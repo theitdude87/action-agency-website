@@ -1,0 +1,8 @@
+# macOS / Windows junk
+.DS_Store
+__MACOSX/
+Thumbs.db
+desktop.ini
+
+# نسخة احتياطية من الموقع القديم - محلية فقط
+s.backup.html
