@@ -18,7 +18,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Tajawal:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Tajawal:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -33,7 +33,10 @@
           panel: '#2a2a2a',
           line:  'rgba(207,207,207,.14)',
           light: '#cfcfcf',
-          ink:   '#f4f4f4'
+          ink:   '#f4f4f4',
+          /* الأحمر: عكس الرمادي + يمثل شعار WE BRING HEAT TO BRANDS */
+          hot:   '#e1232b',
+          hotdk: '#b3171e'
         }
       }
     }
@@ -45,6 +48,7 @@
     --ease: cubic-bezier(.16,1,.3,1);
     --bg:#212121; --deep:#181818; --panel:#2a2a2a;
     --light:#cfcfcf; --ink:#f4f4f4; --line:rgba(207,207,207,.14);
+    --hot:#e1232b; --hotdk:#b3171e;
   }
 
   html{ background:var(--bg); scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
@@ -60,7 +64,18 @@
   .lockup b{ font-weight:800; letter-spacing:.01em; }
   .lockup i{ font-weight:200; font-style:normal; letter-spacing:.14em; }
   .en-label{ font-family:'Montserrat',sans-serif; letter-spacing:.18em; text-transform:uppercase; }
-  .num{ font-family:'Montserrat',sans-serif; font-weight:200; }
+
+  /* أرقام بخط سينمائي مختلف + أحمر */
+  .num{ font-family:'Bebas Neue',sans-serif; font-weight:400; letter-spacing:.01em; line-height:.85; }
+  .num-hot{ color:var(--hot); }
+
+  /* الكلمات/العناوين الصغيرة بخلفية حمرة */
+  .pill-hot{
+    display:inline-block; background:var(--hot); color:#fff;
+    border-radius:999px; padding:8px 20px; font-weight:700; font-size:14px;
+    box-shadow:0 6px 20px rgba(225,35,43,.28);
+  }
+  .mark-hot{ background:var(--hot); color:#fff; padding:.06em .3em; border-radius:.22em; }
 
   ::selection{ background:var(--light); color:var(--bg); }
 
@@ -98,26 +113,33 @@
     background-size:180px 180px; opacity:.05;
     animation:patDrift 90s linear infinite;
   }
-  /* داخل الكروت النمط ثابت (بدون حركة) حفاظاً على أداء الموبايل */
-  .card .logo-pattern, .media-ph .logo-pattern{ animation:none; }
-
-  @keyframes wmSlide{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-  .watermark{
-    position:absolute; left:0; display:flex; width:max-content; gap:.2em;
-    font-family:'Montserrat',sans-serif; font-weight:900; letter-spacing:.02em;
-    font-size:clamp(80px,15vw,210px); line-height:.85; white-space:nowrap;
-    color:transparent; -webkit-text-stroke:1.5px rgba(207,207,207,.16);
-    animation:wmSlide 52s linear infinite; pointer-events:none; user-select:none;
+  /* ---------- كرة ثلاثية الأبعاد متحركة ---------- */
+  .sphere{ width:var(--sz,230px); height:var(--sz,230px); position:relative; perspective:900px; }
+  .sphere .globe{
+    position:absolute; inset:0; transform-style:preserve-3d;
+    transform:rotateX(74deg); animation:globeSpin 18s linear infinite;
   }
-  .watermark.rev{ animation-direction:reverse; }
+  .sphere .ring{
+    position:absolute; inset:0; border-radius:50%;
+    border:1px solid rgba(207,207,207,.42); transform-style:preserve-3d;
+  }
+  .sphere .ring.hot{ border-color:rgba(225,35,43,.85); box-shadow:0 0 18px rgba(225,35,43,.35); }
+  @keyframes globeSpin{ from{ transform:rotateX(74deg) rotateZ(0deg); } to{ transform:rotateX(74deg) rotateZ(360deg); } }
+  /* حلقة ثانية تلف بالعكس حتى يبين العمق */
+  .sphere .orbit{
+    position:absolute; inset:-6%; border-radius:50%;
+    border:1px dashed rgba(207,207,207,.28);
+    animation:orbitSpin 26s linear infinite reverse;
+  }
+  @keyframes orbitSpin{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
 
-  /* ---------- شريط الفيلم (من تمبلت الهوية) ---------- */
+  /* ---------- شريط الفيلم: نفس الشريط اللي بأسفل كلاكيت اللوكو ---------- */
   .filmstrip{
-    height:38px; background:var(--deep);
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='38' viewBox='0 0 34 38'%3E%3Crect width='34' height='38' fill='%23181818'/%3E%3Crect x='5' y='8' width='24' height='22' rx='5' fill='%23cfcfcf'/%3E%3C/svg%3E");
-    background-repeat:repeat-x; animation:filmRoll 14s linear infinite;
+    height:34px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='34' viewBox='0 0 44 34'%3E%3Crect width='44' height='34' fill='%23cfcfcf'/%3E%3Crect width='44' height='3' fill='%23212121'/%3E%3Crect y='31' width='44' height='3' fill='%23212121'/%3E%3Crect width='3' height='34' fill='%23212121'/%3E%3C/svg%3E");
+    background-repeat:repeat-x; animation:filmRoll 18s linear infinite;
   }
-  @keyframes filmRoll{ from{ background-position-x:0; } to{ background-position-x:-340px; } }
+  @keyframes filmRoll{ from{ background-position-x:0; } to{ background-position-x:-440px; } }
 
   /* ---------- مقدمة الكلاكيت ---------- */
   html.preloading{ overflow:hidden; }
@@ -270,14 +292,9 @@
 </div>
 
 <!-- ===================== خلفية متحركة ===================== -->
+<!-- خلفية موحدة: طبقة وحدة فقط، نمط الكلاكيت المتحرك على طول الصفحة -->
 <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
   <div class="logo-pattern"></div>
-  <div class="absolute top-[24%] w-full">
-    <div class="watermark"><span>ACTION&nbsp;AGENCY&nbsp;</span><span>ACTION&nbsp;AGENCY&nbsp;</span></div>
-  </div>
-  <div class="absolute bottom-[10%] w-full">
-    <div class="watermark rev"><span>ACTION&nbsp;AGENCY&nbsp;</span><span>ACTION&nbsp;AGENCY&nbsp;</span></div>
-  </div>
 </div>
 
 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -306,6 +323,7 @@
         <a href="#about"    class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">من نحن</span><span class="only-en">About</span></a>
         <a href="#services" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">خدماتنا</span><span class="only-en">Services</span></a>
         <a href="#projects" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">المشاريع</span><span class="only-en">Projects</span></a>
+        <a href="#team"     class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">فريقنا</span><span class="only-en">Team</span></a>
         <a href="#results"  class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">النتائج</span><span class="only-en">Results</span></a>
         <a href="#contact"  class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">تواصل معنا</span><span class="only-en">Contact</span></a>
       </nav>
@@ -334,6 +352,7 @@
         <a href="#about"    class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">من نحن</span><span class="only-en">About</span></a>
         <a href="#services" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">خدماتنا</span><span class="only-en">Services</span></a>
         <a href="#projects" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">المشاريع (ريلز · فوتو · TVC)</span><span class="only-en">Projects (Reels · Photo · TVC)</span></a>
+        <a href="#team"     class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">فريقنا</span><span class="only-en">Team</span></a>
         <a href="#results"  class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">النتائج</span><span class="only-en">Results</span></a>
         <a href="#clients"  class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">عملاؤنا</span><span class="only-en">Clients</span></a>
         <a href="#contact"  class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">تواصل معنا</span><span class="only-en">Contact</span></a>
@@ -379,19 +398,16 @@
     <div class="lg:col-span-5 flex justify-center" data-r="zoom" data-d=".3">
       <div data-tilt class="relative w-full max-w-sm">
         <div data-loop="float" class="relative aspect-[4/5] card media-ph p-6 flex flex-col justify-between overflow-hidden">
-          <div class="absolute inset-0 logo-pattern" style="opacity:.07"></div>
-
           <div class="relative z-10 flex justify-between items-start">
-            <span class="bg-light text-bg text-[10px] font-black px-3 py-1.5 rounded-full en-label">Showreel 2026</span>
+            <span class="bg-hot text-white text-[10px] font-black px-3 py-1.5 rounded-full en-label">Showreel 2026</span>
           </div>
 
+          <!-- كرة 3D متحركة واللوكو بالنص -->
           <div class="relative z-10 my-auto flex items-center justify-center">
-            <svg viewBox="0 0 200 200" class="absolute w-44 h-44" data-loop="spin" aria-hidden="true">
-              <defs><path id="circPath" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
-              <text fill="#cfcfcf" font-size="12.5" font-family="Montserrat,sans-serif" letter-spacing="4" opacity=".7">
-                <textPath href="#circPath">ACTION AGENCY · WE BRING HEAT TO BRANDS ·</textPath>
-              </text>
-            </svg>
+            <div class="sphere absolute" style="--sz:clamp(190px,56vw,250px)" aria-hidden="true">
+              <div class="orbit"></div>
+              <div class="globe" id="globe"></div>
+            </div>
             <svg width="124" height="128" class="relative" aria-hidden="true"><use href="#clapLogo"/></svg>
           </div>
 
@@ -413,7 +429,7 @@
   <section id="about" class="py-16 sm:py-20">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
       <div class="lg:col-span-6 space-y-6" data-r="up">
-        <span class="inline-block border border-line rounded-full px-5 py-2 text-sm font-bold text-light">
+        <span class="pill-hot">
           <span class="only-ar">من نحن</span><span class="only-en">About Us</span>
         </span>
         <h2 class="text-3xl sm:text-5xl font-black leading-tight" data-split>
@@ -431,7 +447,6 @@
       <div class="lg:col-span-6" data-r="zoom" data-d=".15">
         <!-- ضع هنا صورة الفريق: <img src="assets/about.jpg" class="w-full h-full object-cover"> -->
         <div class="card media-ph aspect-[4/3] flex items-center justify-center overflow-hidden relative">
-          <div class="absolute inset-0 logo-pattern" style="opacity:.08"></div>
           <svg width="180" height="185" class="relative z-10" data-loop="float" aria-hidden="true"><use href="#clapLogo"/></svg>
         </div>
       </div>
@@ -441,7 +456,7 @@
   <!-- ===================== خدماتنا (11 خدمة) ===================== -->
   <section id="services" class="py-16 sm:py-20 border-t border-line">
     <div class="text-center mb-12 sm:mb-16" data-r="up">
-      <span class="inline-block border border-line rounded-full px-5 py-2 text-sm font-bold text-light">
+      <span class="pill-hot">
         <span class="only-ar">خدماتنا</span><span class="only-en">Our Services</span>
       </span>
       <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black mt-6" data-split>
@@ -455,7 +470,7 @@
   <!-- ===================== المشاريع: ريلز / فوتو / TVC ===================== -->
   <section id="projects" class="py-16 sm:py-20 border-t border-line">
     <div class="text-center mb-10" data-r="up">
-      <span class="inline-block border border-line rounded-full px-5 py-2 text-sm font-bold text-light">
+      <span class="pill-hot">
         <span class="only-ar">المشاريع</span><span class="only-en">Projects</span>
       </span>
       <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black mt-6" data-split>
@@ -480,10 +495,28 @@
     </div>
   </section>
 
+  <!-- ===================== فريقنا ===================== -->
+  <section id="team" class="py-16 sm:py-20 border-t border-line">
+    <div class="text-center mb-12" data-r="up">
+      <span class="pill-hot">
+        <span class="only-ar">فريقنا</span><span class="only-en">Our Team</span>
+      </span>
+      <h2 class="text-3xl sm:text-5xl font-black mt-6" data-split>
+        <span class="only-ar">الناس اللي تشتغل على مشروعك</span>
+        <span class="only-en">The people behind your project</span>
+      </h2>
+      <p class="text-ink/55 max-w-2xl mx-auto mt-4 text-base sm:text-lg">
+        <span class="only-ar">فريق متكامل من المخرجين والمصورين والمصممين، كل واحد مختص بمجاله.</span>
+        <span class="only-en">A full crew of directors, shooters and designers — each a specialist in their craft.</span>
+      </p>
+    </div>
+    <div id="teamGrid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"></div>
+  </section>
+
   <!-- ===================== النتائج ===================== -->
   <section id="results" class="py-16 sm:py-20 border-t border-line">
     <div class="text-center mb-12" data-r="up">
-      <span class="inline-block border border-line rounded-full px-5 py-2 text-sm font-bold text-light">
+      <span class="pill-hot">
         <span class="only-ar">النتائج</span><span class="only-en">Results</span>
       </span>
       <h2 class="text-3xl sm:text-5xl font-black mt-6" data-split>
@@ -494,19 +527,19 @@
 
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6" data-r="up" data-d=".1">
       <div class="card p-6 sm:p-8 text-center">
-        <p class="num text-5xl sm:text-6xl text-light"><span data-count="250">0</span>+</p>
+        <p class="num num-hot text-6xl sm:text-7xl"><span data-count="250">0</span>+</p>
         <p class="text-ink/60 mt-3 font-medium text-sm sm:text-base"><span class="only-ar">مشروع منجز</span><span class="only-en">Projects delivered</span></p>
       </div>
       <div class="card p-6 sm:p-8 text-center">
-        <p class="num text-5xl sm:text-6xl text-light"><span data-count="120">0</span>+</p>
+        <p class="num num-hot text-6xl sm:text-7xl"><span data-count="120">0</span>+</p>
         <p class="text-ink/60 mt-3 font-medium text-sm sm:text-base"><span class="only-ar">عميل ووثق بينا</span><span class="only-en">Clients served</span></p>
       </div>
       <div class="card p-6 sm:p-8 text-center">
-        <p class="num text-5xl sm:text-6xl text-light"><span data-count="8">0</span></p>
+        <p class="num num-hot text-6xl sm:text-7xl"><span data-count="8">0</span></p>
         <p class="text-ink/60 mt-3 font-medium text-sm sm:text-base"><span class="only-ar">سنوات خبرة</span><span class="only-en">Years of experience</span></p>
       </div>
       <div class="card p-6 sm:p-8 text-center">
-        <p class="num text-5xl sm:text-6xl text-light"><span data-count="35">0</span>+</p>
+        <p class="num num-hot text-6xl sm:text-7xl"><span data-count="35">0</span>+</p>
         <p class="text-ink/60 mt-3 font-medium text-sm sm:text-base"><span class="only-ar">حملة إعلانية</span><span class="only-en">Ad campaigns</span></p>
       </div>
     </div>
@@ -515,7 +548,7 @@
   <!-- ===================== العملاء ===================== -->
   <section id="clients" class="py-16 sm:py-20 border-t border-line">
     <div class="text-center mb-10" data-r="up">
-      <span class="inline-block border border-line rounded-full px-5 py-2 text-sm font-bold text-light">
+      <span class="pill-hot">
         <span class="only-ar">عملاؤنا</span><span class="only-en">Our Clients</span>
       </span>
     </div>
@@ -667,7 +700,7 @@
   if (sg){
     sg.innerHTML = SERVICES.map(function(s, i){
       return '<div class="card card-hover p-5 sm:p-7" data-r="up" data-d="' + (i % 4 * .08).toFixed(2) + 's">' +
-               '<p class="num text-[62px] sm:text-[86px] leading-none text-light/45 select-none">' + (i + 1) + '</p>' +
+               '<p class="num num-hot text-[70px] sm:text-[96px] select-none">' + String(i + 1).padStart(2, '0') + '</p>' +
                '<h3 class="font-bold text-sm sm:text-lg mt-2 only-ar">' + s.ar + '</h3>' +
                '<h3 class="font-bold text-sm sm:text-lg mt-2 only-en">' + s.en + '</h3>' +
                '<p class="en-label text-[9px] sm:text-[10px] text-ink/40 mt-1.5 only-ar">' + s.en + '</p>' +
@@ -686,35 +719,79 @@
     { cat:'reels', ar:'ريل · افتتاح معرض',       en:'Reel · Showroom Opening',      meta:'0:15' },
     { cat:'photo', ar:'تصوير جوي · مشروع سكني',  en:'Aerial · Residential Project', meta:'30 IMG' }
   ];
+  /* قوالب موحدة: كل الكروت بنفس المقاس حتى الشبكة تطلع مرتبة */
   var CAT = {
-    reels:{ en:'Reels', ratio:'aspect-[9/16]' },
-    photo:{ en:'Photo', ratio:'aspect-[4/5]'  },
-    tvc:  { en:'TVC',   ratio:'aspect-[4/5] lg:aspect-[16/11]' }
+    reels:{ ar:'ريلز', en:'Reels' },
+    photo:{ ar:'فوتو', en:'Photo' },
+    tvc:  { ar:'TVC',  en:'TVC'   }
   };
   var pg = document.getElementById('projectsGrid');
   if (pg){
     pg.innerHTML = PROJECTS.map(function(p, i){
       var c = CAT[p.cat];
-      var span = p.cat === 'tvc' ? 'col-span-2' : '';
-      return '<article class="proj ' + span + '" data-cat="' + p.cat + '" data-r="up" data-d="' + (i % 4 * .08).toFixed(2) + 's">' +
-               '<div class="card card-hover media-ph ' + c.ratio + ' overflow-hidden relative group p-4 flex flex-col justify-between">' +
+      return '<article class="proj" data-cat="' + p.cat + '" data-r="up" data-d="' + (i % 4 * .08).toFixed(2) + 's">' +
+               '<div class="card card-hover media-ph aspect-[4/5] overflow-hidden relative group">' +
                  /* الميديا الحقيقية تنحط هنا:
                     <img src="assets/work-1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
                     أو <video src="assets/work-1.mp4" muted loop playsinline class="absolute inset-0 w-full h-full object-cover"></video> */
-                 '<div class="absolute inset-0 logo-pattern" style="opacity:.06"></div>' +
-                 '<div class="relative z-10 flex items-center justify-between">' +
-                   '<span class="en-label text-[9px] font-black bg-light text-bg px-3 py-1.5 rounded-full">' + c.en + '</span>' +
-                   '<span class="text-[11px] text-ink/65 bg-deep/70 px-2.5 py-1 rounded-full">' + p.meta + '</span>' +
+
+                 /* تدرج أسود تحت حتى النص يبقى مقروء فوق أي صورة */
+                 '<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent z-10"></div>' +
+
+                 '<div class="absolute inset-x-0 top-0 p-3 sm:p-4 flex items-start justify-between z-20">' +
+                   '<span class="en-label text-[9px] font-black bg-hot text-white px-3 py-1.5 rounded-full">' + c.en + '</span>' +
+                   '<span class="num text-[15px] text-light bg-black/55 px-2.5 py-1 rounded-full">' + p.meta + '</span>' +
                  '</div>' +
-                 '<div class="relative z-10 my-auto text-center">' +
-                   '<span class="w-14 h-14 rounded-full border border-light/40 bg-light/10 backdrop-blur flex items-center justify-center text-xl mx-auto group-hover:bg-light group-hover:text-bg transition">▶</span>' +
+
+                 '<div class="absolute inset-0 flex items-center justify-center z-20">' +
+                   '<span class="w-14 h-14 rounded-full border border-light/35 bg-black/35 backdrop-blur flex items-center justify-center text-lg ps-1 ' +
+                          'group-hover:bg-hot group-hover:border-hot group-hover:text-white transition duration-300">▶</span>' +
                  '</div>' +
-                 '<div class="relative z-10">' +
-                   '<h3 class="font-bold text-sm sm:text-base only-ar">' + p.ar + '</h3>' +
-                   '<h3 class="font-bold text-sm sm:text-base only-en">' + p.en + '</h3>' +
+
+                 '<div class="absolute inset-x-0 bottom-0 p-3 sm:p-4 z-20">' +
+                   '<h3 class="font-bold text-sm sm:text-base leading-snug only-ar">' + p.ar + '</h3>' +
+                   '<h3 class="font-bold text-sm sm:text-base leading-snug only-en">' + p.en + '</h3>' +
                  '</div>' +
                '</div>' +
              '</article>';
+    }).join('');
+  }
+
+  /* الكرة ثلاثية الأبعاد: حلقات ملفوفة حول محور Y */
+  var globe = document.getElementById('globe');
+  if (globe && !RM){
+    var RINGS = 9, html = '';
+    for (var g = 0; g < RINGS; g++){
+      var hot = (g === 0 || g === Math.floor(RINGS / 2));
+      html += '<div class="ring' + (hot ? ' hot' : '') + '" style="transform:rotateY(' + (g * (180 / RINGS)) + 'deg)"></div>';
+    }
+    globe.innerHTML = html;
+  }
+
+  /* فريق العمل — بدّل الأسماء وحط صور الفريق */
+  var TEAM = [
+    { ar:'مخرج ومنتج',      en:'Director &amp; Producer', name:'—', ic:'assets/icons/12.jpg' },
+    { ar:'مدير تصوير',      en:'Director of Photography', name:'—', ic:'assets/icons/02.jpg' },
+    { ar:'مصمم غرافيك',     en:'Graphic Designer',        name:'—', ic:'assets/icons/04.jpg' },
+    { ar:'مصور فوتوغرافي',  en:'Photographer',            name:'—', ic:'assets/icons/03.jpg' }
+  ];
+  var tg = document.getElementById('teamGrid');
+  if (tg){
+    tg.innerHTML = TEAM.map(function(t, i){
+      return '<div class="card card-hover overflow-hidden" data-r="up" data-d="' + (i * .08).toFixed(2) + 's">' +
+               '<div class="media-ph aspect-[4/5] relative flex items-center justify-center">' +
+                 /* صورة العضو الحقيقية:
+                    <img src="assets/team-1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover"> */
+                 '<span class="w-20 h-20 opacity-80"><img class="bicon" src="' + t.ic + '" alt=""></span>' +
+                 '<span class="absolute bottom-3 inset-x-3 h-1 bg-hot rounded-full"></span>' +
+               '</div>' +
+               '<div class="p-4">' +
+                 '<p class="font-bold text-base">' + t.name + '</p>' +
+                 '<p class="text-ink/55 text-sm mt-0.5">' +
+                   '<span class="only-ar">' + t.ar + '</span><span class="only-en">' + t.en + '</span>' +
+                 '</p>' +
+               '</div>' +
+             '</div>';
     }).join('');
   }
 
