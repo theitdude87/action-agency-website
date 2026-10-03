@@ -1,0 +1,82 @@
+{
+  "site": {
+    "tagline": "WE BRING HEAT TO BRANDS"
+  },
+  "hero": {
+    "badge": {
+      "ar": "وكالة إنتاج وإعلان متكاملة",
+      "en": "Full-service production & ad agency"
+    },
+    "desc": {
+      "ar": "نصنع محتوى بصري يخلي علامتك التجارية تتحچى: تصوير سينمائي، ريلز، فوتوغراف، وإعلانات تجارية TVC من الفكرة للنشر.",
+      "en": "We craft visual content that makes your brand speak: cinematic production, reels, photography and TV commercials — from idea to release."
+    }
+  },
+  "about": {
+    "title": {
+      "ar": "فريق إنتاج يشتغل بالتفاصيل",
+      "en": "A production team obsessed with detail"
+    },
+    "desc": {
+      "ar": "اكشن ايجنسي وكالة متخصصة بالإنتاج البصري والتسويق الرقمي. نشتغل ويّا العلامات التجارية من مرحلة الفكرة والسيناريو، للتصوير والمونتاج، ولحد إدارة الحملات الإعلانية المدفوعة.",
+      "en": "Action Agency is a creative production house specialised in visual content and digital marketing. We work with brands from concept and script, through shooting and editing, all the way to paid campaign management."
+    }
+  },
+  "steps": [
+    { "ar": "تصوير وإنتاج",  "en": "Shoot & Produce",    "icon": "assets/icons/02.jpg" },
+    { "ar": "فوتوغراف",      "en": "Photography",        "icon": "assets/icons/03.jpg" },
+    { "ar": "تصميم وغرافيك", "en": "Design & Graphics",  "icon": "assets/icons/04.jpg" },
+    { "ar": "مونتاج وإخراج", "en": "Edit & Direct",      "icon": "assets/icons/12.jpg" }
+  ],
+  "services": [
+    { "ar": "تصوير فيديو",                       "en": "Shooting a Video" },
+    { "ar": "تصوير فوتوغرافي",                   "en": "Photography" },
+    { "ar": "التصميم الغرافيكي",                 "en": "Graphic Design" },
+    { "ar": "الموشن غرافيك",                     "en": "Motion Graphics" },
+    { "ar": "إنتاج الفيديوهات السينمائية",       "en": "Cinematic Video Production" },
+    { "ar": "تصوير جوي بالدرون",                 "en": "Aerial Photography / Drone" },
+    { "ar": "كتابة المحتوى",                     "en": "Content Writing" },
+    { "ar": "إنتاج الإعلانات التجارية",          "en": "Production of Commercials" },
+    { "ar": "المونتاج والإخراج",                 "en": "Editing and Directing" },
+    { "ar": "تصميم وإنتاج الهويات البصرية",      "en": "Design & Production of Visual Identities" },
+    { "ar": "إدارة الترويج والإعلانات المدفوعة", "en": "Paid Advertising & Promotion" }
+  ],
+  "projects": [
+    { "cat": "reels", "ar": "ريل منتج · مشروب طاقة",  "en": "Product Reel · Energy Drink",  "meta": "0:18",   "media": "" },
+    { "cat": "tvc",   "ar": "إعلان تجاري · بنك",       "en": "TVC · Banking Brand",          "meta": "0:45",   "media": "" },
+    { "cat": "photo", "ar": "جلسة تصوير · مطعم",       "en": "Photo Shoot · Restaurant",     "meta": "24 IMG", "media": "" },
+    { "cat": "reels", "ar": "ريل · عيادة تجميل",       "en": "Reel · Beauty Clinic",         "meta": "0:22",   "media": "" },
+    { "cat": "photo", "ar": "تصوير منتجات · عطور",     "en": "Product Photo · Perfume",      "meta": "16 IMG", "media": "" },
+    { "cat": "tvc",   "ar": "إعلان · شركة اتصالات",    "en": "TVC · Telecom",                "meta": "0:60",   "media": "" },
+    { "cat": "reels", "ar": "ريل · افتتاح معرض",       "en": "Reel · Showroom Opening",      "meta": "0:15",   "media": "" },
+    { "cat": "photo", "ar": "تصوير جوي · مشروع سكني",  "en": "Aerial · Residential Project", "meta": "30 IMG", "media": "" }
+  ],
+  "team": [
+    { "name": "—", "ar": "مخرج ومنتج",     "en": "Director & Producer",   "photo": "", "icon": "assets/icons/12.jpg" },
+    { "name": "—", "ar": "مدير تصوير",     "en": "Director of Photography","photo": "", "icon": "assets/icons/02.jpg" },
+    { "name": "—", "ar": "مصمم غرافيك",    "en": "Graphic Designer",      "photo": "", "icon": "assets/icons/04.jpg" },
+    { "name": "—", "ar": "مصور فوتوغرافي", "en": "Photographer",          "photo": "", "icon": "assets/icons/03.jpg" }
+  ],
+  "results": [
+    { "value": 250, "suffix": "+", "ar": "مشروع منجز",    "en": "Projects delivered" },
+    { "value": 120, "suffix": "+", "ar": "عميل ووثق بينا", "en": "Clients served" },
+    { "value": 8,   "suffix": "",  "ar": "سنوات خبرة",     "en": "Years of experience" },
+    { "value": 35,  "suffix": "+", "ar": "حملة إعلانية",   "en": "Ad campaigns" }
+  ],
+  "clients": [
+    "Northwave", "Vertex Labs", "Lumen Co", "Orbit Studio", "Haven Media", "Pixelforge",
+    "Silverroot", "Cascade", "Meridian", "Foundry", "Driftwood", "Nova Works"
+  ],
+  "contact": {
+    "whatsapp": "9647700000000",
+    "waTextAr": "مرحبا اكشن ايجنسي، أريد أستفسر عن خدماتكم",
+    "waTextEn": "Hi Action Agency, I would like to ask about your services",
+    "email": "info@actionagency.iq",
+    "address": { "ar": "بغداد - العراق", "en": "Baghdad, Iraq" }
+  },
+  "social": {
+    "instagram": "",
+    "tiktok": "",
+    "youtube": ""
+  }
+}

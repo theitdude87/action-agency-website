@@ -367,7 +367,7 @@
     <div class="lg:col-span-7 space-y-7" data-r="up" data-d=".15">
       <span class="inline-flex items-center gap-2 border border-line rounded-full px-5 py-2 text-xs sm:text-sm text-light font-bold">
         <span class="w-2 h-2 rounded-full bg-light"></span>
-        <span class="only-ar">وكالة إنتاج وإعلان متكاملة</span><span class="only-en">Full-service production &amp; ad agency</span>
+        <span data-ct="hero.badge"><span class="only-ar">وكالة إنتاج وإعلان متكاملة</span><span class="only-en">Full-service production &amp; ad agency</span></span>
       </span>
 
       <h1 class="lockup text-[38px] leading-[1.05] sm:text-6xl lg:text-7xl">
@@ -375,9 +375,9 @@
       </h1>
 
       <!-- شعار الهوية الرسمي -->
-      <p class="en-label text-light text-sm sm:text-xl font-light">WE BRING HEAT TO BRANDS</p>
+      <p class="en-label text-light text-sm sm:text-xl font-light" data-ct-text="site.tagline">WE BRING HEAT TO BRANDS</p>
 
-      <p class="text-lg sm:text-2xl text-ink/65 leading-relaxed max-w-2xl">
+      <p class="text-lg sm:text-2xl text-ink/65 leading-relaxed max-w-2xl" data-ct="hero.desc">
         <span class="only-ar">نصنع محتوى بصري يخلي علامتك التجارية تتحچى: تصوير سينمائي، ريلز، فوتوغراف، وإعلانات تجارية TVC من الفكرة للنشر.</span>
         <span class="only-en">We craft visual content that makes your brand speak: cinematic production, reels, photography and TV commercials — from idea to release.</span>
       </p>
@@ -432,11 +432,11 @@
         <span class="pill-hot">
           <span class="only-ar">من نحن</span><span class="only-en">About Us</span>
         </span>
-        <h2 class="text-3xl sm:text-5xl font-black leading-tight" data-split>
+        <h2 class="text-3xl sm:text-5xl font-black leading-tight" data-split data-ct="about.title">
           <span class="only-ar">فريق إنتاج يشتغل بالتفاصيل</span>
           <span class="only-en">A production team obsessed with detail</span>
         </h2>
-        <p class="text-ink/65 text-lg leading-relaxed">
+        <p class="text-ink/65 text-lg leading-relaxed" data-ct="about.desc">
           <span class="only-ar">اكشن ايجنسي وكالة متخصصة بالإنتاج البصري والتسويق الرقمي. نشتغل ويّا العلامات التجارية من مرحلة الفكرة والسيناريو، للتصوير والمونتاج، ولحد إدارة الحملات الإعلانية المدفوعة.</span>
           <span class="only-en">Action Agency is a creative production house specialised in visual content and digital marketing. We work with brands from concept and script, through shooting and editing, all the way to paid campaign management.</span>
         </p>
@@ -525,24 +525,7 @@
       </h2>
     </div>
 
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6" data-r="up" data-d=".1">
-      <div class="card p-6 sm:p-8 text-center">
-        <p class="num num-hot text-6xl sm:text-7xl"><span data-count="250">0</span>+</p>
-        <p class="text-ink/60 mt-3 font-medium text-sm sm:text-base"><span class="only-ar">مشروع منجز</span><span class="only-en">Projects delivered</span></p>
-      </div>
-      <div class="card p-6 sm:p-8 text-center">
-        <p class="num num-hot text-6xl sm:text-7xl"><span data-count="120">0</span>+</p>
-        <p class="text-ink/60 mt-3 font-medium text-sm sm:text-base"><span class="only-ar">عميل ووثق بينا</span><span class="only-en">Clients served</span></p>
-      </div>
-      <div class="card p-6 sm:p-8 text-center">
-        <p class="num num-hot text-6xl sm:text-7xl"><span data-count="8">0</span></p>
-        <p class="text-ink/60 mt-3 font-medium text-sm sm:text-base"><span class="only-ar">سنوات خبرة</span><span class="only-en">Years of experience</span></p>
-      </div>
-      <div class="card p-6 sm:p-8 text-center">
-        <p class="num num-hot text-6xl sm:text-7xl"><span data-count="35">0</span>+</p>
-        <p class="text-ink/60 mt-3 font-medium text-sm sm:text-base"><span class="only-ar">حملة إعلانية</span><span class="only-en">Ad campaigns</span></p>
-      </div>
-    </div>
+    <div id="resultsGrid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6" data-r="up" data-d=".1"></div>
   </section>
 
   <!-- ===================== العملاء ===================== -->
@@ -572,19 +555,19 @@
           <svg width="44" height="45" aria-hidden="true"><use href="#clapLogo"/></svg>
           <span class="lockup text-lg text-light"><b>ACTION</b><i>AGENCY</i></span>
         </div>
-        <p class="en-label text-light/80 text-xs">WE BRING HEAT TO BRANDS</p>
+        <p class="en-label text-light/80 text-xs" data-ct-text="site.tagline">WE BRING HEAT TO BRANDS</p>
         <p class="text-ink/55 leading-relaxed max-w-md">
           <span class="only-ar">وكالة إنتاج وإعلان: تصوير، مونتاج، موشن غرافيك، هويات بصرية وإدارة حملات.</span>
           <span class="only-en">Production &amp; advertising agency: filming, editing, motion graphics, visual identities and campaign management.</span>
         </p>
         <div class="flex gap-3 pt-1">
-          <a href="#" aria-label="Instagram" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
+          <a href="#" data-ct-social="instagram" aria-label="Instagram" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
           </a>
-          <a href="#" aria-label="TikTok" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
+          <a href="#" data-ct-social="tiktok" aria-label="TikTok" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.4 2.2 1.9 3.8 4 4v3c-1.6 0-3-.5-4.2-1.3v6.6A6.3 6.3 0 1 1 9.5 9v3.2a3.1 3.1 0 1 0 3.2 3.1V3H16z"/></svg>
           </a>
-          <a href="#" aria-label="YouTube" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
+          <a href="#" data-ct-social="youtube" aria-label="YouTube" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3-.4-4.4a2.7 2.7 0 0 0-1.9-1.9C18.3 5.3 12 5.3 12 5.3s-6.3 0-7.7.4a2.7 2.7 0 0 0-1.9 1.9C2 9 2 12 2 12s0 3 .4 4.4c.2.9.9 1.6 1.9 1.9 1.4.4 7.7.4 7.7.4s6.3 0 7.7-.4a2.7 2.7 0 0 0 1.9-1.9C22 15 22 12 22 12zM10 15V9l5 3-5 3z"/></svg>
           </a>
         </div>
@@ -596,13 +579,13 @@
           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
           <span dir="ltr" data-wa-display>+964 000 000 0000</span>
         </a>
-        <a href="mailto:info@actionagency.iq" class="flex items-center gap-3 text-ink/70 hover:text-light transition">
+        <a href="mailto:info@actionagency.iq" data-ct-email class="flex items-center gap-3 text-ink/70 hover:text-light transition">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>
-          <span dir="ltr">info@actionagency.iq</span>
+          <span dir="ltr" data-ct-text="contact.email">info@actionagency.iq</span>
         </a>
         <p class="text-ink/55 flex items-start gap-3">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="mt-1 shrink-0"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          <span><span class="only-ar">بغداد - العراق</span><span class="only-en">Baghdad, Iraq</span></span>
+          <span data-ct="contact.address"><span class="only-ar">بغداد - العراق</span><span class="only-en">Baghdad, Iraq</span></span>
         </p>
       </div>
 
@@ -635,17 +618,19 @@
 (function(){
   'use strict';
 
+  /* استعلام آمن: إذا المتصفح ما يدعمه ما ننهار */
+  function mq(q){
+    try { return window.matchMedia ? window.matchMedia(q) : { matches:false }; }
+    catch(e){ return { matches:false }; }
+  }
+  var RM = mq('(prefers-reduced-motion: reduce)').matches;
+
   /* ============================================================
-     ١) رقم الواتساب — بدّل الرقم هنا فقط ويتحدث بكل الموقع
-        صيغة دولية بدون + وبدون صفر (العراق: 964 ثم الرقم)
+     المحتوى كله ينقرأ من ملف content.json
+     عدّله من لوحة التحكم:  admin.html
      ============================================================ */
-  var WA_NUMBER  = '9647700000000';
-  var WA_TEXT_AR = 'مرحبا اكشن ايجنسي، أريد أستفسر عن خدماتكم';
-  var WA_TEXT_EN = 'Hi Action Agency, I would like to ask about your services';
 
-  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ============ ٢) المقدمة ============ */
+  /* ---------- المقدمة (تشتغل فوراً قبل تحميل المحتوى) ---------- */
   var pre = document.getElementById('preload'), done = false;
   function finishPreload(){
     if (done) return; done = true;
@@ -662,168 +647,222 @@
     }
   } else { document.documentElement.classList.remove('preloading'); }
 
-  /* ============ ٣) المحتوى ============ */
+  /* ---------- أدوات ---------- */
+  var ESCMAP = { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' };
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return ESCMAP[c]; }); }
+  function get(o, path){ return path.split('.').reduce(function(x, k){ return (x || {})[k]; }, o); }
+  function isVideo(u){ return /\.(mp4|webm|ogv|mov)(\?|$)/i.test(u || ''); }
 
-  /* أيقونات الهوية (النسخة الغامقة لأن خلفيتها نفس خلفية الموقع) */
-  var STEPS = [
-    { ic:'assets/icons/02.jpg', ar:'تصوير وإنتاج',   en:'Shoot &amp; Produce' },
-    { ic:'assets/icons/03.jpg', ar:'فوتوغراف',       en:'Photography' },
-    { ic:'assets/icons/04.jpg', ar:'تصميم وغرافيك',  en:'Design &amp; Graphics' },
-    { ic:'assets/icons/12.jpg', ar:'مونتاج وإخراج',  en:'Edit &amp; Direct' }
-  ];
-  var sgSteps = document.getElementById('stepsGrid');
-  if (sgSteps){
-    sgSteps.innerHTML = STEPS.map(function(s){
+  function mediaTag(url){
+    if (!url) return '';
+    if (isVideo(url)){
+      return '<video src="' + esc(url) + '" muted loop playsinline autoplay preload="metadata" ' +
+             'class="absolute inset-0 w-full h-full object-cover"></video>';
+    }
+    return '<img src="' + esc(url) + '" alt="" loading="lazy" ' +
+           'class="absolute inset-0 w-full h-full object-cover">';
+  }
+
+  /* ---------- المحتوى الافتراضي (إذا ما انقرأ الملف) ---------- */
+  var DEFAULTS = {
+    site: { tagline: 'WE BRING HEAT TO BRANDS' },
+    hero: {
+      badge: { ar:'وكالة إنتاج وإعلان متكاملة', en:'Full-service production & ad agency' },
+      desc:  { ar:'نصنع محتوى بصري يخلي علامتك التجارية تتحچى.', en:'We craft visual content that makes your brand speak.' }
+    },
+    about: {
+      title: { ar:'فريق إنتاج يشتغل بالتفاصيل', en:'A production team obsessed with detail' },
+      desc:  { ar:'اكشن ايجنسي وكالة متخصصة بالإنتاج البصري والتسويق الرقمي.', en:'Action Agency is a creative production house.' }
+    },
+    steps: [
+      { ar:'تصوير وإنتاج',  en:'Shoot & Produce',   icon:'assets/icons/02.jpg' },
+      { ar:'فوتوغراف',      en:'Photography',       icon:'assets/icons/03.jpg' },
+      { ar:'تصميم وغرافيك', en:'Design & Graphics', icon:'assets/icons/04.jpg' },
+      { ar:'مونتاج وإخراج', en:'Edit & Direct',     icon:'assets/icons/12.jpg' }
+    ],
+    services: [
+      { ar:'تصوير فيديو', en:'Shooting a Video' },
+      { ar:'تصوير فوتوغرافي', en:'Photography' },
+      { ar:'التصميم الغرافيكي', en:'Graphic Design' },
+      { ar:'الموشن غرافيك', en:'Motion Graphics' },
+      { ar:'إنتاج الفيديوهات السينمائية', en:'Cinematic Video Production' },
+      { ar:'تصوير جوي بالدرون', en:'Aerial Photography / Drone' },
+      { ar:'كتابة المحتوى', en:'Content Writing' },
+      { ar:'إنتاج الإعلانات التجارية', en:'Production of Commercials' },
+      { ar:'المونتاج والإخراج', en:'Editing and Directing' },
+      { ar:'تصميم وإنتاج الهويات البصرية', en:'Design & Production of Visual Identities' },
+      { ar:'إدارة الترويج والإعلانات المدفوعة', en:'Paid Advertising & Promotion' }
+    ],
+    projects: [
+      { cat:'reels', ar:'ريل منتج · مشروب طاقة', en:'Product Reel · Energy Drink', meta:'0:18', media:'' },
+      { cat:'tvc',   ar:'إعلان تجاري · بنك', en:'TVC · Banking Brand', meta:'0:45', media:'' },
+      { cat:'photo', ar:'جلسة تصوير · مطعم', en:'Photo Shoot · Restaurant', meta:'24 IMG', media:'' },
+      { cat:'reels', ar:'ريل · عيادة تجميل', en:'Reel · Beauty Clinic', meta:'0:22', media:'' },
+      { cat:'photo', ar:'تصوير منتجات · عطور', en:'Product Photo · Perfume', meta:'16 IMG', media:'' },
+      { cat:'tvc',   ar:'إعلان · شركة اتصالات', en:'TVC · Telecom', meta:'0:60', media:'' },
+      { cat:'reels', ar:'ريل · افتتاح معرض', en:'Reel · Showroom Opening', meta:'0:15', media:'' },
+      { cat:'photo', ar:'تصوير جوي · مشروع سكني', en:'Aerial · Residential Project', meta:'30 IMG', media:'' }
+    ],
+    team: [
+      { name:'—', ar:'مخرج ومنتج', en:'Director & Producer', photo:'', icon:'assets/icons/12.jpg' },
+      { name:'—', ar:'مدير تصوير', en:'Director of Photography', photo:'', icon:'assets/icons/02.jpg' },
+      { name:'—', ar:'مصمم غرافيك', en:'Graphic Designer', photo:'', icon:'assets/icons/04.jpg' },
+      { name:'—', ar:'مصور فوتوغرافي', en:'Photographer', photo:'', icon:'assets/icons/03.jpg' }
+    ],
+    results: [
+      { value:250, suffix:'+', ar:'مشروع منجز', en:'Projects delivered' },
+      { value:120, suffix:'+', ar:'عميل ووثق بينا', en:'Clients served' },
+      { value:8,   suffix:'',  ar:'سنوات خبرة', en:'Years of experience' },
+      { value:35,  suffix:'+', ar:'حملة إعلانية', en:'Ad campaigns' }
+    ],
+    clients: ['Northwave','Vertex Labs','Lumen Co','Orbit Studio','Haven Media','Pixelforge',
+              'Silverroot','Cascade','Meridian','Foundry','Driftwood','Nova Works'],
+    contact: {
+      whatsapp:'9647700000000',
+      waTextAr:'مرحبا اكشن ايجنسي، أريد أستفسر عن خدماتكم',
+      waTextEn:'Hi Action Agency, I would like to ask about your services',
+      email:'info@actionagency.iq',
+      address:{ ar:'بغداد - العراق', en:'Baghdad, Iraq' }
+    },
+    social: { instagram:'', tiktok:'', youtube:'' }
+  };
+
+  var C = DEFAULTS;
+
+  /* ---------- تطبيق النصوص ---------- */
+  function applyText(){
+    document.querySelectorAll('[data-ct]').forEach(function(el){
+      var v = get(C, el.getAttribute('data-ct'));
+      if (!v) return;
+      var a = el.querySelector('.only-ar'), e = el.querySelector('.only-en');
+      if (a && v.ar != null) a.textContent = v.ar;
+      if (e && v.en != null) e.textContent = v.en;
+    });
+    document.querySelectorAll('[data-ct-text]').forEach(function(el){
+      var v = get(C, el.getAttribute('data-ct-text'));
+      if (v != null && v !== '') el.textContent = v;
+    });
+    var em = get(C, 'contact.email');
+    document.querySelectorAll('[data-ct-email]').forEach(function(a){ if (em) a.setAttribute('href', 'mailto:' + em); });
+    document.querySelectorAll('[data-ct-social]').forEach(function(a){
+      var u = get(C, 'social.' + a.getAttribute('data-ct-social'));
+      if (u){ a.setAttribute('href', u); a.setAttribute('target','_blank'); a.setAttribute('rel','noopener'); a.style.display = ''; }
+      else { a.style.display = 'none'; }   /* ما نعرض رابط ميت */
+    });
+  }
+
+  /* ---------- الأقسام ---------- */
+  function renderSteps(){
+    var el = document.getElementById('stepsGrid'); if (!el) return;
+    el.innerHTML = (C.steps || []).map(function(s){
       return '<div class="card p-4 sm:p-5 flex items-center gap-3">' +
-               '<span class="w-12 h-12 shrink-0"><img class="bicon" src="' + s.ic + '" alt=""></span>' +
+               '<span class="w-12 h-12 shrink-0"><img class="bicon" src="' + esc(s.icon) + '" alt=""></span>' +
                '<span class="font-bold text-sm sm:text-base">' +
-                 '<span class="only-ar">' + s.ar + '</span><span class="only-en">' + s.en + '</span>' +
-               '</span>' +
-             '</div>';
+                 '<span class="only-ar">' + esc(s.ar) + '</span><span class="only-en">' + esc(s.en) + '</span>' +
+               '</span></div>';
     }).join('');
   }
 
-  var SERVICES = [
-    { ar:'تصوير فيديو',                       en:'Shooting a Video' },
-    { ar:'تصوير فوتوغرافي',                   en:'Photography' },
-    { ar:'التصميم الغرافيكي',                 en:'Graphic Design' },
-    { ar:'الموشن غرافيك',                     en:'Motion Graphics' },
-    { ar:'إنتاج الفيديوهات السينمائية',       en:'Cinematic Video Production' },
-    { ar:'تصوير جوي بالدرون',                 en:'Aerial Photography / Drone' },
-    { ar:'كتابة المحتوى',                     en:'Content Writing' },
-    { ar:'إنتاج الإعلانات التجارية',          en:'Production of Commercials' },
-    { ar:'المونتاج والإخراج',                 en:'Editing and Directing' },
-    { ar:'تصميم وإنتاج الهويات البصرية',      en:'Design &amp; Production of Visual Identities' },
-    { ar:'إدارة الترويج والإعلانات المدفوعة', en:'Paid Advertising &amp; Promotion' }
-  ];
-  var sg = document.getElementById('servicesGrid');
-  if (sg){
-    sg.innerHTML = SERVICES.map(function(s, i){
+  function renderServices(){
+    var el = document.getElementById('servicesGrid'); if (!el) return;
+    el.innerHTML = (C.services || []).map(function(s, i){
       return '<div class="card card-hover p-5 sm:p-7" data-r="up" data-d="' + (i % 4 * .08).toFixed(2) + 's">' +
                '<p class="num num-hot text-[70px] sm:text-[96px] select-none">' + String(i + 1).padStart(2, '0') + '</p>' +
-               '<h3 class="font-bold text-sm sm:text-lg mt-2 only-ar">' + s.ar + '</h3>' +
-               '<h3 class="font-bold text-sm sm:text-lg mt-2 only-en">' + s.en + '</h3>' +
-               '<p class="en-label text-[9px] sm:text-[10px] text-ink/40 mt-1.5 only-ar">' + s.en + '</p>' +
+               '<h3 class="font-bold text-sm sm:text-lg mt-2 only-ar">' + esc(s.ar) + '</h3>' +
+               '<h3 class="font-bold text-sm sm:text-lg mt-2 only-en">' + esc(s.en) + '</h3>' +
+               '<p class="en-label text-[9px] sm:text-[10px] text-ink/40 mt-1.5 only-ar">' + esc(s.en) + '</p>' +
              '</div>';
     }).join('');
   }
 
-  /* المشاريع — بدّل العناوين وحط الميديا الحقيقية مكان الخلفية */
-  var PROJECTS = [
-    { cat:'reels', ar:'ريل منتج · مشروب طاقة',  en:'Product Reel · Energy Drink',  meta:'0:18' },
-    { cat:'tvc',   ar:'إعلان تجاري · بنك',       en:'TVC · Banking Brand',          meta:'0:45' },
-    { cat:'photo', ar:'جلسة تصوير · مطعم',       en:'Photo Shoot · Restaurant',     meta:'24 IMG' },
-    { cat:'reels', ar:'ريل · عيادة تجميل',       en:'Reel · Beauty Clinic',         meta:'0:22' },
-    { cat:'photo', ar:'تصوير منتجات · عطور',     en:'Product Photo · Perfume',      meta:'16 IMG' },
-    { cat:'tvc',   ar:'إعلان · شركة اتصالات',    en:'TVC · Telecom',                meta:'0:60' },
-    { cat:'reels', ar:'ريل · افتتاح معرض',       en:'Reel · Showroom Opening',      meta:'0:15' },
-    { cat:'photo', ar:'تصوير جوي · مشروع سكني',  en:'Aerial · Residential Project', meta:'30 IMG' }
-  ];
-  /* قوالب موحدة: كل الكروت بنفس المقاس حتى الشبكة تطلع مرتبة */
-  var CAT = {
-    reels:{ ar:'ريلز', en:'Reels' },
-    photo:{ ar:'فوتو', en:'Photo' },
-    tvc:  { ar:'TVC',  en:'TVC'   }
-  };
-  var pg = document.getElementById('projectsGrid');
-  if (pg){
-    pg.innerHTML = PROJECTS.map(function(p, i){
-      var c = CAT[p.cat];
-      return '<article class="proj" data-cat="' + p.cat + '" data-r="up" data-d="' + (i % 4 * .08).toFixed(2) + 's">' +
+  var CAT = { reels:{ en:'Reels' }, photo:{ en:'Photo' }, tvc:{ en:'TVC' } };
+
+  function renderProjects(){
+    var el = document.getElementById('projectsGrid'); if (!el) return;
+    el.innerHTML = (C.projects || []).map(function(p, i){
+      var c = CAT[p.cat] || { en: esc(p.cat) };
+      return '<article class="proj" data-cat="' + esc(p.cat) + '" data-r="up" data-d="' + (i % 4 * .08).toFixed(2) + 's">' +
                '<div class="card card-hover media-ph aspect-[4/5] overflow-hidden relative group">' +
-                 /* الميديا الحقيقية تنحط هنا:
-                    <img src="assets/work-1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
-                    أو <video src="assets/work-1.mp4" muted loop playsinline class="absolute inset-0 w-full h-full object-cover"></video> */
-
-                 /* تدرج أسود تحت حتى النص يبقى مقروء فوق أي صورة */
+                 mediaTag(p.media) +
                  '<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent z-10"></div>' +
-
                  '<div class="absolute inset-x-0 top-0 p-3 sm:p-4 flex items-start justify-between z-20">' +
-                   '<span class="en-label text-[9px] font-black bg-hot text-white px-3 py-1.5 rounded-full">' + c.en + '</span>' +
-                   '<span class="num text-[15px] text-light bg-black/55 px-2.5 py-1 rounded-full">' + p.meta + '</span>' +
+                   '<span class="en-label text-[9px] font-black bg-hot text-white px-3 py-1.5 rounded-full">' + esc(c.en) + '</span>' +
+                   '<span class="num text-[15px] text-light bg-black/55 px-2.5 py-1 rounded-full">' + esc(p.meta) + '</span>' +
                  '</div>' +
-
                  '<div class="absolute inset-0 flex items-center justify-center z-20">' +
                    '<span class="w-14 h-14 rounded-full border border-light/35 bg-black/35 backdrop-blur flex items-center justify-center text-lg ps-1 ' +
                           'group-hover:bg-hot group-hover:border-hot group-hover:text-white transition duration-300">▶</span>' +
                  '</div>' +
-
                  '<div class="absolute inset-x-0 bottom-0 p-3 sm:p-4 z-20">' +
-                   '<h3 class="font-bold text-sm sm:text-base leading-snug only-ar">' + p.ar + '</h3>' +
-                   '<h3 class="font-bold text-sm sm:text-base leading-snug only-en">' + p.en + '</h3>' +
+                   '<h3 class="font-bold text-sm sm:text-base leading-snug only-ar">' + esc(p.ar) + '</h3>' +
+                   '<h3 class="font-bold text-sm sm:text-base leading-snug only-en">' + esc(p.en) + '</h3>' +
                  '</div>' +
-               '</div>' +
-             '</article>';
+               '</div></article>';
     }).join('');
   }
 
-  /* الكرة ثلاثية الأبعاد: حلقات ملفوفة حول محور Y */
-  var globe = document.getElementById('globe');
-  if (globe && !RM){
-    var RINGS = 9, html = '';
-    for (var g = 0; g < RINGS; g++){
-      var hot = (g === 0 || g === Math.floor(RINGS / 2));
-      html += '<div class="ring' + (hot ? ' hot' : '') + '" style="transform:rotateY(' + (g * (180 / RINGS)) + 'deg)"></div>';
-    }
-    globe.innerHTML = html;
-  }
-
-  /* فريق العمل — بدّل الأسماء وحط صور الفريق */
-  var TEAM = [
-    { ar:'مخرج ومنتج',      en:'Director &amp; Producer', name:'—', ic:'assets/icons/12.jpg' },
-    { ar:'مدير تصوير',      en:'Director of Photography', name:'—', ic:'assets/icons/02.jpg' },
-    { ar:'مصمم غرافيك',     en:'Graphic Designer',        name:'—', ic:'assets/icons/04.jpg' },
-    { ar:'مصور فوتوغرافي',  en:'Photographer',            name:'—', ic:'assets/icons/03.jpg' }
-  ];
-  var tg = document.getElementById('teamGrid');
-  if (tg){
-    tg.innerHTML = TEAM.map(function(t, i){
+  function renderTeam(){
+    var el = document.getElementById('teamGrid'); if (!el) return;
+    el.innerHTML = (C.team || []).map(function(t, i){
+      var inner = t.photo
+        ? mediaTag(t.photo)
+        : '<span class="w-20 h-20 opacity-80"><img class="bicon" src="' + esc(t.icon || 'assets/icons/09.jpg') + '" alt=""></span>';
       return '<div class="card card-hover overflow-hidden" data-r="up" data-d="' + (i * .08).toFixed(2) + 's">' +
-               '<div class="media-ph aspect-[4/5] relative flex items-center justify-center">' +
-                 /* صورة العضو الحقيقية:
-                    <img src="assets/team-1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover"> */
-                 '<span class="w-20 h-20 opacity-80"><img class="bicon" src="' + t.ic + '" alt=""></span>' +
-                 '<span class="absolute bottom-3 inset-x-3 h-1 bg-hot rounded-full"></span>' +
+               '<div class="media-ph aspect-[4/5] relative flex items-center justify-center">' + inner +
+                 '<span class="absolute bottom-3 inset-x-3 h-1 bg-hot rounded-full z-10"></span>' +
                '</div>' +
                '<div class="p-4">' +
-                 '<p class="font-bold text-base">' + t.name + '</p>' +
+                 '<p class="font-bold text-base">' + esc(t.name) + '</p>' +
                  '<p class="text-ink/55 text-sm mt-0.5">' +
-                   '<span class="only-ar">' + t.ar + '</span><span class="only-en">' + t.en + '</span>' +
+                   '<span class="only-ar">' + esc(t.ar) + '</span><span class="only-en">' + esc(t.en) + '</span>' +
                  '</p>' +
-               '</div>' +
-             '</div>';
+               '</div></div>';
     }).join('');
   }
 
-  /* لوكوات العملاء: SVG أحادي اللون بقياس موحد */
-  function logo(name){
-    var initials = name.split(' ').map(function(w){ return w[0]; }).join('').slice(0,2).toUpperCase();
-    return '<svg class="client-logo" viewBox="0 0 190 48" role="img" aria-label="' + name + '">' +
+  function renderResults(){
+    var el = document.getElementById('resultsGrid'); if (!el) return;
+    el.innerHTML = (C.results || []).map(function(r){
+      return '<div class="card p-6 sm:p-8 text-center">' +
+               '<p class="num num-hot text-6xl sm:text-7xl">' +
+                 '<span data-count="' + esc(r.value) + '">0</span>' + esc(r.suffix || '') +
+               '</p>' +
+               '<p class="text-ink/60 mt-3 font-medium text-sm sm:text-base">' +
+                 '<span class="only-ar">' + esc(r.ar) + '</span><span class="only-en">' + esc(r.en) + '</span>' +
+               '</p></div>';
+    }).join('');
+  }
+
+  function clientLogo(name){
+    var ini = String(name).split(' ').map(function(w){ return w[0]; }).join('').slice(0,2).toUpperCase();
+    return '<svg class="client-logo" viewBox="0 0 190 48" role="img" aria-label="' + esc(name) + '">' +
              '<circle cx="24" cy="24" r="15" fill="none" stroke="currentColor" stroke-width="2.5"/>' +
-             '<text x="24" y="29" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="13" font-weight="700" fill="currentColor">' + initials + '</text>' +
-             '<text x="48" y="30" font-family="Montserrat,sans-serif" font-size="17" font-weight="600" letter-spacing="2" fill="currentColor">' + name.toUpperCase() + '</text>' +
+             '<text x="24" y="29" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="13" font-weight="700" fill="currentColor">' + esc(ini) + '</text>' +
+             '<text x="48" y="30" font-family="Montserrat,sans-serif" font-size="17" font-weight="600" letter-spacing="2" fill="currentColor">' + esc(String(name).toUpperCase()) + '</text>' +
            '</svg>';
   }
-  var ROW1 = ['Northwave','Vertex Labs','Lumen Co','Orbit Studio','Haven Media','Pixelforge'];
-  var ROW2 = ['Silverroot','Cascade','Meridian','Foundry','Driftwood','Nova Works'];
-  var r1 = document.getElementById('logoRow1'), r2 = document.getElementById('logoRow2');
-  if (r1) r1.innerHTML = ROW1.map(logo).join('') + ROW1.map(logo).join('');
-  if (r2) r2.innerHTML = ROW2.map(logo).join('') + ROW2.map(logo).join('');
 
-  /* ============ ٤) فلاتر المشاريع ============ */
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-  tabs.forEach(function(tab){
-    tab.addEventListener('click', function(){
-      tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t === tab)); });
-      var f = tab.dataset.filter;
-      document.querySelectorAll('.proj').forEach(function(card){
-        card.classList.toggle('out', !(f === 'all' || card.dataset.cat === f));
-      });
+  function renderClients(){
+    var r1 = document.getElementById('logoRow1'), r2 = document.getElementById('logoRow2');
+    if (!r1 || !r2) return;
+    var all = C.clients || [], half = Math.ceil(all.length / 2);
+    var a = all.slice(0, half), b = all.slice(half);
+    if (!b.length) b = a;
+    r1.innerHTML = a.map(clientLogo).join('') + a.map(clientLogo).join('');
+    r2.innerHTML = b.map(clientLogo).join('') + b.map(clientLogo).join('');
+  }
+
+  /* ---------- اللغة + الواتساب ---------- */
+  function buildWaLinks(lang){
+    var n = get(C, 'contact.whatsapp') || '';
+    var txt = lang === 'en' ? get(C, 'contact.waTextEn') : get(C, 'contact.waTextAr');
+    var href = 'https://wa.me/' + n + '?text=' + encodeURIComponent(txt || '');
+    document.querySelectorAll('[data-wa]').forEach(function(a){
+      a.setAttribute('href', href); a.setAttribute('target','_blank'); a.setAttribute('rel','noopener');
     });
-  });
+    document.querySelectorAll('[data-wa-display]').forEach(function(el){ el.textContent = '+' + n; });
+  }
 
-  /* ============ ٥) اللغة عربي / انكليزي ============ */
-  var langBtn = document.getElementById('langBtn');
   function setLang(lang){
     var root = document.documentElement;
     root.setAttribute('lang', lang);
@@ -831,27 +870,130 @@
     try { localStorage.setItem('aa-lang', lang); } catch(e){}
     buildWaLinks(lang);
   }
-  var saved = 'ar';
-  try { saved = localStorage.getItem('aa-lang') || 'ar'; } catch(e){}
+
+  /* ---------- الحركات ---------- */
+  function initAnimations(){
+    document.querySelectorAll('[data-d]').forEach(function(el){
+      var v = (el.getAttribute('data-d') || '').trim();
+      if (!v) return;
+      if (!/s$/.test(v)) v += 's';
+      el.style.setProperty('--d', v);
+    });
+
+    document.querySelectorAll('[data-split]').forEach(function(el){
+      if (el.dataset.splitDone) return;
+      el.dataset.splitDone = '1';
+      var n = 0;
+      (function walk(node){
+        Array.prototype.slice.call(node.childNodes).forEach(function(c){
+          if (c.nodeType === 3){
+            var frag = document.createDocumentFragment();
+            c.textContent.split(/(\s+)/).forEach(function(p){
+              if (!p) return;
+              if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(p));
+              else {
+                var s = document.createElement('span');
+                s.className = 'w'; s.style.setProperty('--i', n++); s.textContent = p;
+                frag.appendChild(s);
+              }
+            });
+            c.replaceWith(frag);
+          } else if (c.nodeType === 1 && c.tagName !== 'BR') walk(c);
+        });
+      })(el);
+    });
+
+    /* متصفح قديم ما يدعم المراقب: نعرض كل شي بدل ما يبقى مخفي */
+    if (!window.IntersectionObserver){ revealAll(); return; }
+
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold:.12 });
+    document.querySelectorAll('[data-r],[data-split]').forEach(function(t){ io.observe(t); });
+
+    document.querySelectorAll('[data-count]').forEach(function(el){
+      var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+      el.textContent = '0';
+      var co = new IntersectionObserver(function(es){
+        if (!es[0].isIntersecting) return;
+        co.disconnect();
+        var t0 = performance.now(), dur = 1500;
+        (function step(now){
+          var p = Math.min(1, (now - t0) / dur);
+          el.textContent = Math.round(target * (1 - Math.pow(2, -10 * p)));
+          if (p < 1) requestAnimationFrame(step);
+        })(t0);
+      }, { threshold:.35 });
+      co.observe(el);
+    });
+  }
+
+  function initTabs(){
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t === tab)); });
+        var f = tab.getAttribute('data-filter');
+        document.querySelectorAll('.proj').forEach(function(card){
+          card.classList.toggle('out', !(f === 'all' || card.getAttribute('data-cat') === f));
+        });
+      });
+    });
+  }
+
+  /* ---------- التشغيل ---------- */
+  /* شبكة أمان: إذا صار خطأ بالمحتوى، نظهر الصفحة بدل ما تبقى فارغة */
+  function revealAll(){
+    document.querySelectorAll('[data-r],[data-split]').forEach(function(el){ el.classList.add('in'); });
+  }
+
+  function boot(){
+    try {
+      applyText();
+      renderSteps(); renderServices(); renderProjects(); renderTeam(); renderResults(); renderClients();
+    } catch(err){
+      if (window.console) console.error('خطأ بقراءة المحتوى:', err);
+    }
+    try {
+      var saved = 'ar';
+      try { saved = localStorage.getItem('aa-lang') || 'ar'; } catch(e){}
+      setLang(saved);
+      initTabs();
+      initAnimations();
+    } catch(err2){
+      if (window.console) console.error(err2);
+      revealAll();
+    }
+  }
+
+  function mergeContent(d, j){
+    var out = {};
+    Object.keys(d).forEach(function(k){ out[k] = (j && j[k] != null) ? j[k] : d[k]; });
+    if (j) Object.keys(j).forEach(function(k){ if (out[k] == null) out[k] = j[k]; });
+    return out;
+  }
+
+  /* يجيب المحتوى من content.json، وإذا فشل يشتغل بالمحتوى الافتراضي */
+  function load(){
+    if (!window.fetch){ boot(); return; }
+    fetch('content.json', { cache:'no-store' })
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(j){ if (j) C = mergeContent(DEFAULTS, j); })
+      .catch(function(){ /* فتح الملف محلياً بدون سيرفر - نكمل بالافتراضي */ })
+      .then(boot, boot);
+  }
+  load();
+
+  /* ---------- أشياء ما تعتمد على المحتوى ---------- */
+  var langBtn = document.getElementById('langBtn');
   if (langBtn){
     langBtn.addEventListener('click', function(){
       setLang(document.documentElement.getAttribute('lang') === 'ar' ? 'en' : 'ar');
     });
   }
 
-  /* ============ ٦) روابط الواتساب ============ */
-  function buildWaLinks(lang){
-    var href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lang === 'en' ? WA_TEXT_EN : WA_TEXT_AR);
-    document.querySelectorAll('[data-wa]').forEach(function(a){
-      a.setAttribute('href', href);
-      a.setAttribute('target', '_blank');
-      a.setAttribute('rel', 'noopener');
-    });
-    document.querySelectorAll('[data-wa-display]').forEach(function(el){ el.textContent = '+' + WA_NUMBER; });
-  }
-  setLang(saved);
-
-  /* ============ ٧) قائمة الموبايل ============ */
   var menuBtn = document.getElementById('menuBtn'), mobileMenu = document.getElementById('mobileMenu');
   if (menuBtn && mobileMenu){
     menuBtn.addEventListener('click', function(){
@@ -866,61 +1008,18 @@
     });
   }
 
-  /* ============ ٨) الحركات ============ */
-  document.querySelectorAll('[data-d]').forEach(function(el){
-    var v = (el.dataset.d || '').trim();
-    if (!v) return;
-    if (!/s$/.test(v)) v += 's';
-    el.style.setProperty('--d', v);
-  });
+  var globe = document.getElementById('globe');
+  if (globe && !RM){
+    var RINGS = 9, html = '';
+    for (var g = 0; g < RINGS; g++){
+      var hot = (g === 0 || g === Math.floor(RINGS / 2));
+      html += '<div class="ring' + (hot ? ' hot' : '') + '" style="transform:rotateY(' + (g * (180 / RINGS)) + 'deg)"></div>';
+    }
+    globe.innerHTML = html;
+  }
 
-  document.querySelectorAll('[data-split]').forEach(function(el){
-    var n = 0;
-    (function walk(node){
-      Array.prototype.slice.call(node.childNodes).forEach(function(c){
-        if (c.nodeType === 3){
-          var frag = document.createDocumentFragment();
-          c.textContent.split(/(\s+)/).forEach(function(p){
-            if (!p) return;
-            if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(p));
-            else {
-              var s = document.createElement('span');
-              s.className = 'w'; s.style.setProperty('--i', n++); s.textContent = p;
-              frag.appendChild(s);
-            }
-          });
-          c.replaceWith(frag);
-        } else if (c.nodeType === 1 && c.tagName !== 'BR') walk(c);
-      });
-    })(el);
-  });
-
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
-    });
-  }, { threshold:.12 });
-  document.querySelectorAll('[data-r],[data-split]').forEach(function(t){ io.observe(t); });
-
-  document.querySelectorAll('[data-count]').forEach(function(el){
-    var target = parseInt(el.dataset.count, 10) || 0;
-    el.textContent = '0';
-    var co = new IntersectionObserver(function(es){
-      if (!es[0].isIntersecting) return;
-      co.disconnect();
-      var t0 = performance.now(), dur = 1500;
-      (function step(now){
-        var p = Math.min(1, (now - t0) / dur);
-        el.textContent = Math.round(target * (1 - Math.pow(2, -10 * p)));
-        if (p < 1) requestAnimationFrame(step);
-      })(t0);
-    }, { threshold:.35 });
-    co.observe(el);
-  });
-
-  /* ============ ٩) ميلان الكارت (ديسكتوب فقط) ============ */
   var tilt = document.querySelector('[data-tilt]');
-  if (tilt && !RM && matchMedia('(hover:hover) and (min-width:1024px)').matches){
+  if (tilt && !RM && mq('(hover:hover) and (min-width:1024px)').matches){
     window.addEventListener('mousemove', function(e){
       var rx = (e.clientY / window.innerHeight - .5) * -5;
       var ry = (e.clientX / window.innerWidth  - .5) *  6;

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>لوحة تحكم ACTION AGENCY</title>
+<link rel="icon" href="assets/logo-dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;800&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#212121; --deep:#181818; --panel:#2a2a2a; --panel2:#323232;
+    --light:#cfcfcf; --ink:#f4f4f4; --line:rgba(207,207,207,.14);
+    --hot:#e1232b; --ok:#2ea04c; --warn:#d99a1a;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Tajawal',system-ui,sans-serif; -webkit-font-smoothing:antialiased;
+  }
+  .lockup{ font-family:'Montserrat',sans-serif; }
+  .lockup b{ font-weight:800; } .lockup i{ font-weight:400; font-style:normal; letter-spacing:.14em; color:var(--light); }
+  .num{ font-family:'Bebas Neue',sans-serif; }
+
+  header{
+    position:sticky; top:0; z-index:50; background:rgba(33,33,33,.95); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line); padding:12px 18px;
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  }
+  header .sp{ flex:1 1 auto; }
+
+  .wrap{ max-width:1100px; margin:0 auto; padding:18px; }
+
+  .tabs{ display:flex; gap:8px; overflow-x:auto; padding:14px 18px 0; max-width:1100px; margin:0 auto; }
+  .tabs button{
+    background:transparent; border:1px solid var(--line); color:var(--ink);
+    padding:9px 18px; border-radius:999px; cursor:pointer; white-space:nowrap;
+    font-family:inherit; font-size:14px; font-weight:700; transition:all .25s var(--ease);
+  }
+  .tabs button:hover{ border-color:rgba(207,207,207,.45); }
+  .tabs button[aria-selected="true"]{ background:var(--hot); border-color:var(--hot); color:#fff; }
+
+  section[hidden]{ display:none; }
+
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:16px; margin-bottom:14px; }
+  .card h3{ margin:0 0 12px; font-size:16px; }
+
+  label{ display:block; font-size:13px; color:rgba(244,244,244,.65); margin:10px 0 5px; font-weight:500; }
+  input, textarea, select{
+    width:100%; background:var(--deep); border:1px solid var(--line); color:var(--ink);
+    border-radius:10px; padding:11px 13px; font-family:inherit; font-size:15px; outline:none;
+    transition:border-color .2s;
+  }
+  input:focus, textarea:focus, select:focus{ border-color:var(--hot); }
+  textarea{ resize:vertical; min-height:84px; line-height:1.6; }
+  input[dir="ltr"]{ text-align:left; }
+
+  .row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:640px){ .row{ grid-template-columns:1fr; } }
+
+  .item{ background:var(--panel2); border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:12px; position:relative; }
+  .item .bar{ display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .item .idx{ font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--hot); line-height:1; min-width:30px; }
+  .item .grab{ flex:1; font-weight:700; font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+  button.b{
+    background:var(--panel2); border:1px solid var(--line); color:var(--ink);
+    border-radius:9px; padding:8px 14px; cursor:pointer; font-family:inherit; font-size:13px; font-weight:700;
+    transition:all .2s;
+  }
+  button.b:hover{ border-color:rgba(207,207,207,.5); }
+  button.b.hot{ background:var(--hot); border-color:var(--hot); color:#fff; }
+  button.b.ghost{ background:transparent; }
+  button.b.danger{ color:#ff8a8a; }
+  button.b:disabled{ opacity:.5; cursor:not-allowed; }
+  .icon-b{ width:32px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center; font-size:15px; }
+
+  .actions{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+
+  .note{ font-size:13px; color:rgba(244,244,244,.55); line-height:1.7; margin:8px 0 0; }
+  .warn{ background:rgba(217,154,26,.1); border:1px solid rgba(217,154,26,.4); border-radius:12px; padding:13px; font-size:13.5px; line-height:1.75; }
+  .danger-box{ background:rgba(225,35,43,.08); border:1px solid rgba(225,35,43,.35); border-radius:12px; padding:13px; font-size:13.5px; line-height:1.75; }
+
+  #toast{
+    position:fixed; inset-inline-start:50%; transform:translateX(50%) translateY(140%);
+    bottom:22px; z-index:100; background:var(--panel2); border:1px solid var(--line);
+    border-radius:999px; padding:13px 24px; font-weight:700; font-size:14px;
+    box-shadow:0 14px 40px rgba(0,0,0,.5); transition:transform .4s var(--ease); max-width:90vw; text-align:center;
+  }
+  #toast.show{ transform:translateX(50%) translateY(0); }
+  #toast.ok{ border-color:var(--ok); } #toast.err{ border-color:var(--hot); }
+
+  .pill{ display:inline-block; background:var(--hot); color:#fff; border-radius:999px; padding:3px 11px; font-size:11px; font-weight:700; }
+  .dot{ width:9px; height:9px; border-radius:50%; display:inline-block; }
+  .dot.on{ background:var(--ok); } .dot.off{ background:rgba(207,207,207,.4); }
+
+  details{ border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-top:12px; }
+  summary{ cursor:pointer; font-weight:700; font-size:14px; }
+  code{ background:var(--deep); padding:2px 7px; border-radius:6px; font-size:12.5px; }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="lockup" style="font-size:17px"><b>ACTION</b><i>AGENCY</i></span>
+  <span class="pill">لوحة التحكم</span>
+  <span class="sp"></span>
+  <span id="connDot" class="dot off" title="حالة الربط"></span>
+  <button class="b ghost" id="previewBtn">معاينة الموقع</button>
+  <button class="b" id="exportBtn">تنزيل الملف</button>
+  <button class="b hot" id="publishBtn">نشر على الموقع</button>
+</header>
+
+<div class="tabs" role="tablist">
+  <button role="tab" data-tab="general"  aria-selected="true">عام</button>
+  <button role="tab" data-tab="services" aria-selected="false">الخدمات</button>
+  <button role="tab" data-tab="projects" aria-selected="false">المشاريع</button>
+  <button role="tab" data-tab="team"     aria-selected="false">الفريق</button>
+  <button role="tab" data-tab="results"  aria-selected="false">النتائج</button>
+  <button role="tab" data-tab="clients"  aria-selected="false">العملاء</button>
+  <button role="tab" data-tab="settings" aria-selected="false">الربط والنشر</button>
+</div>
+
+<div class="wrap">
+
+  <!-- ============ عام ============ -->
+  <section id="tab-general">
+    <div class="card">
+      <h3>الشعار والواجهة</h3>
+      <label>شعار الشركة (انكليزي)</label>
+      <input dir="ltr" data-bind="site.tagline">
+
+      <div class="row">
+        <div>
+          <label>سطر الترحيب — عربي</label>
+          <input data-bind="hero.badge.ar">
+        </div>
+        <div>
+          <label>سطر الترحيب — انكليزي</label>
+          <input dir="ltr" data-bind="hero.badge.en">
+        </div>
+      </div>
+
+      <label>وصف الواجهة — عربي</label>
+      <textarea data-bind="hero.desc.ar"></textarea>
+      <label>وصف الواجهة — انكليزي</label>
+      <textarea dir="ltr" data-bind="hero.desc.en"></textarea>
+    </div>
+
+    <div class="card">
+      <h3>من نحن</h3>
+      <div class="row">
+        <div><label>العنوان — عربي</label><input data-bind="about.title.ar"></div>
+        <div><label>العنوان — انكليزي</label><input dir="ltr" data-bind="about.title.en"></div>
+      </div>
+      <label>النص — عربي</label>
+      <textarea data-bind="about.desc.ar"></textarea>
+      <label>النص — انكليزي</label>
+      <textarea dir="ltr" data-bind="about.desc.en"></textarea>
+    </div>
+
+    <div class="card">
+      <h3>خطوات الشغل (٤ مربعات)</h3>
+      <div id="stepsList"></div>
+    </div>
+
+    <div class="card">
+      <h3>التواصل</h3>
+      <label>رقم الواتساب — صيغة دولية بدون + وبدون صفر</label>
+      <input dir="ltr" data-bind="contact.whatsapp" placeholder="9647701234567">
+      <p class="note">مثال العراق: <code>964</code> ثم الرقم بدون الصفر. هذا الرقم يشتغل بكل أزرار الواتساب بالموقع.</p>
+
+      <div class="row">
+        <div><label>رسالة الواتساب الجاهزة — عربي</label><input data-bind="contact.waTextAr"></div>
+        <div><label>رسالة الواتساب الجاهزة — انكليزي</label><input dir="ltr" data-bind="contact.waTextEn"></div>
+      </div>
+
+      <label>الإيميل</label>
+      <input dir="ltr" data-bind="contact.email">
+
+      <div class="row">
+        <div><label>العنوان — عربي</label><input data-bind="contact.address.ar"></div>
+        <div><label>العنوان — انكليزي</label><input dir="ltr" data-bind="contact.address.en"></div>
+      </div>
+
+      <h3 style="margin-top:18px">السوشيال ميديا</h3>
+      <p class="note">اتركه فارغ إذا ما عندك حساب — الأيقونة تختفي من الموقع تلقائياً.</p>
+      <label>انستغرام</label><input dir="ltr" data-bind="social.instagram" placeholder="https://instagram.com/...">
+      <label>تيك توك</label><input dir="ltr" data-bind="social.tiktok" placeholder="https://tiktok.com/@...">
+      <label>يوتيوب</label><input dir="ltr" data-bind="social.youtube" placeholder="https://youtube.com/@...">
+    </div>
+  </section>
+
+  <!-- ============ الخدمات ============ -->
+  <section id="tab-services" hidden>
+    <div class="card">
+      <h3>الخدمات <span class="note" style="font-weight:400">— الترقيم يتحدث تلقائياً</span></h3>
+      <div id="servicesList"></div>
+      <button class="b hot" data-add="services">+ خدمة جديدة</button>
+    </div>
+  </section>
+
+  <!-- ============ المشاريع ============ -->
+  <section id="tab-projects" hidden>
+    <div class="card">
+      <h3>المشاريع</h3>
+      <p class="note">
+        القسم: ريلز / فوتو / TVC — هو اللي يحدد تحت أي فلتر يظهر المشروع.<br>
+        الميديا: حط رابط صورة أو فيديو. ارفع الملف بمجلد <code>assets</code> واكتب مثلاً
+        <code>assets/work-1.jpg</code> أو حط رابط كامل.
+      </p>
+      <div id="projectsList"></div>
+      <button class="b hot" data-add="projects">+ مشروع جديد</button>
+    </div>
+  </section>
+
+  <!-- ============ الفريق ============ -->
+  <section id="tab-team" hidden>
+    <div class="card">
+      <h3>فريق العمل</h3>
+      <p class="note">إذا ما حطيت صورة، راح تظهر أيقونة من أيقونات الهوية.</p>
+      <div id="teamList"></div>
+      <button class="b hot" data-add="team">+ عضو جديد</button>
+    </div>
+  </section>
+
+  <!-- ============ النتائج ============ -->
+  <section id="tab-results" hidden>
+    <div class="card">
+      <h3>أرقام النتائج</h3>
+      <p class="note">الرقم يتحرك ويعد لحد الرقم المكتوب. اللاحقة مثل <code>+</code> اختيارية.</p>
+      <div id="resultsList"></div>
+      <button class="b hot" data-add="results">+ رقم جديد</button>
+    </div>
+  </section>
+
+  <!-- ============ العملاء ============ -->
+  <section id="tab-clients" hidden>
+    <div class="card">
+      <h3>أسماء العملاء</h3>
+      <p class="note">تظهر بالشريط المتحرك. كل سطر اسم عميل.</p>
+      <textarea id="clientsBox" style="min-height:220px"></textarea>
+      <p class="note">اكتب كل اسم بسطر لحاله.</p>
+    </div>
+  </section>
+
+  <!-- ============ الربط والنشر ============ -->
+  <section id="tab-settings" hidden>
+    <div class="card">
+      <h3>النشر المباشر على الموقع</h3>
+      <p class="note">
+        حتى تنشر تعديلاتك على الموقع مباشرة بدون ما تحتاج أحد، تحتاج مفتاح وصول من GitHub.
+        تسويه مرة وحدة بس.
+      </p>
+
+      <div class="warn" style="margin:12px 0">
+        <b>خطوات إنشاء المفتاح:</b><br>
+        ١. افتح <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" style="color:var(--hot)">هذا الرابط</a><br>
+        ٢. Repository access ← Only select repositories ← اختر <code>action-agency-website</code><br>
+        ٣. Permissions ← Repository permissions ← <b>Contents</b> ← اختر <b>Read and write</b><br>
+        ٤. Generate token، وانسخ المفتاح والصقه تحت
+      </div>
+
+      <label>المستخدم / المستودع</label>
+      <input dir="ltr" id="repoInput" placeholder="theitdude87/action-agency-website">
+
+      <label>مفتاح الوصول (Token)</label>
+      <input dir="ltr" id="tokenInput" type="password" placeholder="github_pat_...">
+
+      <div class="actions" style="margin-top:14px">
+        <button class="b" id="saveTokenBtn">حفظ المفتاح</button>
+        <button class="b ghost" id="testBtn">اختبار الاتصال</button>
+        <button class="b ghost danger" id="clearTokenBtn">مسح المفتاح</button>
+      </div>
+
+      <div class="danger-box" style="margin-top:14px">
+        <b>مهم عن الأمان:</b> المفتاح ينحفظ بمتصفحك أنت بس، ما ينرفع للموقع ولا يشوفه أحد غيرك.
+        بس لا تفتح لوحة التحكم من جهاز مشترك أو عام. إذا شكيت بشي، امسح المفتاح من هنا
+        وألغيه من إعدادات GitHub.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>نسخ احتياطية</h3>
+      <div class="actions">
+        <button class="b" id="exportBtn2">تنزيل نسخة من المحتوى</button>
+        <button class="b ghost" id="importBtn">رفع نسخة محفوظة</button>
+        <input type="file" id="importFile" accept="application/json,.json" hidden>
+        <button class="b ghost danger" id="resetBtn">رجّع المحتوى الأصلي</button>
+      </div>
+      <p class="note">
+        «تنزيل نسخة» ينزّل ملف <code>content.json</code> — احتفظ بيه كنسخة احتياطية.
+        إذا صار شي غلط ترفعه مرة ثانية.
+      </p>
+    </div>
+
+    <details>
+      <summary>ما عندي مفتاح — شلون أنشر؟</summary>
+      <p class="note">
+        اضغط «تنزيل الملف» فوق، وراح ينزل ملف اسمه <code>content.json</code>.
+        ارفعه بمستودع GitHub مكان الملف القديم (اسحبه وأفلته بصفحة المستودع)، والموقع
+        يتحدث خلال دقيقة تقريباً.
+      </p>
+    </details>
+  </section>
+</div>
+
+<div id="toast"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  var LS_DATA = 'aa-admin-content', LS_TOKEN = 'aa-admin-token', LS_REPO = 'aa-admin-repo';
+  var DEFAULT_REPO = 'theitdude87/action-agency-website';
+  var data = null, original = null, fileSha = null;
+
+  /* ---------- أدوات ---------- */
+  function $(s, r){ return (r || document).querySelector(s); }
+  function $$(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+
+  function toast(msg, kind){
+    var t = $('#toast');
+    t.textContent = msg;
+    t.className = 'show ' + (kind || '');
+    clearTimeout(t._h);
+    t._h = setTimeout(function(){ t.className = ''; }, kind === 'err' ? 5200 : 2800);
+  }
+
+  function get(o, p){ return p.split('.').reduce(function(x, k){ return (x || {})[k]; }, o); }
+  function set(o, p, v){
+    var ks = p.split('.'), last = ks.pop();
+    var t = ks.reduce(function(x, k){ if (x[k] == null) x[k] = {}; return x[k]; }, o);
+    t[last] = v;
+  }
+  function clone(x){ return JSON.parse(JSON.stringify(x)); }
+
+  function save(){
+    try { localStorage.setItem(LS_DATA, JSON.stringify(data)); } catch(e){}
+  }
+
+  /* ---------- تحميل المحتوى ---------- */
+  function loadContent(){
+    return fetch('content.json', { cache:'no-store' })
+      .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+      .then(function(j){
+        original = clone(j);
+        var local = null;
+        try { local = JSON.parse(localStorage.getItem(LS_DATA) || 'null'); } catch(e){}
+        data = local || clone(j);
+        if (local) toast('فُتحت تعديلات محفوظة عندك وما اننشرت بعد');
+      })
+      .catch(function(){
+        var local = null;
+        try { local = JSON.parse(localStorage.getItem(LS_DATA) || 'null'); } catch(e){}
+        if (local){ data = local; original = clone(local); toast('شغال على نسخة محفوظة محلياً'); }
+        else { toast('ما كدرت أجيب content.json — افتح اللوحة من رابط الموقع مو من الملف', 'err'); }
+      });
+  }
+
+  /* ---------- ربط الحقول البسيطة ---------- */
+  function bindFields(){
+    $$('[data-bind]').forEach(function(el){
+      var p = el.getAttribute('data-bind');
+      var v = get(data, p);
+      el.value = v == null ? '' : v;
+      el.addEventListener('input', function(){ set(data, p, el.value); save(); });
+    });
+  }
+
+  /* ---------- باني القوائم ---------- */
+  function field(label, val, oninput, ltr, ph){
+    var w = document.createElement('div');
+    var l = document.createElement('label'); l.textContent = label;
+    var i = document.createElement('input');
+    i.value = val == null ? '' : val;
+    if (ltr) i.setAttribute('dir', 'ltr');
+    if (ph) i.placeholder = ph;
+    i.addEventListener('input', function(){ oninput(i.value); save(); });
+    w.appendChild(l); w.appendChild(i);
+    return w;
+  }
+
+  function listItem(opts){
+    var it = document.createElement('div'); it.className = 'item';
+    var bar = document.createElement('div'); bar.className = 'bar';
+
+    var idx = document.createElement('span'); idx.className = 'idx';
+    idx.textContent = String(opts.index + 1).padStart(2, '0');
+
+    var title = document.createElement('span'); title.className = 'grab';
+    title.textContent = opts.title || '—';
+
+    var up = document.createElement('button');   up.className = 'b icon-b'; up.innerHTML = '&#9650;'; up.title = 'فوق';
+    var dn = document.createElement('button');   dn.className = 'b icon-b'; dn.innerHTML = '&#9660;'; dn.title = 'تحت';
+    var del = document.createElement('button');  del.className = 'b icon-b danger'; del.innerHTML = '&times;'; del.title = 'حذف';
+
+    up.onclick = function(){ opts.move(-1); };
+    dn.onclick = function(){ opts.move(1); };
+    del.onclick = function(){
+      if (confirm('تريد تحذف «' + (opts.title || 'هذا العنصر') + '»؟')) opts.remove();
+    };
+
+    bar.appendChild(idx); bar.appendChild(title);
+    bar.appendChild(up); bar.appendChild(dn); bar.appendChild(del);
+    it.appendChild(bar);
+    return it;
+  }
+
+  function renderList(key, host, rowFn, titleFn){
+    var el = $(host); if (!el) return;
+    el.innerHTML = '';
+    (data[key] || []).forEach(function(obj, i){
+      var it = listItem({
+        index: i,
+        title: titleFn(obj),
+        move: function(d){
+          var arr = data[key], j = i + d;
+          if (j < 0 || j >= arr.length) return;
+          var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+          save(); renderAll();
+        },
+        remove: function(){ data[key].splice(i, 1); save(); renderAll(); }
+      });
+      rowFn(obj, it, i);
+      el.appendChild(it);
+    });
+  }
+
+  function twoCol(a, b){
+    var r = document.createElement('div'); r.className = 'row';
+    r.appendChild(a); r.appendChild(b); return r;
+  }
+
+  /* ---------- الأقسام ---------- */
+  function renderSteps(){
+    renderList('steps', '#stepsList', function(o, it){
+      it.appendChild(twoCol(
+        field('عربي', o.ar, function(v){ o.ar = v; }),
+        field('انكليزي', o.en, function(v){ o.en = v; }, true)
+      ));
+      it.appendChild(field('أيقونة', o.icon, function(v){ o.icon = v; }, true, 'assets/icons/02.jpg'));
+    }, function(o){ return o.ar; });
+  }
+
+  function renderServices(){
+    renderList('services', '#servicesList', function(o, it){
+      it.appendChild(twoCol(
+        field('عربي', o.ar, function(v){ o.ar = v; }),
+        field('انكليزي', o.en, function(v){ o.en = v; }, true)
+      ));
+    }, function(o){ return o.ar; });
+  }
+
+  function renderProjects(){
+    renderList('projects', '#projectsList', function(o, it){
+      var w = document.createElement('div');
+      var l = document.createElement('label'); l.textContent = 'القسم';
+      var sel = document.createElement('select');
+      [['reels','ريلز'],['photo','فوتو'],['tvc','TVC']].forEach(function(p){
+        var op = document.createElement('option'); op.value = p[0]; op.textContent = p[1];
+        if (o.cat === p[0]) op.selected = true;
+        sel.appendChild(op);
+      });
+      sel.addEventListener('change', function(){ o.cat = sel.value; save(); });
+      w.appendChild(l); w.appendChild(sel);
+
+      it.appendChild(twoCol(
+        field('الاسم — عربي', o.ar, function(v){ o.ar = v; }),
+        field('الاسم — انكليزي', o.en, function(v){ o.en = v; }, true)
+      ));
+      it.appendChild(twoCol(w, field('المدة / العدد', o.meta, function(v){ o.meta = v; }, true, '0:30')));
+      it.appendChild(field('رابط الصورة أو الفيديو', o.media, function(v){ o.media = v; }, true, 'assets/work-1.jpg'));
+    }, function(o){ return o.ar; });
+  }
+
+  function renderTeam(){
+    renderList('team', '#teamList', function(o, it){
+      it.appendChild(field('الاسم', o.name, function(v){ o.name = v; }));
+      it.appendChild(twoCol(
+        field('المنصب — عربي', o.ar, function(v){ o.ar = v; }),
+        field('المنصب — انكليزي', o.en, function(v){ o.en = v; }, true)
+      ));
+      it.appendChild(field('رابط الصورة', o.photo, function(v){ o.photo = v; }, true, 'assets/team-1.jpg'));
+    }, function(o){ return o.name && o.name !== '—' ? o.name : o.ar; });
+  }
+
+  function renderResults(){
+    renderList('results', '#resultsList', function(o, it){
+      it.appendChild(twoCol(
+        field('الرقم', o.value, function(v){ o.value = parseInt(v, 10) || 0; }, true, '250'),
+        field('لاحقة', o.suffix, function(v){ o.suffix = v; }, true, '+')
+      ));
+      it.appendChild(twoCol(
+        field('الوصف — عربي', o.ar, function(v){ o.ar = v; }),
+        field('الوصف — انكليزي', o.en, function(v){ o.en = v; }, true)
+      ));
+    }, function(o){ return o.ar; });
+  }
+
+  function renderClients(){
+    var box = $('#clientsBox'); if (!box) return;
+    box.value = (data.clients || []).join('\n');
+    box.oninput = function(){
+      data.clients = box.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+      save();
+    };
+  }
+
+  function renderAll(){
+    renderSteps(); renderServices(); renderProjects(); renderTeam(); renderResults(); renderClients();
+  }
+
+  /* ---------- إضافة ---------- */
+  var BLANKS = {
+    services: { ar:'خدمة جديدة', en:'New service' },
+    projects: { cat:'reels', ar:'مشروع جديد', en:'New project', meta:'0:30', media:'' },
+    team:     { name:'اسم', ar:'المنصب', en:'Role', photo:'', icon:'assets/icons/09.jpg' },
+    results:  { value:10, suffix:'+', ar:'وصف', en:'Label' }
+  };
+  $$('[data-add]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var k = btn.getAttribute('data-add');
+      if (!data[k]) data[k] = [];
+      data[k].push(clone(BLANKS[k]));
+      save(); renderAll();
+      toast('انضاف — انزل تحت وعدّله');
+    });
+  });
+
+  /* ---------- التبويبات ---------- */
+  $$('.tabs button').forEach(function(b){
+    b.addEventListener('click', function(){
+      $$('.tabs button').forEach(function(x){ x.setAttribute('aria-selected', String(x === b)); });
+      $$('.wrap section').forEach(function(s){ s.hidden = true; });
+      var t = $('#tab-' + b.getAttribute('data-tab'));
+      if (t) t.hidden = false;
+      window.scrollTo({ top:0, behavior:'smooth' });
+    });
+  });
+
+  /* ---------- تنزيل / رفع ---------- */
+  function download(){
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'content.json';
+    a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+    toast('نزل الملف', 'ok');
+  }
+  $('#exportBtn').onclick = download;
+  $('#exportBtn2').onclick = download;
+
+  $('#importBtn').onclick = function(){ $('#importFile').click(); };
+  $('#importFile').onchange = function(e){
+    var f = e.target.files[0]; if (!f) return;
+    var rd = new FileReader();
+    rd.onload = function(){
+      try {
+        data = JSON.parse(rd.result);
+        save(); bindFields(); renderAll();
+        toast('انرفع المحتوى', 'ok');
+      } catch(err){ toast('الملف مو سليم', 'err'); }
+    };
+    rd.readAsText(f);
+  };
+
+  $('#resetBtn').onclick = function(){
+    if (!original) return;
+    if (!confirm('تريد ترجع كل شي مثل ما كان بالموقع؟ تعديلاتك غير المنشورة راح تروح.')) return;
+    data = clone(original);
+    save(); bindFields(); renderAll();
+    toast('رجع المحتوى الأصلي', 'ok');
+  };
+
+  $('#previewBtn').onclick = function(){ window.open('index.html', '_blank', 'noopener'); };
+
+  /* ---------- الربط بـ GitHub ---------- */
+  function token(){ try { return localStorage.getItem(LS_TOKEN) || ''; } catch(e){ return ''; } }
+  function repo(){ try { return localStorage.getItem(LS_REPO) || DEFAULT_REPO; } catch(e){ return DEFAULT_REPO; } }
+
+  function setDot(on){ $('#connDot').className = 'dot ' + (on ? 'on' : 'off'); }
+
+  $('#repoInput').value = repo();
+  $('#tokenInput').value = token();
+  setDot(!!token());
+
+  $('#saveTokenBtn').onclick = function(){
+    try {
+      localStorage.setItem(LS_TOKEN, $('#tokenInput').value.trim());
+      localStorage.setItem(LS_REPO, $('#repoInput').value.trim() || DEFAULT_REPO);
+      setDot(!!token());
+      toast('انحفظ المفتاح', 'ok');
+    } catch(e){ toast('ما كدرت أحفظ', 'err'); }
+  };
+
+  $('#clearTokenBtn').onclick = function(){
+    try { localStorage.removeItem(LS_TOKEN); } catch(e){}
+    $('#tokenInput').value = ''; setDot(false);
+    toast('انمسح المفتاح', 'ok');
+  };
+
+  function api(path, opts){
+    opts = opts || {};
+    opts.headers = Object.assign({
+      'Authorization': 'Bearer ' + token(),
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    }, opts.headers || {});
+    return fetch('https://api.github.com/repos/' + repo() + path, opts);
+  }
+
+  $('#testBtn').onclick = function(){
+    if (!token()) return toast('احفظ المفتاح الأول', 'err');
+    toast('جاري الفحص…');
+    api('/contents/content.json').then(function(r){
+      if (r.ok) return r.json().then(function(j){ fileSha = j.sha; toast('الاتصال تمام ✓', 'ok'); setDot(true); });
+      if (r.status === 404) toast('المستودع موجود بس ما لكيت content.json', 'err');
+      else if (r.status === 401) toast('المفتاح غلط أو منتهي', 'err');
+      else if (r.status === 403) toast('المفتاح ما عنده صلاحية Contents: Read and write', 'err');
+      else toast('فشل الاتصال (' + r.status + ')', 'err');
+      setDot(false);
+    }).catch(function(){ toast('ما في اتصال بالإنترنت', 'err'); setDot(false); });
+  };
+
+  function b64(str){
+    return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str)));
+  }
+
+  $('#publishBtn').onclick = function(){
+    if (!token()){
+      toast('تحتاج مفتاح — روح لتبويب «الربط والنشر»', 'err');
+      var st = $('.tabs button[data-tab="settings"]'); if (st) st.click();
+      return;
+    }
+    if (!confirm('تريد تنشر التعديلات على الموقع المباشر؟')) return;
+
+    var btn = this;
+    btn.disabled = true; btn.textContent = 'جاري النشر…';
+
+    api('/contents/content.json')
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(j){
+        var body = {
+          message: 'تحديث محتوى الموقع من لوحة التحكم',
+          content: b64(JSON.stringify(data, null, 2))
+        };
+        if (j && j.sha) body.sha = j.sha;
+        return api('/contents/content.json', { method:'PUT', body: JSON.stringify(body) });
+      })
+      .then(function(r){
+        if (r.ok){
+          original = clone(data);
+          toast('اننشر ✓ الموقع يتحدث خلال دقيقة', 'ok');
+        } else {
+          return r.json().then(function(e){
+            toast('فشل النشر: ' + (e.message || r.status), 'err');
+          });
+        }
+      })
+      .catch(function(){ toast('فشل النشر — تأكد من الإنترنت', 'err'); })
+      .then(function(){ btn.disabled = false; btn.textContent = 'نشر على الموقع'; });
+  };
+
+  /* ---------- تحذير قبل الخروج ---------- */
+  window.addEventListener('beforeunload', function(e){
+    if (!original || !data) return;
+    if (JSON.stringify(original) !== JSON.stringify(data)){
+      e.preventDefault(); e.returnValue = '';
+    }
+  });
+
+  /* ---------- البداية ---------- */
+  loadContent().then(function(){
+    if (!data) return;
+    bindFields();
+    renderAll();
+  });
+})();
+</script>
+</body>
+</html>
