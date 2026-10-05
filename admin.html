@@ -204,6 +204,14 @@
         <div><label>العنوان — انكليزي</label><input dir="ltr" data-bind="contact.address.en"></div>
       </div>
 
+      <label>موقع الخريطة (اسم المكان أو الإحداثيات)</label>
+      <input dir="ltr" data-bind="contact.mapQuery" placeholder="اسم الستوديو، الشارع، المدينة">
+      <p class="note">هذا اللي تطلع عليه الخريطة بالموقع. تكدر تحط اسم المكان أو كود الموقع (Plus Code).</p>
+
+      <label>رابط الخرائط (زر «افتح بالخرائط»)</label>
+      <input dir="ltr" data-bind="contact.mapUrl" placeholder="https://maps.app.goo.gl/...">
+      <p class="note">افتح موقعك بخرائط جوجل ← مشاركة ← انسخ الرابط والصقه هنا.</p>
+
       <h3 style="margin-top:18px">السوشيال ميديا</h3>
       <p class="note">اتركه فارغ إذا ما عندك حساب — الأيقونة تختفي من الموقع تلقائياً.</p>
       <label>انستغرام</label><input dir="ltr" data-bind="social.instagram" placeholder="https://instagram.com/...">

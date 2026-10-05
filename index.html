@@ -166,6 +166,20 @@
   @keyframes playPulse{ 0%{ transform:scale(1); opacity:.7 } 100%{ transform:scale(1.65); opacity:0 } }
   .videoWrap.playing .playBtn, .videoWrap.playing .veil{ display:none; }
 
+
+  /* ---------- الخريطة ---------- */
+  .mapWrap{
+    position:relative; width:100%; aspect-ratio:16/9; border-radius:24px; overflow:hidden;
+    border:1px solid var(--line); box-shadow:0 26px 70px rgba(0,0,0,.5);
+  }
+  @media (max-width:768px){ .mapWrap{ aspect-ratio:4/5; border-radius:18px; } }
+  .mapWrap iframe{
+    position:absolute; inset:0; width:100%; height:100%; border:0;
+    filter:grayscale(1) invert(.92) contrast(.86) brightness(.95);
+    transition:filter .6s var(--ease);
+  }
+  .mapWrap:hover iframe{ filter:grayscale(.25) invert(.92) contrast(.9); }
+
   /* ---------- شريط الفيلم: نفس الشريط اللي بأسفل كلاكيت اللوكو ---------- */
   .filmstrip{
     height:34px;
@@ -362,6 +376,7 @@
         <a href="#projects" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">المشاريع</span><span class="only-en">Projects</span></a>
         <a href="#team"     class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">فريقنا</span><span class="only-en">Team</span></a>
         <a href="#results"  class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">النتائج</span><span class="only-en">Results</span></a>
+        <a href="#location" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">موقعنا</span><span class="only-en">Location</span></a>
         <a href="#contact"  class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">تواصل معنا</span><span class="only-en">Contact</span></a>
       </nav>
 
@@ -393,6 +408,7 @@
         <a href="#team"     class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">فريقنا</span><span class="only-en">Team</span></a>
         <a href="#results"  class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">النتائج</span><span class="only-en">Results</span></a>
         <a href="#clients"  class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">عملاؤنا</span><span class="only-en">Clients</span></a>
+        <a href="#location" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">موقعنا</span><span class="only-en">Location</span></a>
         <a href="#contact"  class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">تواصل معنا</span><span class="only-en">Contact</span></a>
         <a href="#" data-wa class="mt-2 bg-light text-bg font-bold px-4 py-3 rounded-2xl text-center"><span class="only-ar">تحدث معنا على واتساب</span><span class="only-en">Chat on WhatsApp</span></a>
       </div>
@@ -596,6 +612,42 @@
 
 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
   <!-- ===================== تواصل / الفوتر ===================== -->
+
+  <!-- ===================== موقعنا ===================== -->
+  <section id="location" class="py-16 sm:py-20 border-t border-line">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-5 space-y-5" data-r="up">
+        <span class="pill-hot">
+          <span class="only-ar">موقعنا</span><span class="only-en">Find us</span>
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black leading-tight" data-split>
+          <span class="only-ar">تعال شوفنا بالستوديو</span>
+          <span class="only-en">Come visit the studio</span>
+        </h2>
+        <p class="text-ink/65 text-lg flex items-start gap-3">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="mt-1 shrink-0 text-hot"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span data-ct="contact.address">
+            <span class="only-ar">الشاهر ستوديو — شارع الرواد، بغداد</span>
+            <span class="only-en">Alshaher Studio — Rowad St, Baghdad</span>
+          </span>
+        </p>
+        <div class="flex flex-wrap gap-3 pt-1">
+          <a id="mapLink" href="#" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-3 bg-light text-bg font-bold px-6 py-3.5 rounded-full hover:bg-white transition">
+            <span class="only-ar">افتح بالخرائط</span><span class="only-en">Open in Maps</span>
+            <span class="bg-bg text-light w-7 h-7 rounded-full flex items-center justify-center text-xs">↗</span>
+          </a>
+          <a href="#" data-wa class="inline-flex items-center gap-3 border border-line font-bold px-6 py-3.5 rounded-full hover:border-hot hover:text-hot transition">
+            <span class="only-ar">تواصل ويانا</span><span class="only-en">Message us</span>
+          </a>
+        </div>
+      </div>
+      <div class="lg:col-span-7" data-r="zoom" data-d=".1">
+        <div id="mapBox"></div>
+      </div>
+    </div>
+  </section>
+
   <footer id="contact" class="py-14 sm:py-16">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
 
@@ -771,11 +823,13 @@
     clients: ['Northwave','Vertex Labs','Lumen Co','Orbit Studio','Haven Media','Pixelforge',
               'Silverroot','Cascade','Meridian','Foundry','Driftwood','Nova Works'],
     contact: {
-      whatsapp:'9647700000000',
+      whatsapp:'9647708480082',
       waTextAr:'مرحبا اكشن ايجنسي، أريد أستفسر عن خدماتكم',
       waTextEn:'Hi Action Agency, I would like to ask about your services',
       email:'info@actionagency.iq',
-      address:{ ar:'بغداد - العراق', en:'Baghdad, Iraq' }
+      address:{ ar:'الشاهر ستوديو — شارع الرواد، بغداد', en:'Alshaher Studio — Rowad St, Baghdad' },
+      mapQuery:'89F3+8HH الشاهر ستوديو alshaher studio, Rowad St, Baghdad',
+      mapUrl:'https://maps.app.goo.gl/DJqsz5EZ1Wv4EGWU7'
     },
     social: { instagram:'', tiktok:'', youtube:'' }
   };
@@ -914,6 +968,21 @@
     });
   }
 
+
+  function renderMap(){
+    var box = document.getElementById('mapBox');
+    var link = document.getElementById('mapLink');
+    var q = get(C, 'contact.mapQuery') || '';
+    var url = get(C, 'contact.mapUrl') || '';
+
+    if (link) link.setAttribute('href', url || ('https://maps.google.com/maps?q=' + encodeURIComponent(q)));
+    if (!box) return;
+    if (!q){ box.innerHTML = ''; return; }
+
+    box.innerHTML = '<div class="mapWrap"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" ' +
+      'title="Map" src="https://maps.google.com/maps?q=' + encodeURIComponent(q) + '&z=16&output=embed"></iframe></div>';
+  }
+
   function renderResults(){
     var el = document.getElementById('resultsGrid'); if (!el) return;
     el.innerHTML = (C.results || []).map(function(r){
@@ -1000,21 +1069,26 @@
     /* متصفح قديم ما يدعم المراقب: نعرض كل شي بدل ما يبقى مخفي */
     if (!window.IntersectionObserver){ revealAll(); return; }
 
+    /* الحركة تشتغل وترجع: تظهر لمن تنزل وتختفي لمن تطلع فوق */
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
-        if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+        en.target.classList.toggle('in', en.isIntersecting);
       });
-    }, { threshold:.12 });
+    }, { threshold:.12, rootMargin:'0px 0px -6% 0px' });
     document.querySelectorAll('[data-r],[data-split]').forEach(function(t){ io.observe(t); });
 
+    /* الأرقام تعد من جديد كل ما ترجع للشاشة */
     document.querySelectorAll('[data-count]').forEach(function(el){
       var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+      var running = false;
       el.textContent = '0';
       var co = new IntersectionObserver(function(es){
-        if (!es[0].isIntersecting) return;
-        co.disconnect();
+        if (!es[0].isIntersecting){ running = false; el.textContent = '0'; return; }
+        if (running) return;
+        running = true;
         var t0 = performance.now(), dur = 1500;
         (function step(now){
+          if (!running) return;
           var p = Math.min(1, (now - t0) / dur);
           el.textContent = Math.round(target * (1 - Math.pow(2, -10 * p)));
           if (p < 1) requestAnimationFrame(step);
@@ -1046,7 +1120,7 @@
   function boot(){
     try {
       applyText();
-      renderSteps(); renderServices(); renderShowreel(); renderProjects(); renderTeam(); renderResults(); renderClients();
+      renderSteps(); renderServices(); renderShowreel(); renderProjects(); renderMap(); renderTeam(); renderResults(); renderClients();
     } catch(err){
       if (window.console) console.error('خطأ بقراءة المحتوى:', err);
     }
