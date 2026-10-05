@@ -22,6 +22,14 @@
       "en": "Action Agency is a creative production house specialised in visual content and digital marketing. We work with brands from concept and script, through shooting and editing, all the way to paid campaign management."
     }
   },
+  "showreel": {
+    "title": {
+      "ar": "دقيقة وحدة تكفي تعرف شنو نسوي",
+      "en": "One minute is enough to see what we do"
+    },
+    "poster": "",
+    "video": ""
+  },
   "steps": [
     { "ar": "تصوير وإنتاج",  "en": "Shoot & Produce",    "icon": "assets/icons/02.jpg" },
     { "ar": "فوتوغراف",      "en": "Photography",        "icon": "assets/icons/03.jpg" },

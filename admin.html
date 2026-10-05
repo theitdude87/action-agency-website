@@ -163,6 +163,24 @@
     </div>
 
     <div class="card">
+      <h3>فيديو التعريف (الشوريل)</h3>
+      <div class="row">
+        <div><label>العنوان — عربي</label><input data-bind="showreel.title.ar"></div>
+        <div><label>العنوان — انكليزي</label><input dir="ltr" data-bind="showreel.title.en"></div>
+      </div>
+      <label>صورة الغلاف</label>
+      <input dir="ltr" data-bind="showreel.poster" placeholder="assets/showreel-cover.jpg">
+      <p class="note">تظهر بالأبيض والأسود، وتصير ملوّنة لمن يشتغل الفيديو.</p>
+
+      <label>رابط الفيديو</label>
+      <input dir="ltr" data-bind="showreel.video" placeholder="https://youtu.be/xxxx  أو  assets/showreel.mp4">
+      <p class="note">
+        يقبل يوتيوب، فيميو، أو ملف فيديو ترفعه بمجلد <code>assets</code>.
+        إذا تركته فارغ، يظهر الغلاف وزر التشغيل بس بدون ما يشتغل شي.
+      </p>
+    </div>
+
+    <div class="card">
       <h3>خطوات الشغل (٤ مربعات)</h3>
       <div id="stepsList"></div>
     </div>
