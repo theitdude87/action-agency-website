@@ -35,9 +35,9 @@
           light: '#cfcfcf',
           ink:   '#f4f4f4',
           /* الأحمر: عكس الرمادي + يمثل شعار WE BRING HEAT TO BRANDS */
-          hot:   '#870009',
-          hotdk: '#5e0006',
-          hotlt: '#b3000c'
+          hot:   '#ac080e',
+          hotdk: '#7a050a',
+          hotlt: '#d4141c'
         }
       }
     }
@@ -49,7 +49,7 @@
     --ease: cubic-bezier(.16,1,.3,1);
     --bg:#212121; --deep:#181818; --panel:#2a2a2a;
     --light:#cfcfcf; --ink:#f4f4f4; --line:rgba(207,207,207,.14);
-    --hot:#870009; --hotdk:#5e0006; --hotlt:#b3000c;
+    --hot:#ac080e; --hotdk:#7a050a; --hotlt:#d4141c;
   }
 
   html{ background:var(--bg); scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
@@ -79,7 +79,7 @@
   .pill-hot{
     display:inline-block; background:var(--hot); color:#fff;
     border-radius:999px; padding:8px 20px; font-weight:700; font-size:14px;
-    box-shadow:0 6px 20px rgba(135,0,9,.45);
+    box-shadow:0 6px 20px rgba(172,8,14,.45);
   }
   .mark-hot{ background:var(--hot); color:#fff; padding:.06em .3em; border-radius:.22em; }
 
@@ -154,7 +154,7 @@
     width:clamp(74px,11vw,116px); aspect-ratio:1; border-radius:50%;
     background:var(--hot); color:#fff; border:0; cursor:pointer;
     display:flex; align-items:center; justify-content:center;
-    box-shadow:0 10px 40px rgba(135,0,9,.55);
+    box-shadow:0 10px 40px rgba(172,8,14,.55);
     transition:transform .35s var(--ease), background .35s var(--ease);
   }
   .playBtn:hover{ transform:translate(-50%,-50%) scale(1.09); background:var(--hotlt); }
@@ -179,6 +179,20 @@
     transition:filter .6s var(--ease);
   }
   .mapWrap:hover iframe{ filter:grayscale(.25) invert(.92) contrast(.9); }
+
+
+  /* ---------- الهيدر: يبقى شفاف وما ينملي لون وقت النزول ---------- */
+  #siteHeader{
+    background:transparent; border-bottom:1px solid transparent;
+    transition:backdrop-filter .35s var(--ease), border-color .35s var(--ease);
+  }
+  #siteHeader.scrolled{
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom-color:rgba(207,207,207,.10);
+  }
+  /* قائمة الموبايل لازم تكون معتمة حتى تنقرأ */
+  #mobileMenu.open{ background:rgba(20,20,20,.92); backdrop-filter:blur(14px); border-radius:18px; margin-top:8px; }
 
   /* ---------- شريط الفيلم: نفس الشريط اللي بأسفل كلاكيت اللوكو ---------- */
   .filmstrip{
@@ -350,7 +364,7 @@
 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
   <!-- ===================== النافبار ===================== -->
-  <header class="sticky top-0 z-50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 bg-bg/85 backdrop-blur-xl border-b border-line" data-r="down" data-d=".05">
+  <header id="siteHeader" class="sticky top-0 z-50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3" data-r="down" data-d=".05">
     <div class="flex items-center justify-between gap-4">
 
       <a href="#top" class="navlogo flex items-center gap-3 shrink-0">
@@ -368,9 +382,8 @@
       </a>
 
       <!-- الترتيب: معلومات الشركة أول، بعدين المشاريع -->
-      <nav class="hidden lg:flex items-center gap-1 bg-deep/70 border border-line rounded-full p-1.5">
+      <nav class="hidden lg:flex items-center gap-1 border border-line rounded-full p-1.5 backdrop-blur-md bg-deep/25">
         <a href="#top"      class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">الرئيسية</span><span class="only-en">Home</span></a>
-        <a href="#about"    class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">من نحن</span><span class="only-en">About</span></a>
         <a href="#services" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">خدماتنا</span><span class="only-en">Services</span></a>
         <a href="#showreel" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">الفيديو</span><span class="only-en">Showreel</span></a>
         <a href="#projects" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">المشاريع</span><span class="only-en">Projects</span></a>
@@ -401,7 +414,6 @@
     <nav id="mobileMenu" class="lg:hidden">
       <div class="flex flex-col gap-1 pt-4 pb-2">
         <a href="#top"      class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">الرئيسية</span><span class="only-en">Home</span></a>
-        <a href="#about"    class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">من نحن</span><span class="only-en">About</span></a>
         <a href="#services" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">خدماتنا</span><span class="only-en">Services</span></a>
         <a href="#showreel" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">الفيديو</span><span class="only-en">Showreel</span></a>
         <a href="#projects" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">المشاريع (ريلز · فوتو · TVC)</span><span class="only-en">Projects (Reels · Photo · TVC)</span></a>
@@ -475,33 +487,20 @@
 
 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-  <!-- ===================== من نحن ===================== -->
-  <section id="about" class="py-16 sm:py-20">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-      <div class="lg:col-span-6 space-y-6" data-r="up">
-        <span class="pill-hot">
-          <span class="only-ar">من نحن</span><span class="only-en">About Us</span>
-        </span>
-        <h2 class="text-3xl sm:text-5xl font-black leading-tight" data-split data-ct="about.title">
-          <span class="only-ar">فريق إنتاج يشتغل بالتفاصيل</span>
-          <span class="only-en">A production team obsessed with detail</span>
-        </h2>
-        <p class="text-ink/65 text-lg leading-relaxed" data-ct="about.desc">
-          <span class="only-ar">اكشن ايجنسي وكالة متخصصة بالإنتاج البصري والتسويق الرقمي. نشتغل ويّا العلامات التجارية من مرحلة الفكرة والسيناريو، للتصوير والمونتاج، ولحد إدارة الحملات الإعلانية المدفوعة.</span>
-          <span class="only-en">Action Agency is a creative production house specialised in visual content and digital marketing. We work with brands from concept and script, through shooting and editing, all the way to paid campaign management.</span>
-        </p>
-        <!-- خطوات الشغل بأيقونات الهوية -->
-        <div id="stepsGrid" class="grid grid-cols-2 gap-4 pt-2"></div>
-      </div>
-
-      <div class="lg:col-span-6" data-r="zoom" data-d=".15">
-        <!-- ضع هنا صورة الفريق: <img src="assets/about.jpg" class="w-full h-full object-cover"> -->
-        <div class="card media-ph aspect-[4/3] flex items-center justify-center overflow-hidden relative">
-          <svg width="180" height="185" class="relative z-10" data-loop="float" aria-hidden="true"><use href="#clapLogo"/></svg>
-        </div>
-      </div>
+  <!-- ===================== فيديو التعريف ===================== -->
+  <section id="showreel" class="pt-6 pb-16 sm:pb-20">
+    <div class="text-center mb-10" data-r="up">
+      <span class="pill-hot">
+        <span class="only-ar">شوف شغلنا</span><span class="only-en">Showreel</span>
+      </span>
+      <h2 class="text-3xl sm:text-5xl font-black mt-6" data-split data-ct="showreel.title">
+        <span class="only-ar">دقيقة وحدة تكفي تعرف شنو نسوي</span>
+        <span class="only-en">One minute is enough to see what we do</span>
+      </h2>
     </div>
+    <div id="showreelBox" data-r="zoom" data-d=".1"></div>
   </section>
+
 
   <!-- ===================== خدماتنا (11 خدمة) ===================== -->
   <section id="services" class="py-16 sm:py-20 border-t border-line">
@@ -517,20 +516,6 @@
     <div id="servicesGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
   </section>
 
-
-  <!-- ===================== فيديو التعريف ===================== -->
-  <section id="showreel" class="py-16 sm:py-20 border-t border-line">
-    <div class="text-center mb-10" data-r="up">
-      <span class="pill-hot">
-        <span class="only-ar">شوف شغلنا</span><span class="only-en">Showreel</span>
-      </span>
-      <h2 class="text-3xl sm:text-5xl font-black mt-6" data-split data-ct="showreel.title">
-        <span class="only-ar">دقيقة وحدة تكفي تعرف شنو نسوي</span>
-        <span class="only-en">One minute is enough to see what we do</span>
-      </h2>
-    </div>
-    <div id="showreelBox" data-r="zoom" data-d=".1"></div>
-  </section>
 
   <!-- ===================== المشاريع: ريلز / فوتو / TVC ===================== -->
   <section id="projects" class="py-16 sm:py-20 border-t border-line">
@@ -771,20 +756,10 @@
       badge: { ar:'وكالة إنتاج وإعلان متكاملة', en:'Full-service production & ad agency' },
       desc:  { ar:'نصنع محتوى بصري يخلي علامتك التجارية تتحچى.', en:'We craft visual content that makes your brand speak.' }
     },
-    about: {
-      title: { ar:'فريق إنتاج يشتغل بالتفاصيل', en:'A production team obsessed with detail' },
-      desc:  { ar:'اكشن ايجنسي وكالة متخصصة بالإنتاج البصري والتسويق الرقمي.', en:'Action Agency is a creative production house.' }
-    },
     showreel: {
       title:{ ar:'دقيقة وحدة تكفي تعرف شنو نسوي', en:'One minute is enough to see what we do' },
       poster:'', video:''
     },
-    steps: [
-      { ar:'تصوير وإنتاج',  en:'Shoot & Produce',   icon:'assets/icons/02.jpg' },
-      { ar:'فوتوغراف',      en:'Photography',       icon:'assets/icons/03.jpg' },
-      { ar:'تصميم وغرافيك', en:'Design & Graphics', icon:'assets/icons/04.jpg' },
-      { ar:'مونتاج وإخراج', en:'Edit & Direct',     icon:'assets/icons/12.jpg' }
-    ],
     services: [
       { ar:'تصوير فيديو', en:'Shooting a Video' },
       { ar:'تصوير فوتوغرافي', en:'Photography' },
@@ -859,16 +834,6 @@
   }
 
   /* ---------- الأقسام ---------- */
-  function renderSteps(){
-    var el = document.getElementById('stepsGrid'); if (!el) return;
-    el.innerHTML = (C.steps || []).map(function(s){
-      return '<div class="card p-4 sm:p-5 flex items-center gap-3">' +
-               '<span class="w-12 h-12 shrink-0"><img class="bicon" src="' + esc(s.icon) + '" alt=""></span>' +
-               '<span class="font-bold text-sm sm:text-base">' +
-                 '<span class="only-ar">' + esc(s.ar) + '</span><span class="only-en">' + esc(s.en) + '</span>' +
-               '</span></div>';
-    }).join('');
-  }
 
   function renderServices(){
     var el = document.getElementById('servicesGrid'); if (!el) return;
@@ -1120,7 +1085,7 @@
   function boot(){
     try {
       applyText();
-      renderSteps(); renderServices(); renderShowreel(); renderProjects(); renderMap(); renderTeam(); renderResults(); renderClients();
+      renderServices(); renderShowreel(); renderProjects(); renderMap(); renderTeam(); renderResults(); renderClients();
     } catch(err){
       if (window.console) console.error('خطأ بقراءة المحتوى:', err);
     }
@@ -1184,6 +1149,15 @@
       var ry = (e.clientX / window.innerWidth  - .5) *  6;
       tilt.style.transform = 'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
     }, { passive:true });
+  }
+
+
+  /* الهيدر يحس بالنزول بدون ما يتملى لون */
+  var hdr = document.getElementById('siteHeader');
+  if (hdr){
+    var onScroll = function(){ hdr.classList.toggle('scrolled', window.scrollY > 12); };
+    window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
   }
 
   var yearEl = document.getElementById('year');

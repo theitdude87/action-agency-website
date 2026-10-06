@@ -151,18 +151,6 @@
     </div>
 
     <div class="card">
-      <h3>من نحن</h3>
-      <div class="row">
-        <div><label>العنوان — عربي</label><input data-bind="about.title.ar"></div>
-        <div><label>العنوان — انكليزي</label><input dir="ltr" data-bind="about.title.en"></div>
-      </div>
-      <label>النص — عربي</label>
-      <textarea data-bind="about.desc.ar"></textarea>
-      <label>النص — انكليزي</label>
-      <textarea dir="ltr" data-bind="about.desc.en"></textarea>
-    </div>
-
-    <div class="card">
       <h3>فيديو التعريف (الشوريل)</h3>
       <div class="row">
         <div><label>العنوان — عربي</label><input data-bind="showreel.title.ar"></div>
@@ -178,11 +166,6 @@
         يقبل يوتيوب، فيميو، أو ملف فيديو ترفعه بمجلد <code>assets</code>.
         إذا تركته فارغ، يظهر الغلاف وزر التشغيل بس بدون ما يشتغل شي.
       </p>
-    </div>
-
-    <div class="card">
-      <h3>خطوات الشغل (٤ مربعات)</h3>
-      <div id="stepsList"></div>
     </div>
 
     <div class="card">
@@ -462,15 +445,6 @@
   }
 
   /* ---------- الأقسام ---------- */
-  function renderSteps(){
-    renderList('steps', '#stepsList', function(o, it){
-      it.appendChild(twoCol(
-        field('عربي', o.ar, function(v){ o.ar = v; }),
-        field('انكليزي', o.en, function(v){ o.en = v; }, true)
-      ));
-      it.appendChild(field('أيقونة', o.icon, function(v){ o.icon = v; }, true, 'assets/icons/02.jpg'));
-    }, function(o){ return o.ar; });
-  }
 
   function renderServices(){
     renderList('services', '#servicesList', function(o, it){
@@ -537,7 +511,7 @@
   }
 
   function renderAll(){
-    renderSteps(); renderServices(); renderProjects(); renderTeam(); renderResults(); renderClients();
+    renderServices(); renderProjects(); renderTeam(); renderResults(); renderClients();
   }
 
   /* ---------- إضافة ---------- */

@@ -12,16 +12,6 @@
       "en": "We craft visual content that makes your brand speak: cinematic production, reels, photography and TV commercials — from idea to release."
     }
   },
-  "about": {
-    "title": {
-      "ar": "فريق إنتاج يشتغل بالتفاصيل",
-      "en": "A production team obsessed with detail"
-    },
-    "desc": {
-      "ar": "اكشن ايجنسي وكالة متخصصة بالإنتاج البصري والتسويق الرقمي. نشتغل ويّا العلامات التجارية من مرحلة الفكرة والسيناريو، للتصوير والمونتاج، ولحد إدارة الحملات الإعلانية المدفوعة.",
-      "en": "Action Agency is a creative production house specialised in visual content and digital marketing. We work with brands from concept and script, through shooting and editing, all the way to paid campaign management."
-    }
-  },
   "showreel": {
     "title": {
       "ar": "دقيقة وحدة تكفي تعرف شنو نسوي",
@@ -30,28 +20,6 @@
     "poster": "",
     "video": ""
   },
-  "steps": [
-    {
-      "ar": "تصوير وإنتاج",
-      "en": "Shoot & Produce",
-      "icon": "assets/icons/02.jpg"
-    },
-    {
-      "ar": "فوتوغراف",
-      "en": "Photography",
-      "icon": "assets/icons/03.jpg"
-    },
-    {
-      "ar": "تصميم وغرافيك",
-      "en": "Design & Graphics",
-      "icon": "assets/icons/04.jpg"
-    },
-    {
-      "ar": "مونتاج وإخراج",
-      "en": "Edit & Direct",
-      "icon": "assets/icons/12.jpg"
-    }
-  ],
   "services": [
     {
       "ar": "تصوير فيديو",
