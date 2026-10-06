@@ -22,6 +22,10 @@
   },
   "services": [
     {
+      "ar": "الخطة والاستراتيجية التسويقية",
+      "en": "Marketing Plan & Strategy"
+    },
+    {
       "ar": "تصوير فيديو",
       "en": "Shooting a Video"
     },
@@ -181,18 +185,46 @@
     }
   ],
   "clients": [
-    "Northwave",
-    "Vertex Labs",
-    "Lumen Co",
-    "Orbit Studio",
-    "Haven Media",
-    "Pixelforge",
-    "Silverroot",
-    "Cascade",
-    "Meridian",
-    "Foundry",
-    "Driftwood",
-    "Nova Works"
+    {
+      "name": "Ababeel Alsaad",
+      "logo": "assets/clients/ababeel-alsaad.png"
+    },
+    {
+      "name": "Biolab",
+      "logo": "assets/clients/biolab.png"
+    },
+    {
+      "name": "Crest Chicken",
+      "logo": "assets/clients/crest.png"
+    },
+    {
+      "name": "Geliyor",
+      "logo": "assets/clients/geliyor.png"
+    },
+    {
+      "name": "Joz Gallery",
+      "logo": "assets/clients/joz-gallery.png"
+    },
+    {
+      "name": "مفتاح الحل",
+      "logo": "assets/clients/miftah-alhal.png"
+    },
+    {
+      "name": "Muhammed Iyad",
+      "logo": "assets/clients/muhammed-iyad.png"
+    },
+    {
+      "name": "Hyundai",
+      "logo": "assets/clients/hyundai.svg"
+    },
+    {
+      "name": "Q",
+      "logo": "assets/clients/q-brand.png"
+    },
+    {
+      "name": "Zeno",
+      "logo": "assets/clients/zeno.png"
+    }
   ],
   "contact": {
     "whatsapp": "9647708480082",

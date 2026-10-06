@@ -68,7 +68,7 @@
   /* قفل الهوية: ACTION عريض + AGENCY رفيع مفتوح التباعد */
   .lockup{ font-family:'Montserrat',sans-serif; white-space:nowrap; }
   .lockup b{ font-weight:800; letter-spacing:.01em; }
-  .lockup i{ font-weight:200; font-style:normal; letter-spacing:.14em; }
+  .lockup i{ font-weight:200; font-style:normal; letter-spacing:.14em; margin-left:.16em; }
   .en-label{ font-family:'Montserrat',sans-serif; letter-spacing:.18em; text-transform:uppercase; }
 
   /* أرقام بخط سينمائي مختلف + أحمر */
@@ -252,11 +252,15 @@
   .marquee-track.mq-right{ animation-direction:reverse; }
   @keyframes mqScroll{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
   .marquee-box:hover .marquee-track{ animation-play-state:paused; }
+  /* لوكوات العملاء: كلهن أبيض بنفس الارتفاع حتى الشريط يطلع موحد */
   .client-logo{
-    height:42px; width:auto; flex:0 0 auto; display:block; color:var(--light); opacity:.45;
+    height:52px; width:auto; max-width:190px; object-fit:contain;
+    flex:0 0 auto; display:block; color:var(--light); opacity:.5;
+    filter:grayscale(1) brightness(0) invert(1);
     transition:opacity .35s var(--ease), transform .35s var(--ease);
   }
   .client-logo:hover{ opacity:1; transform:translateY(-3px); }
+  @media (max-width:640px){ .client-logo{ height:42px; max-width:150px; } }
 
   /* ---------- فلاتر المشاريع ---------- */
   .tab{
@@ -762,6 +766,7 @@
       poster:'', video:''
     },
     services: [
+      { ar:'الخطة والاستراتيجية التسويقية', en:'Marketing Plan & Strategy' },
       { ar:'تصوير فيديو', en:'Shooting a Video' },
       { ar:'تصوير فوتوغرافي', en:'Photography' },
       { ar:'التصميم الغرافيكي', en:'Graphic Design' },
@@ -796,8 +801,18 @@
       { value:8,   suffix:'',  ar:'سنوات خبرة', en:'Years of experience' },
       { value:35,  suffix:'+', ar:'حملة إعلانية', en:'Ad campaigns' }
     ],
-    clients: ['Northwave','Vertex Labs','Lumen Co','Orbit Studio','Haven Media','Pixelforge',
-              'Silverroot','Cascade','Meridian','Foundry','Driftwood','Nova Works'],
+    clients: [
+      { name:'Ababeel Alsaad', logo:'assets/clients/ababeel-alsaad.png' },
+      { name:'Biolab',         logo:'assets/clients/biolab.png' },
+      { name:'Crest Chicken',  logo:'assets/clients/crest.png' },
+      { name:'Geliyor',        logo:'assets/clients/geliyor.png' },
+      { name:'Joz Gallery',    logo:'assets/clients/joz-gallery.png' },
+      { name:'مفتاح الحل',     logo:'assets/clients/miftah-alhal.png' },
+      { name:'Muhammed Iyad',  logo:'assets/clients/muhammed-iyad.png' },
+      { name:'Hyundai',        logo:'assets/clients/hyundai.svg' },
+      { name:'Q',              logo:'assets/clients/q-brand.png' },
+      { name:'Zeno',           logo:'assets/clients/zeno.png' }
+    ],
     contact: {
       whatsapp:'9647708480082',
       waTextAr:'مرحبا اكشن ايجنسي، أريد أستفسر عن خدماتكم',
@@ -962,7 +977,13 @@
     }).join('');
   }
 
-  function clientLogo(name){
+  function clientLogo(c){
+    /* يقبل نص (اسم فقط) أو كائن فيه لوكو */
+    if (typeof c === 'string') c = { name: c, logo: '' };
+    if (c && c.logo){
+      return '<img class="client-logo" src="' + esc(c.logo) + '" alt="' + esc(c.name) + '" loading="lazy">';
+    }
+    var name = (c && c.name) || '';
     var ini = String(name).split(' ').map(function(w){ return w[0]; }).join('').slice(0,2).toUpperCase();
     return '<svg class="client-logo" viewBox="0 0 190 48" role="img" aria-label="' + esc(name) + '">' +
              '<circle cx="24" cy="24" r="15" fill="none" stroke="currentColor" stroke-width="2.5"/>' +

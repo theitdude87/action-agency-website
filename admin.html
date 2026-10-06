@@ -250,9 +250,13 @@
   <section id="tab-clients" hidden>
     <div class="card">
       <h3>أسماء العملاء</h3>
-      <p class="note">تظهر بالشريط المتحرك. كل سطر اسم عميل.</p>
-      <textarea id="clientsBox" style="min-height:220px"></textarea>
-      <p class="note">اكتب كل اسم بسطر لحاله.</p>
+      <p class="note">
+        تظهر بالشريط المتحرك. ارفع لوكو العميل بمجلد <code>assets/clients</code> واكتب مساره.
+        كل اللوكوات تتحول أبيض تلقائياً بنفس الارتفاع حتى الشريط يبقى مرتب.
+        إذا تركت اللوكو فارغ، يظهر اسم العميل بدله.
+      </p>
+      <div id="clientsList"></div>
+      <button class="b hot" data-add="clients">+ عميل جديد</button>
     </div>
   </section>
 
@@ -502,12 +506,14 @@
   }
 
   function renderClients(){
-    var box = $('#clientsBox'); if (!box) return;
-    box.value = (data.clients || []).join('\n');
-    box.oninput = function(){
-      data.clients = box.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
-      save();
-    };
+    /* ترقية الصيغة القديمة (نصوص) لصيغة الكائنات */
+    data.clients = (data.clients || []).map(function(c){
+      return typeof c === 'string' ? { name:c, logo:'' } : c;
+    });
+    renderList('clients', '#clientsList', function(o, it){
+      it.appendChild(field('اسم العميل', o.name, function(v){ o.name = v; }));
+      it.appendChild(field('مسار اللوكو', o.logo, function(v){ o.logo = v; }, true, 'assets/clients/logo.png'));
+    }, function(o){ return o.name; });
   }
 
   function renderAll(){
@@ -519,7 +525,8 @@
     services: { ar:'خدمة جديدة', en:'New service' },
     projects: { cat:'reels', ar:'مشروع جديد', en:'New project', meta:'0:30', media:'' },
     team:     { name:'اسم', ar:'المنصب', en:'Role', photo:'', icon:'assets/icons/09.jpg' },
-    results:  { value:10, suffix:'+', ar:'وصف', en:'Label' }
+    results:  { value:10, suffix:'+', ar:'وصف', en:'Label' },
+    clients:  { name:'عميل جديد', logo:'' }
   };
   $$('[data-add]').forEach(function(btn){
     btn.addEventListener('click', function(){
