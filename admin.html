@@ -166,6 +166,15 @@
         يقبل يوتيوب، فيميو، أو ملف فيديو ترفعه بمجلد <code>assets</code>.
         إذا تركته فارغ، يظهر الغلاف وزر التشغيل بس بدون ما يشتغل شي.
       </p>
+
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin-top:14px">
+        <input type="checkbox" data-bind-bool="showreel.autoplay" style="width:auto;margin:0">
+        <span>يشتغل تلقائياً أول ما يفتح الموقع</span>
+      </label>
+      <p class="note">
+        يشتغل <b>مكتوم</b> لأن المتصفحات ما تسمح بصوت بدون ضغطة، ويظهر زر «تشغيل الصوت» فوق الفيديو.
+        يشتغل بس إذا الفيديو ملف مرفوع عندك (مو رابط يوتيوب).
+      </p>
     </div>
 
     <div class="card">
@@ -381,6 +390,11 @@
       var v = get(data, p);
       el.value = v == null ? '' : v;
       el.addEventListener('input', function(){ set(data, p, el.value); save(); });
+    });
+    $$('[data-bind-bool]').forEach(function(el){
+      var p = el.getAttribute('data-bind-bool');
+      el.checked = get(data, p) !== false;
+      el.addEventListener('change', function(){ set(data, p, el.checked); save(); });
     });
   }
 

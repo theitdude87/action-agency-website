@@ -17,8 +17,9 @@
       "ar": "دقيقة وحدة تكفي تعرف شنو نسوي",
       "en": "One minute is enough to see what we do"
     },
-    "poster": "",
-    "video": ""
+    "poster": "assets/showreel-poster.jpg",
+    "video": "assets/showreel.mp4",
+    "autoplay": true
   },
   "services": [
     {
@@ -230,7 +231,7 @@
     "whatsapp": "9647708480082",
     "waTextAr": "مرحبا اكشن ايجنسي، أريد أستفسر عن خدماتكم",
     "waTextEn": "Hi Action Agency, I would like to ask about your services",
-    "email": "info@actionagency.iq",
+    "email": "Action.iq0@gmail.com",
     "address": {
       "ar": "الشاهر ستوديو — شارع الرواد، بغداد",
       "en": "Alshaher Studio — Rowad St, Baghdad"

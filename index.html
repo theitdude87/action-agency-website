@@ -167,6 +167,19 @@
   .videoWrap.playing .playBtn, .videoWrap.playing .veil{ display:none; }
 
 
+
+  /* زر الصوت فوق الفيديو */
+  .soundBtn{
+    position:absolute; inset-inline-end:14px; bottom:14px; z-index:5;
+    background:rgba(0,0,0,.55); color:var(--ink); border:1px solid rgba(207,207,207,.3);
+    border-radius:999px; padding:9px 18px; font-family:inherit; font-size:13px; font-weight:700;
+    cursor:pointer; backdrop-filter:blur(6px); transition:all .3s var(--ease);
+  }
+  .soundBtn:hover{ border-color:var(--hot); color:#fff; }
+  .soundBtn.on{ background:var(--hot); border-color:var(--hot); color:#fff; }
+  /* الفيديو التلقائي يبقى ملوّن مو أبيض وأسود */
+  .videoWrap.playing .shot{ filter:none; }
+
   /* ---------- الخريطة ---------- */
   .mapWrap{
     position:relative; width:100%; aspect-ratio:16/9; border-radius:24px; overflow:hidden;
@@ -775,7 +788,7 @@
     },
     showreel: {
       title:{ ar:'دقيقة وحدة تكفي تعرف شنو نسوي', en:'One minute is enough to see what we do' },
-      poster:'', video:''
+      poster:'assets/showreel-poster.jpg', video:'assets/showreel.mp4', autoplay:true
     },
     services: [
       { ar:'الخطة والاستراتيجية التسويقية', en:'Marketing Plan & Strategy' },
@@ -829,7 +842,7 @@
       whatsapp:'9647708480082',
       waTextAr:'مرحبا اكشن ايجنسي، أريد أستفسر عن خدماتكم',
       waTextEn:'Hi Action Agency, I would like to ask about your services',
-      email:'info@actionagency.iq',
+      email:'Action.iq0@gmail.com',
       address:{ ar:'الشاهر ستوديو — شارع الرواد، بغداد', en:'Alshaher Studio — Rowad St, Baghdad' },
       mapQuery:'89F3+8HH الشاهر ستوديو alshaher studio, Rowad St, Baghdad',
       mapUrl:'https://maps.app.goo.gl/DJqsz5EZ1Wv4EGWU7'
@@ -924,9 +937,38 @@
   function renderShowreel(){
     var box = document.getElementById('showreelBox'); if (!box) return;
     var v = (C.showreel || {});
-    var poster = v.poster || '';
-    var vid = v.video || '';
+    var poster = v.poster || '', vid = v.video || '';
+    var selfHosted = vid && !/youtu\.be|youtube\.com|vimeo\.com/i.test(vid);
 
+    /* فيديو محلي + تشغيل تلقائي: يشتغل مكتوم من أول ما يفتح الموقع (المتصفحات ما تسمح بصوت) */
+    if (selfHosted && v.autoplay !== false){
+      box.innerHTML =
+        '<div class="videoWrap playing">' +
+          '<video class="shot" id="showreelVideo" autoplay muted loop playsinline preload="auto"' +
+            (poster ? ' poster="' + esc(poster) + '"' : '') +
+            ' src="' + esc(vid) + '"></video>' +
+          '<button class="soundBtn" id="soundBtn" type="button" aria-label="Sound">' +
+            '<span class="only-ar">تشغيل الصوت</span><span class="only-en">Unmute</span>' +
+          '</button>' +
+        '</div>';
+
+      var video = document.getElementById('showreelVideo');
+      var btn = document.getElementById('soundBtn');
+
+      /* بعض المتصفحات ترفض التشغيل التلقائي، نحاول ونتجاهل الرفض بهدوء */
+      var tryPlay = function(){ var pr = video.play(); if (pr && pr.catch) pr.catch(function(){}); };
+      tryPlay();
+      document.addEventListener('click', tryPlay, { once:true });
+
+      btn.addEventListener('click', function(){
+        video.muted = !video.muted;
+        btn.classList.toggle('on', !video.muted);
+        if (!video.muted) tryPlay();
+      });
+      return;
+    }
+
+    /* يوتيوب / فيميو أو بدون تشغيل تلقائي: غلاف وزر تشغيل */
     var shot = poster
       ? (isVideo(poster)
           ? '<video class="shot" src="' + esc(poster) + '" muted loop playsinline autoplay></video>'
@@ -943,7 +985,7 @@
 
     var wrap = box.querySelector('.videoWrap');
     wrap.querySelector('.playBtn').addEventListener('click', function(){
-      if (!vid){ return; }   /* ما في فيديو مرفوع بعد */
+      if (!vid) return;
       wrap.classList.add('playing');
       var yt = vid.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]{6,})/);
       var vm = vid.match(/vimeo\.com\/(?:video\/)?(\d+)/);
@@ -960,7 +1002,6 @@
       wrap.innerHTML = html;
     });
   }
-
 
   function renderMap(){
     var box = document.getElementById('mapBox');
