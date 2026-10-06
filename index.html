@@ -251,7 +251,6 @@
   .marquee-track{ display:flex; align-items:center; gap:56px; width:max-content; animation:mqScroll 34s linear infinite; }
   .marquee-track.mq-right{ animation-direction:reverse; }
   @keyframes mqScroll{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
-  .marquee-box:hover .marquee-track{ animation-play-state:paused; }
   /* لوكوات العملاء: كلهن أبيض بنفس الارتفاع حتى الشريط يطلع موحد */
   .client-logo{
     height:52px; width:auto; max-width:190px; object-fit:contain;
@@ -992,14 +991,46 @@
            '</svg>';
   }
 
+  /* يعبّي الشريط بنسخ كافية حتى ما يبقى فراغ بأي عرض شاشة */
+  function fillMarquee(el, items){
+    if (!el || !items.length) return;
+    var setHtml = items.map(clientLogo).join('');
+    var copies = 0;
+
+    function paint(n){
+      copies = n;
+      var out = '';
+      for (var i = 0; i < n; i++) out += setHtml;
+      el.innerHTML = out;
+    }
+
+    function fit(){
+      var box = el.parentElement;
+      if (!box || !box.offsetWidth || !copies) return;
+      var one = el.scrollWidth / copies;      /* عرض نسخة وحدة */
+      if (!one) return;
+      /* نحتاج الشريط ضعف عرض الشاشة على الأقل، وبعدد زوجي عشان الحركة تبقى سلسة */
+      var want = Math.max(2, Math.ceil((box.offsetWidth * 2) / one));
+      if (want % 2) want++;
+      if (want !== copies) paint(want);
+    }
+
+    paint(2);
+    requestAnimationFrame(fit);
+    /* الصور تغيّر العرض لمن تحمّل، فنعيد الحساب */
+    window.addEventListener('load', fit);
+    setTimeout(fit, 400); setTimeout(fit, 1500);
+    var rt;
+    window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(fit, 200); }, { passive:true });
+  }
+
   function renderClients(){
     var r1 = document.getElementById('logoRow1'), r2 = document.getElementById('logoRow2');
-    if (!r1 || !r2) return;
-    var all = C.clients || [], half = Math.ceil(all.length / 2);
-    var a = all.slice(0, half), b = all.slice(half);
-    if (!b.length) b = a;
-    r1.innerHTML = a.map(clientLogo).join('') + a.map(clientLogo).join('');
-    r2.innerHTML = b.map(clientLogo).join('') + b.map(clientLogo).join('');
+    var all = (C.clients || []).slice();
+    if (!all.length) return;
+    /* نفس العملاء بالصفين، الثاني بترتيب معكوس حتى ما يبين تكرار */
+    fillMarquee(r1, all);
+    fillMarquee(r2, all.slice().reverse());
   }
 
   /* ---------- اللغة + الواتساب ---------- */
