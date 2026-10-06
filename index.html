@@ -177,6 +177,11 @@
   }
   .soundBtn:hover{ border-color:var(--hot); color:#fff; }
   .soundBtn.on{ background:var(--hot); border-color:var(--hot); color:#fff; }
+  .soundBtn{ display:inline-flex; align-items:center; gap:8px; }
+  .soundBtn svg{ width:16px; height:16px; }
+  .soundBtn .ic-on, .soundBtn .lbl.on{ display:none; }
+  .soundBtn.on .ic-on, .soundBtn.on .lbl.on{ display:inline-flex; }
+  .soundBtn.on .ic-off, .soundBtn.on .lbl.off{ display:none; }
   /* الفيديو التلقائي يبقى ملوّن مو أبيض وأسود */
   .videoWrap.playing .shot{ filter:none; }
 
@@ -940,30 +945,63 @@
     var poster = v.poster || '', vid = v.video || '';
     var selfHosted = vid && !/youtu\.be|youtube\.com|vimeo\.com/i.test(vid);
 
-    /* فيديو محلي + تشغيل تلقائي: يشتغل مكتوم من أول ما يفتح الموقع (المتصفحات ما تسمح بصوت) */
+    /* فيديو محلي + تشغيل تلقائي.
+       المتصفحات تمنع الصوت التلقائي، فنحاول بالصوت أول شي، وإذا انرفض
+       نشغّله مكتوم ونفتح الصوت أول ما الزائر يلمس أي شي بالصفحة. */
     if (selfHosted && v.autoplay !== false){
       box.innerHTML =
         '<div class="videoWrap playing">' +
           '<video class="shot" id="showreelVideo" autoplay muted loop playsinline preload="auto"' +
             (poster ? ' poster="' + esc(poster) + '"' : '') +
             ' src="' + esc(vid) + '"></video>' +
-          '<button class="soundBtn" id="soundBtn" type="button" aria-label="Sound">' +
-            '<span class="only-ar">تشغيل الصوت</span><span class="only-en">Unmute</span>' +
+          '<button class="soundBtn" id="soundBtn" type="button">' +
+            '<svg class="ic-on" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zm-2.5-9v2a7 7 0 0 1 0 14v2a9 9 0 0 0 0-18z"/></svg>' +
+            '<svg class="ic-off" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm18.5-.9L20.1 6.7 17.8 9l-2.3-2.3-1.4 1.4L16.4 10l-2.3 2.3 1.4 1.4 2.3-2.3 2.3 2.3 1.4-1.4L19.2 10l2.3-1.9z"/></svg>' +
+            '<span class="lbl on"><span class="only-ar">كتم الصوت</span><span class="only-en">Mute</span></span>' +
+            '<span class="lbl off"><span class="only-ar">تشغيل الصوت</span><span class="only-en">Sound on</span></span>' +
           '</button>' +
         '</div>';
 
       var video = document.getElementById('showreelVideo');
-      var btn = document.getElementById('soundBtn');
+      var btn   = document.getElementById('soundBtn');
+      var userMuted = false;          /* الزائر كتمه بنفسه؟ وقتها ما نفتحه عليه */
 
-      /* بعض المتصفحات ترفض التشغيل التلقائي، نحاول ونتجاهل الرفض بهدوء */
-      var tryPlay = function(){ var pr = video.play(); if (pr && pr.catch) pr.catch(function(){}); };
-      tryPlay();
-      document.addEventListener('click', tryPlay, { once:true });
+      function sync(){ btn.classList.toggle('on', !video.muted); }
+      function play(){ var p = video.play(); if (p && p.catch) p.catch(function(){}); }
 
-      btn.addEventListener('click', function(){
+      function soundOn(){
+        if (userMuted) return;
+        video.muted = false;
+        var p = video.play();
+        if (p && p.catch) p.catch(function(){ video.muted = true; play(); sync(); });
+        sync();
+      }
+
+      /* ١) نجرب بالصوت فوراً */
+      video.muted = false;
+      var first = video.play();
+      if (first && first.catch){
+        first.catch(function(){
+          /* ٢) المتصفح رفض: نشغله مكتوم حتى ما يوقف */
+          video.muted = true; play(); sync();
+          /* ٣) أول لمسة أو تمرير من الزائر نفتح الصوت تلقائياً */
+          var evs = ['pointerdown','keydown','touchstart','wheel','scroll'];
+          var go = function(e){
+            if (e && e.target && e.target.closest && e.target.closest('#soundBtn')) return;
+            evs.forEach(function(n){ window.removeEventListener(n, go); });
+            soundOn();
+          };
+          evs.forEach(function(n){ window.addEventListener(n, go, { passive:true }); });
+        });
+      }
+      sync();
+
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
         video.muted = !video.muted;
-        btn.classList.toggle('on', !video.muted);
-        if (!video.muted) tryPlay();
+        userMuted = video.muted;
+        if (!video.muted) play();
+        sync();
       });
       return;
     }
