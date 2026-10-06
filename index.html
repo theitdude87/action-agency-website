@@ -247,8 +247,21 @@
   .navlogo:hover .slat{ transform:rotate(-30deg); }
 
   /* ---------- شريط العملاء ---------- */
-  .marquee-box{ overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
-  .marquee-track{ display:flex; align-items:center; gap:56px; width:max-content; animation:mqScroll 34s linear infinite; }
+  .marquee-box{
+    overflow:hidden; direction:ltr;   /* ثابت LTR حتى ما ينقلب الترتيب بالعربي */
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  }
+  /* مهم: الفراغ يكون margin على كل عنصر مو gap.
+     مع gap يصير عرض الشريط = المجموع + (العدد-1)*الفراغ، فإزاحة ٥٠٪ تنقص نص فراغ
+     وتطلع قفزة كل دورة. مع margin الحساب يضبط تماماً واللوب يصير سلس. */
+  .marquee-track{
+    display:flex; align-items:center; width:max-content; direction:ltr;
+    animation:mqScroll 34s linear infinite;
+    will-change:transform;
+  }
+  .marquee-track > *{ margin-right:56px; }
+  @media (max-width:640px){ .marquee-track > *{ margin-right:34px; } }
   .marquee-track.mq-right{ animation-direction:reverse; }
   @keyframes mqScroll{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
   /* لوكوات العملاء: كلهن أبيض بنفس الارتفاع حتى الشريط يطلع موحد */
@@ -808,7 +821,7 @@
       { name:'Joz Gallery',    logo:'assets/clients/joz-gallery.png' },
       { name:'مفتاح الحل',     logo:'assets/clients/miftah-alhal.png' },
       { name:'Muhammed Iyad',  logo:'assets/clients/muhammed-iyad.png' },
-      { name:'Hyundai',        logo:'assets/clients/hyundai.svg' },
+      { name:'Hyundai',        logo:'assets/clients/hyundai.png' },
       { name:'Q',              logo:'assets/clients/q-brand.png' },
       { name:'Zeno',           logo:'assets/clients/zeno.png' }
     ],
@@ -1013,6 +1026,9 @@
       var want = Math.max(2, Math.ceil((box.offsetWidth * 2) / one));
       if (want % 2) want++;
       if (want !== copies) paint(want);
+      /* السرعة ثابتة مهما زاد عدد النسخ: ٦٠ بكسل بالثانية */
+      var half = el.scrollWidth / 2;
+      if (half) el.style.animationDuration = Math.round(half / 60) + 's';
     }
 
     paint(2);
