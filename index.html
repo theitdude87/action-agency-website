@@ -238,20 +238,26 @@
   /* قائمة الموبايل لازم تكون معتمة حتى تنقرأ */
   #mobileMenu.open{ background:rgba(20,20,20,.92); backdrop-filter:blur(14px); border-radius:18px; margin-top:8px; }
 
-  /* ---------- الشريط الفاصل: شريط فاتح بخطوط سودة مائلة مثل سلات الكلاكيت ---------- */
-  .filmstrip{
-    position:relative; height:34px; overflow:hidden;
-    background:repeating-linear-gradient(70deg, var(--bg) 0 9px, var(--light) 9px 38px);
+  /* ---------- الشريط الفاصل: شريط فاتح بخطوط سودة مائلة ----------
+     الخطوط عمودية بدورة ٤٠ بكسل بالضبط ثم نميّلها بـskew،
+     والحركة تزيح ٤٠٠ بكسل = ١٠ دورات كاملة، فما تصير قطة ولا قص. */
+  .filmstrip{ position:relative; height:34px; overflow:hidden; background:var(--light); }
+  .filmstrip .bars{
+    position:absolute; inset:-14px -620px; z-index:0;
+    background:repeating-linear-gradient(90deg, var(--bg) 0 10px, var(--light) 10px 40px);
     animation:filmRoll 16s linear infinite;
+    will-change:transform; backface-visibility:hidden;
   }
   /* السكك الغامقة فوق وتحت */
   .filmstrip::before, .filmstrip::after{
-    content:""; position:absolute; left:0; right:0; height:2px; background:var(--bg);
+    content:""; position:absolute; left:0; right:0; height:2px; background:var(--bg); z-index:1;
   }
   .filmstrip::before{ top:0; }
   .filmstrip::after { bottom:0; }
-  /* الإزاحة بمضاعف دورة النمط (٤٠ بكسل) حتى التكرار يبقى سلس */
-  @keyframes filmRoll{ from{ background-position:0 0; } to{ background-position:-480px 0; } } to{ background-position-x:-530px; } } to{ background-position-x:-440px; } }
+  @keyframes filmRoll{
+    from{ transform:skewX(20deg) translate3d(0,0,0); }
+    to  { transform:skewX(20deg) translate3d(-400px,0,0); }
+  }
 
   /* ---------- مقدمة الكلاكيت ---------- */
   html.preloading{ overflow:hidden; }
@@ -623,7 +629,7 @@
   </section>
 </div>
 
-<div class="filmstrip" aria-hidden="true"></div>
+<div class="filmstrip" aria-hidden="true"><span class="bars"></span></div>
 
 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
   <!-- ===================== تواصل / الفوتر ===================== -->
