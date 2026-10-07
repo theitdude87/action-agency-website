@@ -11,6 +11,10 @@
 <title>ACTION AGENCY | اكشن ايجنسي</title>
 <meta name="description" content="اكشن ايجنسي - وكالة إنتاج وإعلان: تصوير فيديو، فوتوغراف، موشن غرافيك، إعلانات تجارية TVC وريلز. WE BRING HEAT TO BRANDS">
 <link rel="icon" href="assets/logo-dark.png">
+<!-- صور المقدمة تتحمل أول شي حتى الحركة ما تشتغل على صور ما وصلت -->
+<link rel="preload" as="image" href="assets/logo-board.png">
+<link rel="preload" as="image" href="assets/logo-slat.png">
+<link rel="preload" as="image" href="assets/logo-word.png">
 <meta property="og:title" content="ACTION AGENCY | اكشن ايجنسي">
 <meta property="og:description" content="WE BRING HEAT TO BRANDS">
 <meta property="og:image" content="assets/logo-dark.png">
@@ -170,19 +174,24 @@
 
 
   /* اسم الوكالة فوق الفيديو */
+  /* الاسم بالزاوية تحت حتى ما يغطي وجوه أو نص داخل الفيديو */
   .videoWrap .vTitle{
     position:absolute; inset:0; z-index:4; pointer-events:none;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:clamp(6px,1.4vw,14px); text-align:center; padding:18px;
-    background:linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.12) 42%, rgba(0,0,0,.62) 100%);
+    display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end;
+    gap:4px; padding:clamp(14px,2.4vw,26px);
+    background:linear-gradient(180deg, transparent 48%, rgba(0,0,0,.74) 100%);
   }
   .videoWrap .vTitle .nm{
-    margin:0; font-size:clamp(26px,6.2vw,76px); color:#fff; line-height:1;
-    text-shadow:0 8px 34px rgba(0,0,0,.65);
+    margin:0; font-size:clamp(17px,3.2vw,38px); color:#fff; line-height:1;
+    text-shadow:0 6px 24px rgba(0,0,0,.7);
   }
   .videoWrap .vTitle .tg{
-    margin:0; font-size:clamp(9px,1.5vw,15px); color:var(--light);
-    text-shadow:0 3px 16px rgba(0,0,0,.7);
+    margin:0; font-size:clamp(7px,1vw,12px); color:var(--light); opacity:.9;
+    text-shadow:0 3px 14px rgba(0,0,0,.8);
+  }
+  /* زر الصوت يروح للطرف الثاني حتى ما يتصادم ويّا الاسم */
+  @media (max-width:640px){
+    .videoWrap .vTitle .nm{ font-size:clamp(15px,4.6vw,26px); }
   }
 
   /* زر الصوت فوق الفيديو */
@@ -260,18 +269,18 @@
   #preload .clapIcon{ position:relative; width:min(54vw,290px); aspect-ratio:610/532; }
   #preload .clapIcon img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
 
-  /* ٠ درجة = مفتوح (شكل اللوكو)، ‎-15‎ درجة = مطبّق */
+  /* CSS: الموجب يدور مع عقرب الساعة. ٠ = شكل اللوكو، +15 = مطبّق تماماً */
   #preload .slat{
     transform-origin:3% 35.5%;
     animation:slatClap 1.3s cubic-bezier(.3,0,.25,1) forwards .4s;
   }
   @keyframes slatClap{
-    0%  { transform:rotate(0deg) }
-    17% { transform:rotate(-15deg) }   /* الطق */
-    26% { transform:rotate(-11deg) }   /* ارتداد */
-    34% { transform:rotate(-15deg) }
-    62% { transform:rotate(-15deg) }
-    100%{ transform:rotate(0deg) }     /* يرجع يفتح = شكل اللوكو */
+    0%  { transform:rotate(-12deg) }   /* مفتوح على الآخر */
+    20% { transform:rotate(15deg) }    /* الطق - ينزل على البورد */
+    28% { transform:rotate(9deg) }     /* ارتداد */
+    36% { transform:rotate(15deg) }
+    62% { transform:rotate(15deg) }    /* يثبت مطبّق */
+    100%{ transform:rotate(0deg) }     /* يفتح على شكل اللوكو */
   }
 
   #preload .wordmark{
