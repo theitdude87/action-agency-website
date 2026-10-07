@@ -257,7 +257,7 @@
   #preload .clapwrap{
     display:flex; flex-direction:column; align-items:center; gap:clamp(14px,3vw,26px);
     opacity:0; transform:scale(.92);
-    animation:clapIn .45s var(--ease) forwards, clapOut .45s var(--ease) forwards 3.3s;
+    animation:clapIn .32s var(--ease) forwards, clapOut .4s var(--ease) forwards 2.25s;
   }
   @keyframes clapIn { to{ opacity:1; transform:scale(1); } }
   @keyframes clapOut{ to{ opacity:0; transform:scale(.95); } }
@@ -268,7 +268,7 @@
   /* CSS: الموجب يدور مع عقرب الساعة. ٠ = شكل اللوكو، +15 = مطبّق تماماً */
   #preload .slat{
     transform-origin:9.8% 33.1%;   /* مركز مسمار المفصل باللوكو */
-    animation:slatClap 1.3s cubic-bezier(.3,0,.25,1) forwards .4s;
+    animation:slatClap .95s cubic-bezier(.2,0,.1,1) forwards .28s;
   }
   @keyframes slatClap{
     0%  { transform:rotate(-12deg) }   /* مفتوح على الآخر */
@@ -281,7 +281,7 @@
 
   #preload .wordmark{
     width:min(72vw,380px); height:auto; opacity:0;
-    animation:wmIn .6s var(--ease) forwards 1.25s;
+    animation:wmIn .45s var(--ease) forwards .95s;
   }
   @keyframes wmIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
 
@@ -521,7 +521,7 @@
 </div>
 
 <!-- شريط فيلم فاصل -->
-<div class="filmstrip my-4" aria-hidden="true"></div>
+<div class="filmstrip my-4" aria-hidden="true"><span class="bars"></span></div>
 
 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -752,7 +752,7 @@
     if (RM) finishPreload();
     else {
       pre.addEventListener('click', function(e){ if (e.target.closest('.skip')) return; finishPreload(); });
-      setTimeout(finishPreload, 3750);
+      setTimeout(finishPreload, 2700);
     }
   } else { document.documentElement.classList.remove('preloading'); }
 
