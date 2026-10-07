@@ -238,15 +238,20 @@
   /* قائمة الموبايل لازم تكون معتمة حتى تنقرأ */
   #mobileMenu.open{ background:rgba(20,20,20,.92); backdrop-filter:blur(14px); border-radius:18px; margin-top:8px; }
 
-  /* ---------- الشريط الفاصل: نفس خطوط سلات الكلاكيت ----------
-     البلاطة مقصوصة من اللوكو نفسه حتى الميلان يطابقه تماماً */
+  /* ---------- الشريط الفاصل: شريط فاتح بخطوط سودة مائلة مثل سلات الكلاكيت ---------- */
   .filmstrip{
-    height:34px; background-color:var(--deep);
-    background-image:url("assets/filmstrip-tile.png");
-    background-repeat:repeat-x; background-size:auto 34px;
+    position:relative; height:34px; overflow:hidden;
+    background:repeating-linear-gradient(70deg, var(--bg) 0 9px, var(--light) 9px 38px);
     animation:filmRoll 16s linear infinite;
   }
-  @keyframes filmRoll{ from{ background-position-x:0; } to{ background-position-x:-530px; } } to{ background-position-x:-440px; } }
+  /* السكك الغامقة فوق وتحت */
+  .filmstrip::before, .filmstrip::after{
+    content:""; position:absolute; left:0; right:0; height:2px; background:var(--bg);
+  }
+  .filmstrip::before{ top:0; }
+  .filmstrip::after { bottom:0; }
+  /* الإزاحة بمضاعف دورة النمط (٤٠ بكسل) حتى التكرار يبقى سلس */
+  @keyframes filmRoll{ from{ background-position:0 0; } to{ background-position:-480px 0; } } to{ background-position-x:-530px; } } to{ background-position-x:-440px; } }
 
   /* ---------- مقدمة الكلاكيت ---------- */
   html.preloading{ overflow:hidden; }
