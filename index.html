@@ -173,27 +173,6 @@
 
 
 
-  /* اسم الوكالة فوق الفيديو */
-  /* الاسم بالزاوية تحت حتى ما يغطي وجوه أو نص داخل الفيديو */
-  .videoWrap .vTitle{
-    position:absolute; inset:0; z-index:4; pointer-events:none;
-    display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end;
-    gap:4px; padding:clamp(14px,2.4vw,26px);
-    background:linear-gradient(180deg, transparent 48%, rgba(0,0,0,.74) 100%);
-  }
-  .videoWrap .vTitle .nm{
-    margin:0; font-size:clamp(17px,3.2vw,38px); color:#fff; line-height:1;
-    text-shadow:0 6px 24px rgba(0,0,0,.7);
-  }
-  .videoWrap .vTitle .tg{
-    margin:0; font-size:clamp(7px,1vw,12px); color:var(--light); opacity:.9;
-    text-shadow:0 3px 14px rgba(0,0,0,.8);
-  }
-  /* زر الصوت يروح للطرف الثاني حتى ما يتصادم ويّا الاسم */
-  @media (max-width:640px){
-    .videoWrap .vTitle .nm{ font-size:clamp(15px,4.6vw,26px); }
-  }
-
   /* زر الصوت فوق الفيديو */
   .soundBtn{
     position:absolute; inset-inline-end:14px; bottom:14px; z-index:5;
@@ -239,24 +218,28 @@
   #mobileMenu.open{ background:rgba(20,20,20,.92); backdrop-filter:blur(14px); border-radius:18px; margin-top:8px; }
 
   /* ---------- الشريط الفاصل: شريط فاتح بخطوط سودة مائلة ----------
-     الخطوط عمودية بدورة ٤٠ بكسل بالضبط ثم نميّلها بـskew،
-     والحركة تزيح ٤٠٠ بكسل = ١٠ دورات كاملة، فما تصير قطة ولا قص. */
-  .filmstrip{ position:relative; height:34px; overflow:hidden; background:var(--light); }
+     خطوط عمودية بدورة ٤٠ بكسل بالضبط ثم نميّلها، والحركة تزيح
+     ٤٠٠ بكسل = ١٠ دورات كاملة فما تبين وصلة. ألوان صريحة وتدرج
+     بالصيغة الكلاسيكية حتى يشتغل على كل المتصفحات. */
+  .filmstrip{
+    position:relative; height:34px; overflow:hidden;
+    background-color:#cfcfcf;
+    border-top:2px solid #212121; border-bottom:2px solid #212121;
+    box-sizing:border-box;
+  }
   .filmstrip .bars{
-    position:absolute; inset:-14px -620px; z-index:0;
-    background:repeating-linear-gradient(90deg, var(--bg) 0 10px, var(--light) 10px 40px);
+    display:block; position:absolute;
+    top:-24px; bottom:-24px; left:-700px; right:-700px;
+    background-image:repeating-linear-gradient(90deg,
+      #212121 0px, #212121 10px,
+      #cfcfcf 10px, #cfcfcf 40px);
+    transform:skewX(20deg);
     animation:filmRoll 16s linear infinite;
-    will-change:transform; backface-visibility:hidden;
+    will-change:transform;
   }
-  /* السكك الغامقة فوق وتحت */
-  .filmstrip::before, .filmstrip::after{
-    content:""; position:absolute; left:0; right:0; height:2px; background:var(--bg); z-index:1;
-  }
-  .filmstrip::before{ top:0; }
-  .filmstrip::after { bottom:0; }
   @keyframes filmRoll{
-    from{ transform:skewX(20deg) translate3d(0,0,0); }
-    to  { transform:skewX(20deg) translate3d(-400px,0,0); }
+    from{ transform:skewX(20deg) translateX(0); }
+    to  { transform:skewX(20deg) translateX(-400px); }
   }
 
   /* ---------- مقدمة الكلاكيت ---------- */
@@ -473,6 +456,10 @@
 
   <!-- ===================== فيديو التعريف ===================== -->
   <section id="showreel" class="pt-4 sm:pt-6 pb-12 sm:pb-16">
+    <div class="text-center mb-6 sm:mb-8" data-r="up">
+      <p class="lockup text-[30px] sm:text-5xl lg:text-6xl text-ink m-0"><b>ACTION</b><i>AGENCY</i></p>
+      <p class="en-label text-light/80 text-[10px] sm:text-sm mt-2 m-0" data-ct-text="site.tagline">WE BRING HEAT TO BRANDS</p>
+    </div>
     <div id="showreelBox" data-r="zoom" data-d=".1"></div>
   </section>
 
@@ -945,13 +932,6 @@
     var poster = v.poster || '', vid = v.video || '';
     var selfHosted = vid && !/youtu\.be|youtube\.com|vimeo\.com/i.test(vid);
 
-    /* اسم الوكالة يظهر فوق الفيديو */
-    var vTitle =
-      '<div class="vTitle">' +
-        '<p class="lockup nm"><b>ACTION</b><i>AGENCY</i></p>' +
-        '<p class="en-label tg">' + esc(get(C, 'site.tagline') || '') + '</p>' +
-      '</div>';
-
 
     /* فيديو محلي + تشغيل تلقائي.
        المتصفحات تمنع الصوت التلقائي، فنحاول بالصوت أول شي، وإذا انرفض
@@ -962,7 +942,6 @@
           '<video class="shot" id="showreelVideo" autoplay muted loop playsinline preload="auto"' +
             (poster ? ' poster="' + esc(poster) + '"' : '') +
             ' src="' + esc(vid) + '"></video>' +
-          vTitle +
           '<button class="soundBtn" id="soundBtn" type="button">' +
             '<svg class="ic-on" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zm-2.5-9v2a7 7 0 0 1 0 14v2a9 9 0 0 0 0-18z"/></svg>' +
             '<svg class="ic-off" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm18.5-.9L20.1 6.7 17.8 9l-2.3-2.3-1.4 1.4L16.4 10l-2.3 2.3 1.4 1.4 2.3-2.3 2.3 2.3 1.4-1.4L19.2 10l2.3-1.9z"/></svg>' +
@@ -1024,7 +1003,7 @@
 
     box.innerHTML =
       '<div class="videoWrap">' + shot +
-        '<div class="veil"></div>' + vTitle +
+        '<div class="veil"></div>' +
         '<button class="playBtn" type="button" aria-label="Play">' +
           '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
         '</button>' +
