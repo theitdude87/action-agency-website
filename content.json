@@ -13,10 +13,6 @@
     }
   },
   "showreel": {
-    "title": {
-      "ar": "دقيقة وحدة تكفي تعرف شنو نسوي",
-      "en": "One minute is enough to see what we do"
-    },
     "poster": "assets/showreel-poster.jpg",
     "video": "assets/showreel.mp4",
     "autoplay": true

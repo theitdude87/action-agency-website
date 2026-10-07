@@ -168,6 +168,23 @@
 
 
 
+
+  /* اسم الوكالة فوق الفيديو */
+  .videoWrap .vTitle{
+    position:absolute; inset:0; z-index:4; pointer-events:none;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:clamp(6px,1.4vw,14px); text-align:center; padding:18px;
+    background:linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.12) 42%, rgba(0,0,0,.62) 100%);
+  }
+  .videoWrap .vTitle .nm{
+    margin:0; font-size:clamp(26px,6.2vw,76px); color:#fff; line-height:1;
+    text-shadow:0 8px 34px rgba(0,0,0,.65);
+  }
+  .videoWrap .vTitle .tg{
+    margin:0; font-size:clamp(9px,1.5vw,15px); color:var(--light);
+    text-shadow:0 3px 16px rgba(0,0,0,.7);
+  }
+
   /* زر الصوت فوق الفيديو */
   .soundBtn{
     position:absolute; inset-inline-end:14px; bottom:14px; z-index:5;
@@ -276,12 +293,12 @@
   .marquee-track{
     display:flex; align-items:center; width:max-content; direction:ltr;
     animation:mqScroll 90s linear infinite;
-    will-change:transform;
+    will-change:transform; backface-visibility:hidden; transform:translateZ(0);
   }
   .marquee-track > *{ margin-right:56px; }
   @media (max-width:640px){ .marquee-track > *{ margin-right:34px; } }
   .marquee-track.mq-right{ animation-direction:reverse; }
-  @keyframes mqScroll{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  @keyframes mqScroll{ from{transform:translate3d(0,0,0)} to{transform:translate3d(-50%,0,0)} }
   /* لوكوات العملاء: كلهن أبيض بنفس الارتفاع حتى الشريط يطلع موحد */
   .client-logo{
     height:52px; width:auto; max-width:190px; object-fit:contain;
@@ -463,15 +480,6 @@
 
   <!-- ===================== فيديو التعريف ===================== -->
   <section id="showreel" class="pt-4 sm:pt-6 pb-12 sm:pb-16">
-    <div class="text-center mb-10" data-r="up">
-      <span class="pill-hot">
-        <span class="only-ar">شوف شغلنا</span><span class="only-en">Showreel</span>
-      </span>
-      <h2 class="text-3xl sm:text-5xl font-black mt-6" data-split data-ct="showreel.title">
-        <span class="only-ar">دقيقة وحدة تكفي تعرف شنو نسوي</span>
-        <span class="only-en">One minute is enough to see what we do</span>
-      </h2>
-    </div>
     <div id="showreelBox" data-r="zoom" data-d=".1"></div>
   </section>
 
@@ -792,7 +800,6 @@
       desc:  { ar:'نصنع محتوى بصري يخلي علامتك التجارية تتحچى.', en:'We craft visual content that makes your brand speak.' }
     },
     showreel: {
-      title:{ ar:'دقيقة وحدة تكفي تعرف شنو نسوي', en:'One minute is enough to see what we do' },
       poster:'assets/showreel-poster.jpg', video:'assets/showreel.mp4', autoplay:true
     },
     services: [
@@ -945,6 +952,14 @@
     var poster = v.poster || '', vid = v.video || '';
     var selfHosted = vid && !/youtu\.be|youtube\.com|vimeo\.com/i.test(vid);
 
+    /* اسم الوكالة يظهر فوق الفيديو */
+    var vTitle =
+      '<div class="vTitle">' +
+        '<p class="lockup nm"><b>ACTION</b><i>AGENCY</i></p>' +
+        '<p class="en-label tg">' + esc(get(C, 'site.tagline') || '') + '</p>' +
+      '</div>';
+
+
     /* فيديو محلي + تشغيل تلقائي.
        المتصفحات تمنع الصوت التلقائي، فنحاول بالصوت أول شي، وإذا انرفض
        نشغّله مكتوم ونفتح الصوت أول ما الزائر يلمس أي شي بالصفحة. */
@@ -954,6 +969,7 @@
           '<video class="shot" id="showreelVideo" autoplay muted loop playsinline preload="auto"' +
             (poster ? ' poster="' + esc(poster) + '"' : '') +
             ' src="' + esc(vid) + '"></video>' +
+          vTitle +
           '<button class="soundBtn" id="soundBtn" type="button">' +
             '<svg class="ic-on" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zm-2.5-9v2a7 7 0 0 1 0 14v2a9 9 0 0 0 0-18z"/></svg>' +
             '<svg class="ic-off" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm18.5-.9L20.1 6.7 17.8 9l-2.3-2.3-1.4 1.4L16.4 10l-2.3 2.3 1.4 1.4 2.3-2.3 2.3 2.3 1.4-1.4L19.2 10l2.3-1.9z"/></svg>' +
@@ -1015,7 +1031,7 @@
 
     box.innerHTML =
       '<div class="videoWrap">' + shot +
-        '<div class="veil"></div>' +
+        '<div class="veil"></div>' + vTitle +
         '<button class="playBtn" type="button" aria-label="Play">' +
           '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
         '</button>' +
@@ -1090,7 +1106,7 @@
   function fillMarquee(el, items){
     if (!el || !items.length) return;
     var setHtml = items.map(clientLogo).join('');
-    var copies = 0;
+    var copies = 0, lastDur = -1;
 
     function paint(n){
       copies = n;
@@ -1099,27 +1115,43 @@
       el.innerHTML = out;
     }
 
-    function fit(){
+    /* نحسب مرة وحدة بعد ما تحمّل الصور.
+       كل إعادة رسم أو تغيير مدة ترجّع الحركة لأولها وتطلع قزة،
+       فما نسويها إلا إذا فعلاً تغير شي. */
+    function apply(){
       var box = el.parentElement;
       if (!box || !box.offsetWidth || !copies) return;
-      var one = el.scrollWidth / copies;      /* عرض نسخة وحدة */
+      var one = el.scrollWidth / copies;
       if (!one) return;
-      /* نحتاج الشريط ضعف عرض الشاشة على الأقل، وبعدد زوجي عشان الحركة تبقى سلسة */
       var want = Math.max(2, Math.ceil((box.offsetWidth * 2) / one));
       if (want % 2) want++;
       if (want !== copies) paint(want);
-      /* السرعة ثابتة مهما زاد عدد النسخ. قلل الرقم = أبطأ */
-      var half = el.scrollWidth / 2;
-      if (half) el.style.animationDuration = Math.max(30, Math.round(half / MARQUEE_SPEED)) + 's';
+      var dur = Math.max(30, Math.round((el.scrollWidth / 2) / MARQUEE_SPEED));
+      if (dur !== lastDur){
+        lastDur = dur;
+        el.style.animationDuration = dur + 's';
+      }
+    }
+
+    function whenImagesReady(cb){
+      var imgs = el.querySelectorAll('img');
+      var left = imgs.length;
+      if (!left) return cb();
+      var done = function(){ if (--left <= 0) cb(); };
+      Array.prototype.forEach.call(imgs, function(im){
+        if (im.complete) return done();
+        im.addEventListener('load', done, { once:true });
+        im.addEventListener('error', done, { once:true });
+      });
     }
 
     paint(2);
-    requestAnimationFrame(fit);
-    /* الصور تغيّر العرض لمن تحمّل، فنعيد الحساب */
-    window.addEventListener('load', fit);
-    setTimeout(fit, 400); setTimeout(fit, 1500);
+    whenImagesReady(apply);
+
     var rt;
-    window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(fit, 200); }, { passive:true });
+    window.addEventListener('resize', function(){
+      clearTimeout(rt); rt = setTimeout(apply, 250);
+    }, { passive:true });
   }
 
   function renderClients(){
