@@ -22,7 +22,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Tajawal:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -64,16 +64,16 @@
       radial-gradient(1000px 560px at 98% 10%, rgba(207,207,207,.07), transparent 58%),
       linear-gradient(180deg, #302e2c 0%, #262626 28%, #1c1c1c 66%, #131313 100%);
     background-attachment:fixed;
-    font-family:'Tajawal','Montserrat',system-ui,-apple-system,sans-serif;
+    font-family:'Alexandria',system-ui,-apple-system,sans-serif;
     -webkit-font-smoothing:antialiased;
   }
-  html[lang="en"] body{ font-family:'Montserrat','Tajawal',system-ui,sans-serif; }
+  html[lang="en"] body{ font-family:'Alexandria',system-ui,sans-serif; }
 
   /* قفل الهوية: ACTION عريض + AGENCY رفيع مفتوح التباعد */
-  .lockup{ font-family:'Montserrat',sans-serif; white-space:nowrap; }
+  .lockup{ font-family:'Alexandria',sans-serif; white-space:nowrap; }
   .lockup b{ font-weight:800; letter-spacing:.01em; }
   .lockup i{ font-weight:200; font-style:normal; letter-spacing:.14em; margin-left:.16em; }
-  .en-label{ font-family:'Montserrat',sans-serif; letter-spacing:.18em; text-transform:uppercase; }
+  .en-label{ font-family:'Alexandria',sans-serif; letter-spacing:.18em; text-transform:uppercase; }
 
   /* أرقام بخط سينمائي مختلف + أحمر */
   .num{ font-family:'Bebas Neue',sans-serif; font-weight:400; letter-spacing:.01em; line-height:.85; }
@@ -252,38 +252,56 @@
   #preload.hide{ opacity:0; pointer-events:none; }
   #preload .stage{ position:relative; width:min(78vw,400px); }
 
-  /* الكلاكيت الحقيقي: السلات ينطبق على البورد ثم يفتح ويطلع الاسم */
+  /* الكلاكيت: يدخل ← ينطبق بضربة ← يهتز ← يفتح ← يطلع الاسم */
   #preload .stage{ position:relative; width:min(78vw,420px); }
   #preload .clapwrap{
     display:flex; flex-direction:column; align-items:center; gap:clamp(14px,3vw,26px);
-    opacity:0; transform:scale(.92);
-    animation:clapIn .32s var(--ease) forwards, clapOut .4s var(--ease) forwards 2.25s;
+    opacity:0; animation:clapIn .34s var(--ease) forwards, clapOut .4s var(--ease) forwards 2.35s;
   }
-  @keyframes clapIn { to{ opacity:1; transform:scale(1); } }
-  @keyframes clapOut{ to{ opacity:0; transform:scale(.95); } }
+  @keyframes clapIn { from{ opacity:0; transform:scale(.88) translateY(14px); }
+                      to  { opacity:1; transform:none; } }
+  @keyframes clapOut{ to{ opacity:0; transform:scale(.96) translateY(-8px); } }
 
-  #preload .clapIcon{ position:relative; width:min(54vw,290px); aspect-ratio:610/532; }
+  #preload .clapIcon{
+    position:relative; width:min(54vw,290px); aspect-ratio:610/532;
+    animation:clapKick .5s cubic-bezier(.3,0,.2,1) .52s;   /* ارتجاج لحظة الضربة */
+  }
+  @keyframes clapKick{
+    0%{ transform:none } 14%{ transform:translateY(5px) scale(1.035) }
+    36%{ transform:translateY(-2px) scale(.995) } 100%{ transform:none }
+  }
   #preload .clapIcon img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
 
-  /* CSS: الموجب يدور مع عقرب الساعة. ٠ = شكل اللوكو، +15 = مطبّق تماماً */
+  /* CSS: الموجب مع عقرب الساعة. ٠ = شكل اللوكو، +15 = مطبّق تماماً */
   #preload .slat{
-    transform-origin:9.8% 33.1%;   /* مركز مسمار المفصل باللوكو */
-    animation:slatClap .95s cubic-bezier(.2,0,.1,1) forwards .28s;
+    transform-origin:9.8% 33.1%;
+    animation:slatClap 1.5s cubic-bezier(.22,0,.12,1) forwards .2s;
   }
   @keyframes slatClap{
-    0%  { transform:rotate(-12deg) }   /* مفتوح على الآخر */
-    20% { transform:rotate(15deg) }    /* الطق - ينزل على البورد */
-    28% { transform:rotate(9deg) }     /* ارتداد */
-    36% { transform:rotate(15deg) }
-    62% { transform:rotate(15deg) }    /* يثبت مطبّق */
-    100%{ transform:rotate(0deg) }     /* يفتح على شكل اللوكو */
+    0%  { transform:rotate(-26deg) }   /* مفتوح على الآخر */
+    21% { transform:rotate(15deg)  }   /* الضربة */
+    27% { transform:rotate(7deg)   }   /* ارتداد */
+    33% { transform:rotate(15deg)  }
+    40% { transform:rotate(13deg)  }
+    46% { transform:rotate(15deg)  }   /* يستقر مطبّق */
+    64% { transform:rotate(15deg)  }
+    88% { transform:rotate(-2deg)  }   /* يفتح بهدوء */
+    100%{ transform:rotate(0deg)   }   /* شكل اللوكو */
   }
+
+  /* ومضة خفيفة لحظة الطق */
+  #preload .flash{
+    position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none;
+    mix-blend-mode:overlay; animation:flashHit .32s ease-out .5s;
+  }
+  @keyframes flashHit{ 0%{opacity:0} 12%{opacity:.5} 100%{opacity:0} }
 
   #preload .wordmark{
     width:min(72vw,380px); height:auto; opacity:0;
-    animation:wmIn .45s var(--ease) forwards .95s;
+    animation:wmIn .5s var(--ease) forwards 1.5s;
   }
-  @keyframes wmIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+  @keyframes wmIn{ from{ opacity:0; transform:translateY(12px); letter-spacing:.3em; }
+                   to  { opacity:1; transform:none; } }
 
   #preload .skip{
     position:absolute; inset-inline-end:20px; bottom:20px; z-index:2;
@@ -382,6 +400,7 @@
       <div class="clapIcon">
         <img class="board" src="assets/logo-board.png" alt="">
         <img class="slat"  src="assets/logo-slat.png"  alt="">
+        <span class="flash"></span>
       </div>
       <img class="wordmark" src="assets/logo-word.png" alt="ACTION AGENCY">
     </div>
@@ -752,7 +771,7 @@
     if (RM) finishPreload();
     else {
       pre.addEventListener('click', function(e){ if (e.target.closest('.skip')) return; finishPreload(); });
-      setTimeout(finishPreload, 2700);
+      setTimeout(finishPreload, 2800);
     }
   } else { document.documentElement.classList.remove('preloading'); }
 
@@ -1066,8 +1085,8 @@
     var ini = String(name).split(' ').map(function(w){ return w[0]; }).join('').slice(0,2).toUpperCase();
     return '<svg class="client-logo" viewBox="0 0 190 48" role="img" aria-label="' + esc(name) + '">' +
              '<circle cx="24" cy="24" r="15" fill="none" stroke="currentColor" stroke-width="2.5"/>' +
-             '<text x="24" y="29" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="13" font-weight="700" fill="currentColor">' + esc(ini) + '</text>' +
-             '<text x="48" y="30" font-family="Montserrat,sans-serif" font-size="17" font-weight="600" letter-spacing="2" fill="currentColor">' + esc(String(name).toUpperCase()) + '</text>' +
+             '<text x="24" y="29" text-anchor="middle" font-family="Alexandria,sans-serif" font-size="13" font-weight="700" fill="currentColor">' + esc(ini) + '</text>' +
+             '<text x="48" y="30" font-family="Alexandria,sans-serif" font-size="17" font-weight="600" letter-spacing="2" fill="currentColor">' + esc(String(name).toUpperCase()) + '</text>' +
            '</svg>';
   }
 
@@ -1078,7 +1097,7 @@
   function fillMarquee(el, items){
     if (!el || !items.length) return;
     var setHtml = items.map(clientLogo).join('');
-    var copies = 0, lastDur = -1;
+    var copies = 0, lastDur = -1, passes = 0;
 
     function paint(n){
       copies = n;
@@ -1087,27 +1106,8 @@
       el.innerHTML = out;
     }
 
-    /* نحسب مرة وحدة بعد ما تحمّل الصور.
-       كل إعادة رسم أو تغيير مدة ترجّع الحركة لأولها وتطلع قزة،
-       فما نسويها إلا إذا فعلاً تغير شي. */
-    function apply(){
-      var box = el.parentElement;
-      if (!box || !box.offsetWidth || !copies) return;
-      var one = el.scrollWidth / copies;
-      if (!one) return;
-      var want = Math.max(2, Math.ceil((box.offsetWidth * 2) / one));
-      if (want % 2) want++;
-      if (want !== copies) paint(want);
-      var dur = Math.max(30, Math.round((el.scrollWidth / 2) / MARQUEE_SPEED));
-      if (dur !== lastDur){
-        lastDur = dur;
-        el.style.animationDuration = dur + 's';
-      }
-    }
-
-    function whenImagesReady(cb){
-      var imgs = el.querySelectorAll('img');
-      var left = imgs.length;
+    function imagesReady(cb){
+      var imgs = el.querySelectorAll('img'), left = imgs.length;
       if (!left) return cb();
       var done = function(){ if (--left <= 0) cb(); };
       Array.prototype.forEach.call(imgs, function(im){
@@ -1117,12 +1117,33 @@
       });
     }
 
+    /* نقيس بعد ما تحمّل الصور، ولو زاد عدد النسخ نعيد القياس مرة ثانية
+       لأن النسخ الجديدة صورها ما كانت محمّلة وقت القياس الأول. */
+    function apply(){
+      var box = el.parentElement;
+      if (!box || !box.offsetWidth || !copies) return;
+      var one = el.scrollWidth / copies;
+      if (!one) return;
+      /* ٣ أضعاف عرض الشاشة حتى ما يبين فراغ بأي وضع */
+      var want = Math.max(2, Math.ceil((box.offsetWidth * 3) / one));
+      if (want % 2) want++;
+      if (want !== copies && passes < 4){
+        passes++;
+        paint(want);
+        imagesReady(apply);      /* أعد القياس على المحتوى الجديد */
+        return;
+      }
+      var dur = Math.max(30, Math.round((el.scrollWidth / 2) / MARQUEE_SPEED));
+      if (dur !== lastDur){ lastDur = dur; el.style.animationDuration = dur + 's'; }
+    }
+
     paint(2);
-    whenImagesReady(apply);
+    imagesReady(apply);
 
     var rt;
     window.addEventListener('resize', function(){
-      clearTimeout(rt); rt = setTimeout(apply, 250);
+      clearTimeout(rt);
+      rt = setTimeout(function(){ passes = 0; apply(); }, 250);
     }, { passive:true });
   }
 
