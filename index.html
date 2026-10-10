@@ -778,8 +778,21 @@
   function get(o, path){ return path.split('.').reduce(function(x, k){ return (x || {})[k]; }, o); }
   function isVideo(u){ return /\.(mp4|webm|ogv|mov)(\?|$)/i.test(u || ''); }
 
+  function ytId(u){
+    var m = String(u || '').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{6,})/);
+    return m ? m[1] : '';
+  }
+  function isExternalVideo(u){ return !!ytId(u) || /vimeo\.com/i.test(u || ''); }
+
   function mediaTag(url){
     if (!url) return '';
+    /* رابط يوتيوب: نعرض صورته بدل ما نحمّل الفيديو */
+    var y = ytId(url);
+    if (y){
+      return '<img src="https://img.youtube.com/vi/' + esc(y) + '/hqdefault.jpg" alt="" loading="lazy" ' +
+             'class="absolute inset-0 w-full h-full object-cover">';
+    }
+    if (/vimeo\.com/i.test(url)) return '';   /* ما عدنا صورة بدون API، نخلي الخلفية المتدرجة */
     if (isVideo(url)){
       return '<video src="' + esc(url) + '" muted loop playsinline autoplay preload="metadata" ' +
              'class="absolute inset-0 w-full h-full object-cover"></video>';
@@ -1095,8 +1108,12 @@
                    '<span class="num text-[15px] text-light bg-black/55 px-2.5 py-1 rounded-full">' + esc(p.meta) + '</span>' +
                  '</div>' +
                  '<div class="absolute inset-0 flex items-center justify-center z-20">' +
-                   '<span class="w-14 h-14 rounded-full border border-light/35 bg-black/35 backdrop-blur flex items-center justify-center text-lg ps-1 ' +
-                          'group-hover:bg-hot group-hover:border-hot group-hover:text-white transition duration-300">▶</span>' +
+                   (isExternalVideo(p.media)
+                     ? '<a href="' + esc(p.media) + '" target="_blank" rel="noopener" aria-label="Play"'
+                     : '<span') +
+                   ' class="w-14 h-14 rounded-full border border-light/35 bg-black/35 backdrop-blur flex items-center justify-center text-lg ps-1 ' +
+                          'group-hover:bg-hot group-hover:border-hot group-hover:text-white transition duration-300">▶' +
+                   (isExternalVideo(p.media) ? '</a>' : '</span>') +
                  '</div>' +
                  '<div class="absolute inset-x-0 bottom-0 p-3 sm:p-4 z-20">' +
                    '<h3 class="font-bold text-sm sm:text-base leading-snug only-ar">' + esc(p.ar) + '</h3>' +

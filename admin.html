@@ -257,8 +257,8 @@
       <h3>المشاريع</h3>
       <p class="note">
         القسم: ريلز / فوتو / TVC — هو اللي يحدد تحت أي فلتر يظهر المشروع.<br>
-        الميديا: حط رابط صورة أو فيديو. ارفع الملف بمجلد <code>assets</code> واكتب مثلاً
-        <code>assets/work-1.jpg</code> أو حط رابط كامل.
+        الميديا: اضغط «رفع صورة أو فيديو» واختر من جهازك.
+        الفيديوهات الطويلة (TVC) الأفضل ترفعها على يوتيوب وتلصق الرابط — أخف على الموقع وأسرع بالتحميل.
       </p>
       <div id="projectsList"></div>
       <button class="b hot" data-add="projects">+ مشروع جديد</button>
@@ -682,6 +682,7 @@
      ============================================================ */
   var MAXW = 1600;            /* أقصى عرض للصورة بعد التصغير */
   var WARN_MB = 25;           /* تحذير لو الفيديو كبير */
+  var HARD_MB = 80;           /* فوق هذا GitHub يرفضه */
 
   function slug(name){
     return name.replace(/\.[^.]+$/,'').toLowerCase()
@@ -733,14 +734,22 @@
     }
     var inp = document.createElement('input');
     inp.type = 'file';
-    inp.accept = kind === 'video' ? 'video/*' : 'image/*';
+    inp.accept = kind === 'video' ? 'video/*' : (kind === 'media' ? 'image/*,video/*' : 'image/*');
     inp.onchange = function(){
       var f = inp.files && inp.files[0];
       if (!f) return;
-      if (kind === 'video' && f.size > WARN_MB * 1048576){
-        if (!confirm('الفيديو ' + Math.round(f.size/1048576) + 'MB وهذا كبير للموقع. تريد تكمل؟')) return;
+      var isVid = /^video\//.test(f.type) || /\.(mp4|webm|mov|m4v)$/i.test(f.name);
+      var mb = f.size / 1048576;
+      if (isVid){
+        if (mb > HARD_MB){
+          alert('الفيديو ' + Math.round(mb) + 'MB وهذا أكبر من اللي يتحمله GitHub. '
+              + 'ارفعه على يوتيوب والصق الرابط هنا، أو صغّره قبل الرفع.');
+          return;
+        }
+        if (mb > WARN_MB && !confirm('الفيديو ' + Math.round(mb) + 'MB. راح يثقّل الموقع ويطوّل بالرفع. '
+              + 'الأفضل يوتيوب. تريد تكمل؟')) return;
       }
-      toast('جاري الرفع…');
+      toast(isVid ? 'جاري رفع الفيديو… ممكن ياخذ وقت' : 'جاري الرفع…');
       var send = function(blob, ext){
         blobB64(blob, function(b64){
           var path = 'assets/uploads/' + slug(f.name) + '-' + Date.now() + '.' + ext;
@@ -751,7 +760,7 @@
           });
         });
       };
-      if (kind === 'video') send(f, (f.name.split('.').pop() || 'mp4').toLowerCase());
+      if (isVid) send(f, (f.name.split('.').pop() || 'mp4').toLowerCase());
       else shrinkImage(f, send);
     };
     inp.click();
@@ -780,7 +789,7 @@
 
     var btn = document.createElement('button');
     btn.className = 'b hot'; btn.type = 'button';
-    btn.textContent = kind === 'video' ? 'رفع فيديو' : 'رفع صورة';
+    btn.textContent = kind === 'video' ? 'رفع فيديو' : (kind === 'media' ? 'رفع صورة أو فيديو' : 'رفع صورة');
     btn.style.flex = '0 0 auto';
     btn.onclick = function(){
       pickUpload(kind, function(path){
@@ -874,7 +883,7 @@
         field('الاسم — انكليزي', o.en, function(v){ o.en = v; }, true)
       ));
       it.appendChild(twoCol(w, field('المدة / العدد', o.meta, function(v){ o.meta = v; }, true, '0:30')));
-      it.appendChild(mediaField('صورة أو فيديو المشروع', o.media, function(v){ o.media = v; }, 'image', 'ارفع صورة أو الصق مساراً'));
+      it.appendChild(mediaField('صورة أو فيديو المشروع', o.media, function(v){ o.media = v; }, 'media', 'ارفع ملف أو الصق رابط يوتيوب'));
     }, function(o){ return o.ar; });
   }
 
