@@ -128,8 +128,8 @@
   "team": [
     {
       "name": "karar mutar",
-      "ar": "hief Executive Off",
-      "en": "الرئيس التنفيذي",
+      "ar": "الرئيس التنفيذي",
+      "en": "hief Executive Off",
       "photo": "assets/uploads/img-8835-1791637571136.png",
       "icon": "assets/icons/12.jpg"
     },
