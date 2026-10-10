@@ -122,7 +122,6 @@
   <button role="tab" data-tab="results"  aria-selected="false">النتائج</button>
   <button role="tab" data-tab="clients"  aria-selected="false">العملاء</button>
   <button role="tab" data-tab="texts" aria-selected="false">نصوص الموقع</button>
-  <button role="tab" data-tab="settings" aria-selected="false">الربط والنشر</button>
 </div>
 
 <div class="wrap">
@@ -155,11 +154,11 @@
       <h3>فيديو التعريف (الشوريل)</h3>
       <p class="note">اسم الوكالة والشعار يظهرون فوق الفيديو تلقائياً.</p>
       <label>صورة الغلاف</label>
-      <input dir="ltr" data-bind="showreel.poster" placeholder="assets/showreel-cover.jpg">
-      <p class="note">تظهر بالأبيض والأسود، وتصير ملوّنة لمن يشتغل الفيديو.</p>
+      <input dir="ltr" data-bind="showreel.poster" data-upload="image" placeholder="ارفع صورة الغلاف">
+      <p class="note">تظهر بالأبيض والأسود، وتصير ملوّنة لمن يشتغل الفيديو. اضغط «رفع صورة» واختر من جهازك — تتصغّر وتترفع لوحدها.</p>
 
       <label>رابط الفيديو</label>
-      <input dir="ltr" data-bind="showreel.video" placeholder="https://youtu.be/xxxx  أو  assets/showreel.mp4">
+      <input dir="ltr" data-bind="showreel.video" data-upload="video" placeholder="ارفع فيديو أو الصق رابط يوتيوب">
       <p class="note">
         يقبل يوتيوب، فيميو، أو ملف فيديو ترفعه بمجلد <code>assets</code>.
         إذا تركته فارغ، يظهر الغلاف وزر التشغيل بس بدون ما يشتغل شي.
@@ -207,6 +206,21 @@
       <label>انستغرام</label><input dir="ltr" data-bind="social.instagram" placeholder="https://instagram.com/...">
       <label>تيك توك</label><input dir="ltr" data-bind="social.tiktok" placeholder="https://tiktok.com/@...">
       <label>يوتيوب</label><input dir="ltr" data-bind="social.youtube" placeholder="https://youtube.com/@...">
+    </div>
+
+
+    <div class="card">
+      <h3>نسخ احتياطية</h3>
+      <div class="actions">
+        <button class="b" id="exportBtn2">تنزيل نسخة من المحتوى</button>
+        <button class="b ghost" id="importBtn">رفع نسخة محفوظة</button>
+        <input type="file" id="importFile" accept="application/json,.json" hidden>
+        <button class="b ghost danger" id="resetBtn">رجّع المحتوى الأصلي</button>
+      </div>
+      <p class="note">
+        «تنزيل نسخة» ينزّل ملف <code>content.json</code> — احتفظ بيه كنسخة احتياطية.
+        إذا صار شي غلط ترفعه مرة ثانية.
+      </p>
     </div>
   </section>
 
@@ -463,6 +477,7 @@
   </section>
 
   <!-- ============ الربط والنشر ============ -->
+  <!-- مخفي عن العميل. يفتح بـ admin.html#setup -->
   <section id="tab-settings" hidden>
     <div class="card">
       <h3>النشر المباشر على الموقع</h3>
@@ -498,19 +513,6 @@
       </div>
     </div>
 
-    <div class="card">
-      <h3>نسخ احتياطية</h3>
-      <div class="actions">
-        <button class="b" id="exportBtn2">تنزيل نسخة من المحتوى</button>
-        <button class="b ghost" id="importBtn">رفع نسخة محفوظة</button>
-        <input type="file" id="importFile" accept="application/json,.json" hidden>
-        <button class="b ghost danger" id="resetBtn">رجّع المحتوى الأصلي</button>
-      </div>
-      <p class="note">
-        «تنزيل نسخة» ينزّل ملف <code>content.json</code> — احتفظ بيه كنسخة احتياطية.
-        إذا صار شي غلط ترفعه مرة ثانية.
-      </p>
-    </div>
 
     <details>
       <summary>ما عندي مفتاح — شلون أنشر؟</summary>
@@ -584,6 +586,23 @@
       el.value = v == null ? '' : v;
       el.addEventListener('input', function(){ set(data, p, el.value); save(); });
     });
+    $$('[data-upload]').forEach(function(el){
+      if (el.dataset.wired) return;
+      el.dataset.wired = '1';
+      var kind = el.getAttribute('data-upload');
+      var b = document.createElement('button');
+      b.className = 'b hot'; b.type = 'button';
+      b.textContent = kind === 'video' ? 'رفع فيديو' : 'رفع صورة';
+      b.style.cssText = 'margin-top:8px';
+      b.onclick = function(){
+        pickUpload(kind, function(path){
+          el.value = path;
+          set(data, el.getAttribute('data-bind'), path);
+          save();
+        });
+      };
+      el.insertAdjacentElement('afterend', b);
+    });
     $$('[data-bind-bool]').forEach(function(el){
       var p = el.getAttribute('data-bind-bool');
       el.checked = get(data, p) !== false;
@@ -601,6 +620,125 @@
     if (ph) i.placeholder = ph;
     i.addEventListener('input', function(){ oninput(i.value); save(); });
     w.appendChild(l); w.appendChild(i);
+    return w;
+  }
+
+
+  /* ============================================================
+     رفع الصور: يصغّر الصورة بالمتصفح ثم يرفعها للمستودع
+     ويحط مسارها بالحقل تلقائياً — العميل ما يكتب أي رابط.
+     ============================================================ */
+  var MAXW = 1600;            /* أقصى عرض للصورة بعد التصغير */
+  var WARN_MB = 25;           /* تحذير لو الفيديو كبير */
+
+  function slug(name){
+    return name.replace(/\.[^.]+$/,'').toLowerCase()
+               .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40) || 'file';
+  }
+
+  function shrinkImage(file, cb){
+    var url = URL.createObjectURL(file), img = new Image();
+    img.onload = function(){
+      var sc = Math.min(1, MAXW / img.width);
+      var w = Math.round(img.width * sc), h = Math.round(img.height * sc);
+      var c = document.createElement('canvas'); c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      var png = /png/i.test(file.type);
+      c.toBlob(function(b){
+        URL.revokeObjectURL(url);
+        cb(b || file, png ? 'png' : 'jpg');
+      }, png ? 'image/png' : 'image/jpeg', 0.85);
+    };
+    img.onerror = function(){ URL.revokeObjectURL(url); cb(file, (file.name.split('.').pop()||'jpg')); };
+    img.src = url;
+  }
+
+  function blobB64(b, cb){
+    var r = new FileReader();
+    r.onload = function(){ cb(String(r.result).split(',')[1]); };
+    r.readAsDataURL(b);
+  }
+
+  function putFile(path, b64, cb){
+    api('/contents/' + path).then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(j){
+      var body = { message:'رفع ملف من لوحة التحكم: ' + path, content:b64 };
+      if (j && j.sha) body.sha = j.sha;
+      return api('/contents/' + path, { method:'PUT', body: JSON.stringify(body) });
+    })
+    .then(function(r){
+      if (r.ok) cb(null);
+      else r.json().then(function(e){ cb(e.message || ('HTTP ' + r.status)); });
+    })
+    .catch(function(){ cb('ما في اتصال'); });
+  }
+
+  /* يفتح نافذة اختيار ملف، يرفعه، ويرجّع المسار */
+  function pickUpload(kind, done){
+    if (!token()){
+      toast('الرفع يحتاج مفتاح — راجع المطوّر', 'err');
+      return;
+    }
+    var inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = kind === 'video' ? 'video/*' : 'image/*';
+    inp.onchange = function(){
+      var f = inp.files && inp.files[0];
+      if (!f) return;
+      if (kind === 'video' && f.size > WARN_MB * 1048576){
+        if (!confirm('الفيديو ' + Math.round(f.size/1048576) + 'MB وهذا كبير للموقع. تريد تكمل؟')) return;
+      }
+      toast('جاري الرفع…');
+      var send = function(blob, ext){
+        blobB64(blob, function(b64){
+          var path = 'assets/uploads/' + slug(f.name) + '-' + Date.now() + '.' + ext;
+          putFile(path, b64, function(err){
+            if (err) return toast('فشل الرفع: ' + err, 'err');
+            toast('انرفع ✓', 'ok');
+            done(path);
+          });
+        });
+      };
+      if (kind === 'video') send(f, (f.name.split('.').pop() || 'mp4').toLowerCase());
+      else shrinkImage(f, send);
+    };
+    inp.click();
+  }
+
+  /* حقل ملف: معاينة + زر رفع + المسار (للقراءة) */
+  function mediaField(label, val, oninput, kind, ph){
+    var w = document.createElement('div');
+    var l = document.createElement('label'); l.textContent = label;
+    var row = document.createElement('div');
+    row.style.cssText = 'display:flex;gap:8px;align-items:center';
+
+    var prev = document.createElement('span');
+    prev.style.cssText = 'width:46px;height:46px;border-radius:9px;border:1px solid var(--line);'
+      + 'flex:0 0 auto;background:var(--deep) center/contain no-repeat;';
+    var setPrev = function(v){
+      prev.style.backgroundImage = (v && !/\.(mp4|webm|mov)$/i.test(v)) ? 'url("' + v + '")' : 'none';
+      prev.textContent = (v && /\.(mp4|webm|mov)$/i.test(v)) ? '🎬' : '';
+      prev.style.cssText += ';display:flex;align-items:center;justify-content:center;font-size:20px';
+    };
+
+    var i = document.createElement('input');
+    i.value = val == null ? '' : val;
+    i.setAttribute('dir','ltr'); i.placeholder = ph || '';
+    i.addEventListener('input', function(){ oninput(i.value); setPrev(i.value); save(); });
+
+    var btn = document.createElement('button');
+    btn.className = 'b hot'; btn.type = 'button';
+    btn.textContent = kind === 'video' ? 'رفع فيديو' : 'رفع صورة';
+    btn.style.flex = '0 0 auto';
+    btn.onclick = function(){
+      pickUpload(kind, function(path){
+        i.value = path; oninput(path); setPrev(path); save();
+      });
+    };
+
+    setPrev(i.value);
+    row.appendChild(prev); row.appendChild(i); row.appendChild(btn);
+    w.appendChild(l); w.appendChild(row);
     return w;
   }
 
@@ -684,7 +822,7 @@
         field('الاسم — انكليزي', o.en, function(v){ o.en = v; }, true)
       ));
       it.appendChild(twoCol(w, field('المدة / العدد', o.meta, function(v){ o.meta = v; }, true, '0:30')));
-      it.appendChild(field('رابط الصورة أو الفيديو', o.media, function(v){ o.media = v; }, true, 'assets/work-1.jpg'));
+      it.appendChild(mediaField('صورة أو فيديو المشروع', o.media, function(v){ o.media = v; }, 'image', 'ارفع صورة أو الصق مساراً'));
     }, function(o){ return o.ar; });
   }
 
@@ -695,7 +833,7 @@
         field('المنصب — عربي', o.ar, function(v){ o.ar = v; }),
         field('المنصب — انكليزي', o.en, function(v){ o.en = v; }, true)
       ));
-      it.appendChild(field('رابط الصورة', o.photo, function(v){ o.photo = v; }, true, 'assets/team-1.jpg'));
+      it.appendChild(mediaField('صورة العضو', o.photo, function(v){ o.photo = v; }, 'image', 'ارفع صورة'));
     }, function(o){ return o.name && o.name !== '—' ? o.name : o.ar; });
   }
 
@@ -719,7 +857,7 @@
     });
     renderList('clients', '#clientsList', function(o, it){
       it.appendChild(field('اسم العميل', o.name, function(v){ o.name = v; }));
-      it.appendChild(field('مسار اللوكو', o.logo, function(v){ o.logo = v; }, true, 'assets/clients/logo.png'));
+      it.appendChild(mediaField('لوكو العميل', o.logo, function(v){ o.logo = v; }, 'image', 'ارفع اللوكو'));
     }, function(o){ return o.name; });
   }
 
@@ -887,6 +1025,21 @@
       e.preventDefault(); e.returnValue = '';
     }
   });
+
+  /* لوحة المفتاح مخفية عن العميل، تنفتح بـ admin.html#setup */
+  if (location.hash === '#setup'){
+    var tabs = $('.tabs');
+    var b = document.createElement('button');
+    b.setAttribute('role','tab'); b.setAttribute('data-tab','settings');
+    b.setAttribute('aria-selected','false'); b.textContent = 'الربط والنشر';
+    b.addEventListener('click', function(){
+      $$('.tabs button').forEach(function(x){ x.setAttribute('aria-selected', String(x===b)); });
+      $$('.wrap section').forEach(function(x){ x.hidden = true; });
+      $('#tab-settings').hidden = false;
+    });
+    tabs.appendChild(b);
+    b.click();
+  }
 
   /* ---------- البداية ---------- */
   loadContent().then(function(){
