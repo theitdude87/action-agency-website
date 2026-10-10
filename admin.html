@@ -121,6 +121,7 @@
   <button role="tab" data-tab="team"     aria-selected="false">الفريق</button>
   <button role="tab" data-tab="results"  aria-selected="false">النتائج</button>
   <button role="tab" data-tab="clients"  aria-selected="false">العملاء</button>
+  <button role="tab" data-tab="texts" aria-selected="false">نصوص الموقع</button>
   <button role="tab" data-tab="settings" aria-selected="false">الربط والنشر</button>
 </div>
 
@@ -263,6 +264,201 @@
       </p>
       <div id="clientsList"></div>
       <button class="b hot" data-add="clients">+ عميل جديد</button>
+    </div>
+  </section>
+
+  <!-- ============ نصوص الموقع ============ -->
+  <section id="tab-texts" hidden>
+    <div class="card">
+      <h3>روابط القائمة</h3>
+      <div class="row">
+        <div><label>الرئيسية — عربي</label><input data-bind="ui.nav.home.ar"></div>
+        <div><label>الرئيسية — انكليزي</label><input dir="ltr" data-bind="ui.nav.home.en"></div>
+      </div>
+      <div class="row">
+        <div><label>خدماتنا — عربي</label><input data-bind="ui.nav.services.ar"></div>
+        <div><label>خدماتنا — انكليزي</label><input dir="ltr" data-bind="ui.nav.services.en"></div>
+      </div>
+      <div class="row">
+        <div><label>الفيديو — عربي</label><input data-bind="ui.nav.showreel.ar"></div>
+        <div><label>الفيديو — انكليزي</label><input dir="ltr" data-bind="ui.nav.showreel.en"></div>
+      </div>
+      <div class="row">
+        <div><label>المشاريع — عربي</label><input data-bind="ui.nav.projects.ar"></div>
+        <div><label>المشاريع — انكليزي</label><input dir="ltr" data-bind="ui.nav.projects.en"></div>
+      </div>
+      <div class="row">
+        <div><label>المشاريع (نص طويل بالموبايل) — عربي</label><input data-bind="ui.nav.projectsLong.ar"></div>
+        <div><label>المشاريع (نص طويل بالموبايل) — انكليزي</label><input dir="ltr" data-bind="ui.nav.projectsLong.en"></div>
+      </div>
+      <div class="row">
+        <div><label>فريقنا — عربي</label><input data-bind="ui.nav.team.ar"></div>
+        <div><label>فريقنا — انكليزي</label><input dir="ltr" data-bind="ui.nav.team.en"></div>
+      </div>
+      <div class="row">
+        <div><label>النتائج — عربي</label><input data-bind="ui.nav.results.ar"></div>
+        <div><label>النتائج — انكليزي</label><input dir="ltr" data-bind="ui.nav.results.en"></div>
+      </div>
+      <div class="row">
+        <div><label>عملاؤنا — عربي</label><input data-bind="ui.nav.clients.ar"></div>
+        <div><label>عملاؤنا — انكليزي</label><input dir="ltr" data-bind="ui.nav.clients.en"></div>
+      </div>
+      <div class="row">
+        <div><label>موقعنا — عربي</label><input data-bind="ui.nav.location.ar"></div>
+        <div><label>موقعنا — انكليزي</label><input dir="ltr" data-bind="ui.nav.location.en"></div>
+      </div>
+      <div class="row">
+        <div><label>تواصل معنا — عربي</label><input data-bind="ui.nav.contact.ar"></div>
+        <div><label>تواصل معنا — انكليزي</label><input dir="ltr" data-bind="ui.nav.contact.en"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>الأزرار</h3>
+      <div class="row">
+        <div><label>تخطي المقدمة — عربي</label><input data-bind="ui.buttons.skip.ar"></div>
+        <div><label>تخطي المقدمة — انكليزي</label><input dir="ltr" data-bind="ui.buttons.skip.en"></div>
+      </div>
+      <div class="row">
+        <div><label>تحدث معنا (الهيدر) — عربي</label><input data-bind="ui.buttons.talk.ar"></div>
+        <div><label>تحدث معنا (الهيدر) — انكليزي</label><input dir="ltr" data-bind="ui.buttons.talk.en"></div>
+      </div>
+      <div class="row">
+        <div><label>واتساب (قائمة الموبايل) — عربي</label><input data-bind="ui.buttons.whatsappMenu.ar"></div>
+        <div><label>واتساب (قائمة الموبايل) — انكليزي</label><input dir="ltr" data-bind="ui.buttons.whatsappMenu.en"></div>
+      </div>
+      <div class="row">
+        <div><label>شوف أعمالنا — عربي</label><input data-bind="ui.buttons.seeWork.ar"></div>
+        <div><label>شوف أعمالنا — انكليزي</label><input dir="ltr" data-bind="ui.buttons.seeWork.en"></div>
+      </div>
+      <div class="row">
+        <div><label>اتصل / تحدث — عربي</label><input data-bind="ui.buttons.callChat.ar"></div>
+        <div><label>اتصل / تحدث — انكليزي</label><input dir="ltr" data-bind="ui.buttons.callChat.en"></div>
+      </div>
+      <div class="row">
+        <div><label>تريد عمل مثل هذا — عربي</label><input data-bind="ui.buttons.wantWork.ar"></div>
+        <div><label>تريد عمل مثل هذا — انكليزي</label><input dir="ltr" data-bind="ui.buttons.wantWork.en"></div>
+      </div>
+      <div class="row">
+        <div><label>افتح بالخرائط — عربي</label><input data-bind="ui.buttons.openMaps.ar"></div>
+        <div><label>افتح بالخرائط — انكليزي</label><input dir="ltr" data-bind="ui.buttons.openMaps.en"></div>
+      </div>
+      <div class="row">
+        <div><label>تواصل ويانا — عربي</label><input data-bind="ui.buttons.messageUs.ar"></div>
+        <div><label>تواصل ويانا — انكليزي</label><input dir="ltr" data-bind="ui.buttons.messageUs.en"></div>
+      </div>
+      <div class="row">
+        <div><label>اتصل أو تحدث الآن — عربي</label><input data-bind="ui.buttons.callNow.ar"></div>
+        <div><label>اتصل أو تحدث الآن — انكليزي</label><input dir="ltr" data-bind="ui.buttons.callNow.en"></div>
+      </div>
+      <div class="row">
+        <div><label>زر الواتساب العائم — عربي</label><input data-bind="ui.buttons.chatFab.ar"></div>
+        <div><label>زر الواتساب العائم — انكليزي</label><input dir="ltr" data-bind="ui.buttons.chatFab.en"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>قسم الخدمات</h3>
+      <div class="row">
+        <div><label>العنوان الصغير — عربي</label><input data-bind="ui.services.pill.ar"></div>
+        <div><label>العنوان الصغير — انكليزي</label><input dir="ltr" data-bind="ui.services.pill.en"></div>
+      </div>
+      <div class="row">
+        <div><label>العنوان الكبير — عربي</label><input data-bind="ui.services.title.ar"></div>
+        <div><label>العنوان الكبير — انكليزي</label><input dir="ltr" data-bind="ui.services.title.en"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>قسم المشاريع</h3>
+      <div class="row">
+        <div><label>العنوان الصغير — عربي</label><input data-bind="ui.projects.pill.ar"></div>
+        <div><label>العنوان الصغير — انكليزي</label><input dir="ltr" data-bind="ui.projects.pill.en"></div>
+      </div>
+      <div class="row">
+        <div><label>تبويب الكل — عربي</label><input data-bind="ui.projects.tabAll.ar"></div>
+        <div><label>تبويب الكل — انكليزي</label><input dir="ltr" data-bind="ui.projects.tabAll.en"></div>
+      </div>
+      <div class="row">
+        <div><label>تبويب ريلز — عربي</label><input data-bind="ui.projects.tabReels.ar"></div>
+        <div><label>تبويب ريلز — انكليزي</label><input dir="ltr" data-bind="ui.projects.tabReels.en"></div>
+      </div>
+      <div class="row">
+        <div><label>تبويب فوتو — عربي</label><input data-bind="ui.projects.tabPhoto.ar"></div>
+        <div><label>تبويب فوتو — انكليزي</label><input dir="ltr" data-bind="ui.projects.tabPhoto.en"></div>
+      </div>
+      <div class="row">
+        <div><label>تبويب TVC — عربي</label><input data-bind="ui.projects.tabTvc.ar"></div>
+        <div><label>تبويب TVC — انكليزي</label><input dir="ltr" data-bind="ui.projects.tabTvc.en"></div>
+      </div>
+      <div class="row">
+        <div><label>العنوان الكبير — عربي</label><input data-bind="ui.projects.title.ar"></div>
+        <div><label>العنوان الكبير — انكليزي</label><input dir="ltr" data-bind="ui.projects.title.en"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>قسم الفريق</h3>
+      <div class="row">
+        <div><label>العنوان الصغير — عربي</label><input data-bind="ui.team.pill.ar"></div>
+        <div><label>العنوان الصغير — انكليزي</label><input dir="ltr" data-bind="ui.team.pill.en"></div>
+      </div>
+      <div class="row">
+        <div><label>الوصف — عربي</label><input data-bind="ui.team.desc.ar"></div>
+        <div><label>الوصف — انكليزي</label><input dir="ltr" data-bind="ui.team.desc.en"></div>
+      </div>
+      <div class="row">
+        <div><label>العنوان الكبير — عربي</label><input data-bind="ui.team.title.ar"></div>
+        <div><label>العنوان الكبير — انكليزي</label><input dir="ltr" data-bind="ui.team.title.en"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>قسم النتائج</h3>
+      <div class="row">
+        <div><label>العنوان الصغير — عربي</label><input data-bind="ui.results.pill.ar"></div>
+        <div><label>العنوان الصغير — انكليزي</label><input dir="ltr" data-bind="ui.results.pill.en"></div>
+      </div>
+      <div class="row">
+        <div><label>العنوان الكبير — عربي</label><input data-bind="ui.results.title.ar"></div>
+        <div><label>العنوان الكبير — انكليزي</label><input dir="ltr" data-bind="ui.results.title.en"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>قسم العملاء</h3>
+      <div class="row">
+        <div><label>العنوان الصغير — عربي</label><input data-bind="ui.clients.pill.ar"></div>
+        <div><label>العنوان الصغير — انكليزي</label><input dir="ltr" data-bind="ui.clients.pill.en"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>قسم الموقع</h3>
+      <div class="row">
+        <div><label>العنوان الصغير — عربي</label><input data-bind="ui.location.pill.ar"></div>
+        <div><label>العنوان الصغير — انكليزي</label><input dir="ltr" data-bind="ui.location.pill.en"></div>
+      </div>
+      <div class="row">
+        <div><label>العنوان الكبير — عربي</label><input data-bind="ui.location.title.ar"></div>
+        <div><label>العنوان الكبير — انكليزي</label><input dir="ltr" data-bind="ui.location.title.en"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>الفوتر</h3>
+      <div class="row">
+        <div><label>تواصل معنا — عربي</label><input data-bind="ui.footer.getInTouch.ar"></div>
+        <div><label>تواصل معنا — انكليزي</label><input dir="ltr" data-bind="ui.footer.getInTouch.en"></div>
+      </div>
+      <div class="row">
+        <div><label>ابدأ مشروعك — عربي</label><input data-bind="ui.footer.startProject.ar"></div>
+        <div><label>ابدأ مشروعك — انكليزي</label><input dir="ltr" data-bind="ui.footer.startProject.en"></div>
+      </div>
+      <div class="row">
+        <div><label>حقوق النشر — عربي</label><input data-bind="ui.footer.rights.ar"></div>
+        <div><label>حقوق النشر — انكليزي</label><input dir="ltr" data-bind="ui.footer.rights.en"></div>
+      </div>
+      <div class="row">
+        <div><label>الوصف — عربي</label><input data-bind="ui.footer.desc.ar"></div>
+        <div><label>الوصف — انكليزي</label><input dir="ltr" data-bind="ui.footer.desc.en"></div>
+      </div>
+      <div class="row">
+        <div><label>نص ابدأ مشروعك — عربي</label><input data-bind="ui.footer.startDesc.ar"></div>
+        <div><label>نص ابدأ مشروعك — انكليزي</label><input dir="ltr" data-bind="ui.footer.startDesc.en"></div>
+      </div>
     </div>
   </section>
 

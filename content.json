@@ -239,5 +239,189 @@
     "instagram": "",
     "tiktok": "",
     "youtube": ""
+  },
+  "ui": {
+    "buttons": {
+      "skip": {
+        "ar": "تخطي المقدمة",
+        "en": "Skip intro"
+      },
+      "talk": {
+        "ar": "تحدث معنا",
+        "en": "Talk to us"
+      },
+      "whatsappMenu": {
+        "ar": "تحدث معنا على واتساب",
+        "en": "Chat on WhatsApp"
+      },
+      "seeWork": {
+        "ar": "شوف أعمالنا",
+        "en": "See our work"
+      },
+      "callChat": {
+        "ar": "اتصل / تحدث",
+        "en": "Call / Chat"
+      },
+      "wantWork": {
+        "ar": "تريد عمل مثل هذا؟ تحدث ويانا",
+        "en": "Want work like this? Talk to us"
+      },
+      "openMaps": {
+        "ar": "افتح بالخرائط",
+        "en": "Open in Maps"
+      },
+      "messageUs": {
+        "ar": "تواصل ويانا",
+        "en": "Message us"
+      },
+      "callNow": {
+        "ar": "اتصل أو تحدث الآن",
+        "en": "Call or chat now"
+      },
+      "chatFab": {
+        "ar": "تحدث معنا",
+        "en": "Chat with us"
+      }
+    },
+    "nav": {
+      "home": {
+        "ar": "الرئيسية",
+        "en": "Home"
+      },
+      "services": {
+        "ar": "خدماتنا",
+        "en": "Services"
+      },
+      "showreel": {
+        "ar": "الفيديو",
+        "en": "Showreel"
+      },
+      "projects": {
+        "ar": "المشاريع",
+        "en": "Projects"
+      },
+      "projectsLong": {
+        "ar": "المشاريع (ريلز · فوتو · TVC)",
+        "en": "Projects (Reels · Photo · TVC)"
+      },
+      "team": {
+        "ar": "فريقنا",
+        "en": "Team"
+      },
+      "results": {
+        "ar": "النتائج",
+        "en": "Results"
+      },
+      "clients": {
+        "ar": "عملاؤنا",
+        "en": "Clients"
+      },
+      "location": {
+        "ar": "موقعنا",
+        "en": "Location"
+      },
+      "contact": {
+        "ar": "تواصل معنا",
+        "en": "Contact"
+      }
+    },
+    "services": {
+      "pill": {
+        "ar": "خدماتنا",
+        "en": "Our Services"
+      },
+      "title": {
+        "ar": "خدمات اكشن ايجنسي",
+        "en": "Action Agency Services"
+      }
+    },
+    "projects": {
+      "pill": {
+        "ar": "المشاريع",
+        "en": "Projects"
+      },
+      "tabAll": {
+        "ar": "الكل",
+        "en": "All"
+      },
+      "tabReels": {
+        "ar": "ريلز",
+        "en": "Reels"
+      },
+      "tabPhoto": {
+        "ar": "فوتو",
+        "en": "Photo"
+      },
+      "tabTvc": {
+        "ar": "TVC",
+        "en": "TVC"
+      },
+      "title": {
+        "ar": "أعمالنا: ريلز، فوتو، TVC",
+        "en": "Our Work: Reels, Photo, TVC"
+      }
+    },
+    "team": {
+      "pill": {
+        "ar": "فريقنا",
+        "en": "Our Team"
+      },
+      "desc": {
+        "ar": "فريق متكامل من المخرجين والمصورين والمصممين، كل واحد مختص بمجاله.",
+        "en": "A full crew of directors, shooters and designers — each a specialist in their craft."
+      },
+      "title": {
+        "ar": "الناس اللي تشتغل على مشروعك",
+        "en": "The people behind your project"
+      }
+    },
+    "results": {
+      "pill": {
+        "ar": "النتائج",
+        "en": "Results"
+      },
+      "title": {
+        "ar": "أرقام تتكلم عن شغلنا",
+        "en": "Numbers that speak for our work"
+      }
+    },
+    "clients": {
+      "pill": {
+        "ar": "عملاؤنا",
+        "en": "Our Clients"
+      }
+    },
+    "location": {
+      "pill": {
+        "ar": "موقعنا",
+        "en": "Find us"
+      },
+      "title": {
+        "ar": "تعال شوفنا بالستوديو",
+        "en": "Come visit the studio"
+      }
+    },
+    "footer": {
+      "getInTouch": {
+        "ar": "تواصل معنا",
+        "en": "Get in touch"
+      },
+      "startProject": {
+        "ar": "ابدأ مشروعك",
+        "en": "Start your project"
+      },
+      "rights": {
+        "ar": "كل الحقوق محفوظة",
+        "en": "All rights reserved"
+      },
+      "desc": {
+        "ar": "وكالة إنتاج وإعلان: تصوير، مونتاج، موشن غرافيك، هويات بصرية وإدارة حملات.",
+        "en": "Production & advertising agency: filming, editing, motion graphics, visual identities and campaign management."
+      },
+      "startDesc": {
+        "ar": "اضغط الزر وراح تنتقل مباشرة للواتساب ونرد عليك خلال دقائق.",
+        "en": "Tap the button and you'll go straight to WhatsApp — we reply within minutes."
+      }
+    }
   }
 }

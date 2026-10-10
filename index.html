@@ -398,7 +398,7 @@
     </div>
   </div>
   <button class="skip" type="button" id="skipBtn">
-    <span class="only-ar">تخطي المقدمة</span><span class="only-en">Skip intro</span>
+    <span data-ct="ui.buttons.skip"><span class="only-ar">تخطي المقدمة</span><span class="only-en">Skip intro</span></span>
   </button>
 </div>
 
@@ -421,14 +421,14 @@
 
       <!-- الترتيب: معلومات الشركة أول، بعدين المشاريع -->
       <nav class="hidden lg:flex items-center gap-1 border border-line rounded-full p-1.5 backdrop-blur-md bg-deep/25">
-        <a href="#top"      class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">الرئيسية</span><span class="only-en">Home</span></a>
-        <a href="#services" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">خدماتنا</span><span class="only-en">Services</span></a>
-        <a href="#showreel" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">الفيديو</span><span class="only-en">Showreel</span></a>
-        <a href="#projects" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">المشاريع</span><span class="only-en">Projects</span></a>
-        <a href="#team"     class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">فريقنا</span><span class="only-en">Team</span></a>
-        <a href="#results"  class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">النتائج</span><span class="only-en">Results</span></a>
-        <a href="#location" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">موقعنا</span><span class="only-en">Location</span></a>
-        <a href="#contact"  class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span class="only-ar">تواصل معنا</span><span class="only-en">Contact</span></a>
+        <a href="#top"      class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span data-ct="ui.nav.home"><span class="only-ar">الرئيسية</span><span class="only-en">Home</span></span></a>
+        <a href="#services" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span data-ct="ui.nav.services"><span class="only-ar">خدماتنا</span><span class="only-en">Services</span></span></a>
+        <a href="#showreel" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span data-ct="ui.nav.showreel"><span class="only-ar">الفيديو</span><span class="only-en">Showreel</span></span></a>
+        <a href="#projects" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span data-ct="ui.nav.projects"><span data-ct="ui.projects.pill"><span class="only-ar">المشاريع</span><span class="only-en">Projects</span></span></span></a>
+        <a href="#team"     class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span data-ct="ui.nav.team"><span class="only-ar">فريقنا</span><span class="only-en">Team</span></span></a>
+        <a href="#results"  class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span data-ct="ui.nav.results"><span data-ct="ui.results.pill"><span class="only-ar">النتائج</span><span class="only-en">Results</span></span></span></a>
+        <a href="#location" class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span data-ct="ui.nav.location"><span class="only-ar">موقعنا</span><span class="only-en">Location</span></span></a>
+        <a href="#contact"  class="px-4 py-2 rounded-full text-sm hover:bg-light/10 transition"><span data-ct="ui.nav.contact"><span class="only-ar">تواصل معنا</span><span class="only-en">Contact</span></span></a>
       </nav>
 
       <div class="flex items-center gap-2">
@@ -439,7 +439,7 @@
 
         <a href="#" data-wa class="hidden sm:flex items-center gap-2 bg-light text-bg font-bold px-5 py-2.5 rounded-full hover:bg-white transition text-sm">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2zm5.5-5.8c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1s-.8 1-.9 1.2c-.2.2-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.6l-1-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.9 5.1 2.2.9 3 1 4.1.8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/></svg>
-          <span class="only-ar">تحدث معنا</span><span class="only-en">Talk to us</span>
+          <span data-ct="ui.buttons.talk"><span class="only-ar">تحدث معنا</span><span class="only-en">Talk to us</span></span>
         </a>
 
         <button id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu"
@@ -451,16 +451,16 @@
 
     <nav id="mobileMenu" class="lg:hidden">
       <div class="flex flex-col gap-1 pt-4 pb-2">
-        <a href="#top"      class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">الرئيسية</span><span class="only-en">Home</span></a>
-        <a href="#services" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">خدماتنا</span><span class="only-en">Services</span></a>
-        <a href="#showreel" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">الفيديو</span><span class="only-en">Showreel</span></a>
-        <a href="#projects" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">المشاريع (ريلز · فوتو · TVC)</span><span class="only-en">Projects (Reels · Photo · TVC)</span></a>
-        <a href="#team"     class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">فريقنا</span><span class="only-en">Team</span></a>
-        <a href="#results"  class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">النتائج</span><span class="only-en">Results</span></a>
-        <a href="#clients"  class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">عملاؤنا</span><span class="only-en">Clients</span></a>
-        <a href="#location" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">موقعنا</span><span class="only-en">Location</span></a>
-        <a href="#contact"  class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span class="only-ar">تواصل معنا</span><span class="only-en">Contact</span></a>
-        <a href="#" data-wa class="mt-2 bg-light text-bg font-bold px-4 py-3 rounded-2xl text-center"><span class="only-ar">تحدث معنا على واتساب</span><span class="only-en">Chat on WhatsApp</span></a>
+        <a href="#top"      class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span data-ct="ui.nav.home"><span class="only-ar">الرئيسية</span><span class="only-en">Home</span></span></a>
+        <a href="#services" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span data-ct="ui.nav.services"><span class="only-ar">خدماتنا</span><span class="only-en">Services</span></span></a>
+        <a href="#showreel" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span data-ct="ui.nav.showreel"><span class="only-ar">الفيديو</span><span class="only-en">Showreel</span></span></a>
+        <a href="#projects" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span data-ct="ui.nav.projectsLong"><span class="only-ar">المشاريع (ريلز · فوتو · TVC)</span><span class="only-en">Projects (Reels · Photo · TVC)</span></span></a>
+        <a href="#team"     class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span data-ct="ui.nav.team"><span class="only-ar">فريقنا</span><span class="only-en">Team</span></span></a>
+        <a href="#results"  class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span data-ct="ui.nav.results"><span data-ct="ui.results.pill"><span class="only-ar">النتائج</span><span class="only-en">Results</span></span></span></a>
+        <a href="#clients"  class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span data-ct="ui.nav.clients"><span class="only-ar">عملاؤنا</span><span class="only-en">Clients</span></span></a>
+        <a href="#location" class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span data-ct="ui.nav.location"><span class="only-ar">موقعنا</span><span class="only-en">Location</span></span></a>
+        <a href="#contact"  class="px-4 py-3 rounded-2xl hover:bg-light/5 transition"><span data-ct="ui.nav.contact"><span class="only-ar">تواصل معنا</span><span class="only-en">Contact</span></span></a>
+        <a href="#" data-wa class="mt-2 bg-light text-bg font-bold px-4 py-3 rounded-2xl text-center"><span data-ct="ui.buttons.whatsappMenu"><span class="only-ar">تحدث معنا على واتساب</span><span class="only-en">Chat on WhatsApp</span></span></a>
       </div>
     </nav>
   </header>
@@ -499,12 +499,12 @@
 
       <div class="flex flex-wrap items-center gap-3 pt-2">
         <a href="#projects" class="inline-flex items-center gap-3 bg-light text-bg font-bold text-base sm:text-lg px-7 py-4 rounded-full hover:bg-white transition">
-          <span class="only-ar">شوف أعمالنا</span><span class="only-en">See our work</span>
+          <span data-ct="ui.buttons.seeWork"><span class="only-ar">شوف أعمالنا</span><span class="only-en">See our work</span></span>
           <span class="bg-bg text-light w-8 h-8 rounded-full flex items-center justify-center text-xs">↗</span>
         </a>
         <a href="#" data-wa class="inline-flex items-center gap-3 border border-line font-bold text-base sm:text-lg px-7 py-4 rounded-full hover:border-light hover:text-light transition">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2zm5.5-5.8c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1s-.8 1-.9 1.2c-.2.2-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.6l-1-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.9 5.1 2.2.9 3 1 4.1.8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/></svg>
-          <span class="only-ar">اتصل / تحدث</span><span class="only-en">Call / Chat</span>
+          <span data-ct="ui.buttons.callChat"><span class="only-ar">اتصل / تحدث</span><span class="only-en">Call / Chat</span></span>
         </a>
       </div>
     </div>
@@ -540,9 +540,9 @@
   <section id="services" class="py-16 sm:py-20 border-t border-line">
     <div class="text-center mb-12 sm:mb-16" data-r="up">
       <span class="pill-hot">
-        <span class="only-ar">خدماتنا</span><span class="only-en">Our Services</span>
+        <span data-ct="ui.services.pill"><span class="only-ar">خدماتنا</span><span class="only-en">Our Services</span></span>
       </span>
-      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black mt-6" data-split>
+      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black mt-6" data-split data-ct="ui.services.title">
         <span class="only-ar">خدمات اكشن ايجنسي</span>
         <span class="only-en">Action Agency Services</span>
       </h2>
@@ -555,26 +555,26 @@
   <section id="projects" class="py-16 sm:py-20 border-t border-line">
     <div class="text-center mb-10" data-r="up">
       <span class="pill-hot">
-        <span class="only-ar">المشاريع</span><span class="only-en">Projects</span>
+        <span data-ct="ui.nav.projects"><span data-ct="ui.projects.pill"><span class="only-ar">المشاريع</span><span class="only-en">Projects</span></span></span>
       </span>
-      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black mt-6" data-split>
+      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black mt-6" data-split data-ct="ui.projects.title">
         <span class="only-ar">أعمالنا: ريلز، فوتو، TVC</span>
         <span class="only-en">Our Work: Reels, Photo, TVC</span>
       </h2>
     </div>
 
     <div class="flex flex-wrap justify-center gap-3 mb-10" role="tablist" data-r="up" data-d=".1">
-      <button class="tab" role="tab" aria-selected="true"  data-filter="all"><span class="only-ar">الكل</span><span class="only-en">All</span></button>
-      <button class="tab" role="tab" aria-selected="false" data-filter="reels"><span class="only-ar">ريلز</span><span class="only-en">Reels</span></button>
-      <button class="tab" role="tab" aria-selected="false" data-filter="photo"><span class="only-ar">فوتو</span><span class="only-en">Photo</span></button>
-      <button class="tab" role="tab" aria-selected="false" data-filter="tvc"><span class="only-ar">TVC</span><span class="only-en">TVC</span></button>
+      <button class="tab" role="tab" aria-selected="true"  data-filter="all"><span data-ct="ui.projects.tabAll"><span class="only-ar">الكل</span><span class="only-en">All</span></span></button>
+      <button class="tab" role="tab" aria-selected="false" data-filter="reels"><span data-ct="ui.projects.tabReels"><span class="only-ar">ريلز</span><span class="only-en">Reels</span></span></button>
+      <button class="tab" role="tab" aria-selected="false" data-filter="photo"><span data-ct="ui.projects.tabPhoto"><span class="only-ar">فوتو</span><span class="only-en">Photo</span></span></button>
+      <button class="tab" role="tab" aria-selected="false" data-filter="tvc"><span data-ct="ui.projects.tabTvc"><span class="only-ar">TVC</span><span class="only-en">TVC</span></span></button>
     </div>
 
     <div id="projectsGrid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"></div>
 
     <div class="text-center mt-12" data-r="up">
       <a href="#" data-wa class="inline-flex items-center gap-3 border border-line px-7 py-4 rounded-full font-bold hover:border-light hover:text-light transition">
-        <span class="only-ar">تريد عمل مثل هذا؟ تحدث ويانا</span><span class="only-en">Want work like this? Talk to us</span>
+        <span data-ct="ui.buttons.wantWork"><span class="only-ar">تريد عمل مثل هذا؟ تحدث ويانا</span><span class="only-en">Want work like this? Talk to us</span></span>
       </a>
     </div>
   </section>
@@ -583,13 +583,13 @@
   <section id="team" class="py-16 sm:py-20 border-t border-line">
     <div class="text-center mb-12" data-r="up">
       <span class="pill-hot">
-        <span class="only-ar">فريقنا</span><span class="only-en">Our Team</span>
+        <span data-ct="ui.team.pill"><span class="only-ar">فريقنا</span><span class="only-en">Our Team</span></span>
       </span>
-      <h2 class="text-3xl sm:text-5xl font-black mt-6" data-split>
+      <h2 class="text-3xl sm:text-5xl font-black mt-6" data-split data-ct="ui.team.title">
         <span class="only-ar">الناس اللي تشتغل على مشروعك</span>
         <span class="only-en">The people behind your project</span>
       </h2>
-      <p class="text-ink/55 max-w-2xl mx-auto mt-4 text-base sm:text-lg">
+      <p class="text-ink/55 max-w-2xl mx-auto mt-4 text-base sm:text-lg" data-ct="ui.team.desc">
         <span class="only-ar">فريق متكامل من المخرجين والمصورين والمصممين، كل واحد مختص بمجاله.</span>
         <span class="only-en">A full crew of directors, shooters and designers — each a specialist in their craft.</span>
       </p>
@@ -601,9 +601,9 @@
   <section id="results" class="py-16 sm:py-20 border-t border-line">
     <div class="text-center mb-12" data-r="up">
       <span class="pill-hot">
-        <span class="only-ar">النتائج</span><span class="only-en">Results</span>
+        <span data-ct="ui.nav.results"><span data-ct="ui.results.pill"><span class="only-ar">النتائج</span><span class="only-en">Results</span></span></span>
       </span>
-      <h2 class="text-3xl sm:text-5xl font-black mt-6" data-split>
+      <h2 class="text-3xl sm:text-5xl font-black mt-6" data-split data-ct="ui.results.title">
         <span class="only-ar">أرقام تتكلم عن شغلنا</span>
         <span class="only-en">Numbers that speak for our work</span>
       </h2>
@@ -616,7 +616,7 @@
   <section id="clients" class="py-16 sm:py-20 border-t border-line">
     <div class="text-center mb-10" data-r="up">
       <span class="pill-hot">
-        <span class="only-ar">عملاؤنا</span><span class="only-en">Our Clients</span>
+        <span data-ct="ui.clients.pill"><span class="only-ar">عملاؤنا</span><span class="only-en">Our Clients</span></span>
       </span>
     </div>
     <!-- بدّل هذي بلوكوات العملاء الحقيقية، خليها بنفس الكلاس عشان القياس يبقى موحد -->
@@ -637,9 +637,9 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
       <div class="lg:col-span-5 space-y-5" data-r="up">
         <span class="pill-hot">
-          <span class="only-ar">موقعنا</span><span class="only-en">Find us</span>
+          <span data-ct="ui.location.pill"><span class="only-ar">موقعنا</span><span class="only-en">Find us</span></span>
         </span>
-        <h2 class="text-3xl sm:text-5xl font-black leading-tight" data-split>
+        <h2 class="text-3xl sm:text-5xl font-black leading-tight" data-split data-ct="ui.location.title">
           <span class="only-ar">تعال شوفنا بالستوديو</span>
           <span class="only-en">Come visit the studio</span>
         </h2>
@@ -653,11 +653,11 @@
         <div class="flex flex-wrap gap-3 pt-1">
           <a id="mapLink" href="#" target="_blank" rel="noopener"
              class="inline-flex items-center gap-3 bg-light text-bg font-bold px-6 py-3.5 rounded-full hover:bg-white transition">
-            <span class="only-ar">افتح بالخرائط</span><span class="only-en">Open in Maps</span>
+            <span data-ct="ui.buttons.openMaps"><span class="only-ar">افتح بالخرائط</span><span class="only-en">Open in Maps</span></span>
             <span class="bg-bg text-light w-7 h-7 rounded-full flex items-center justify-center text-xs">↗</span>
           </a>
           <a href="#" data-wa class="inline-flex items-center gap-3 border border-line font-bold px-6 py-3.5 rounded-full hover:border-hot hover:text-hot transition">
-            <span class="only-ar">تواصل ويانا</span><span class="only-en">Message us</span>
+            <span data-ct="ui.buttons.messageUs"><span class="only-ar">تواصل ويانا</span><span class="only-en">Message us</span></span>
           </a>
         </div>
       </div>
@@ -676,7 +676,7 @@
           <span class="lockup text-lg text-light"><b>ACTION</b><i>AGENCY</i></span>
         </div>
         <p class="en-label text-light/80 text-xs" data-ct-text="site.tagline">WE BRING HEAT TO BRANDS</p>
-        <p class="text-ink/55 leading-relaxed max-w-md">
+        <p class="text-ink/55 leading-relaxed max-w-md" data-ct="ui.footer.desc">
           <span class="only-ar">وكالة إنتاج وإعلان: تصوير، مونتاج، موشن غرافيك، هويات بصرية وإدارة حملات.</span>
           <span class="only-en">Production &amp; advertising agency: filming, editing, motion graphics, visual identities and campaign management.</span>
         </p>
@@ -694,7 +694,7 @@
       </div>
 
       <div class="lg:col-span-3 space-y-3">
-        <h4 class="text-lg font-bold mb-3"><span class="only-ar">تواصل معنا</span><span class="only-en">Get in touch</span></h4>
+        <h4 class="text-lg font-bold mb-3"><span data-ct="ui.footer.getInTouch"><span class="only-ar">تواصل معنا</span><span class="only-en">Get in touch</span></span></h4>
         <a href="#" data-wa class="flex items-center gap-3 text-ink/70 hover:text-light transition">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
           <span dir="ltr" data-wa-display>+964 000 000 0000</span>
@@ -710,28 +710,28 @@
       </div>
 
       <div class="lg:col-span-4 space-y-4">
-        <h4 class="text-lg font-bold mb-3"><span class="only-ar">ابدأ مشروعك</span><span class="only-en">Start your project</span></h4>
-        <p class="text-ink/55 text-sm leading-relaxed">
+        <h4 class="text-lg font-bold mb-3"><span data-ct="ui.footer.startProject"><span class="only-ar">ابدأ مشروعك</span><span class="only-en">Start your project</span></span></h4>
+        <p class="text-ink/55 text-sm leading-relaxed" data-ct="ui.footer.startDesc">
           <span class="only-ar">اضغط الزر وراح تنتقل مباشرة للواتساب ونرد عليك خلال دقائق.</span>
           <span class="only-en">Tap the button and you'll go straight to WhatsApp — we reply within minutes.</span>
         </p>
         <a href="#" data-wa class="flex items-center justify-center gap-3 bg-light text-bg font-black px-6 py-4 rounded-full hover:bg-white transition">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm5.5 12.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1s-.8 1-.9 1.2c-.2.2-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.6l-1-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.9 5.1 2.2.9 3 1 4.1.8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/></svg>
-          <span class="only-ar">اتصل أو تحدث الآن</span><span class="only-en">Call or chat now</span>
+          <span data-ct="ui.buttons.callNow"><span class="only-ar">اتصل أو تحدث الآن</span><span class="only-en">Call or chat now</span></span>
         </a>
       </div>
     </div>
 
     <p class="text-center text-ink/30 text-xs sm:text-sm mt-12 pt-8 border-t border-line">
       © <span id="year">2026</span> ACTION AGENCY —
-      <span class="only-ar">كل الحقوق محفوظة</span><span class="only-en">All rights reserved</span>
+      <span data-ct="ui.footer.rights"><span class="only-ar">كل الحقوق محفوظة</span><span class="only-en">All rights reserved</span></span>
     </p>
   </footer>
 </div>
 
 <a href="#" data-wa class="wa-fab" aria-label="WhatsApp">
   <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2zm5.5-5.8c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1s-.8 1-.9 1.2c-.2.2-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.6l-1-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.9 5.1 2.2.9 3 1 4.1.8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/></svg></span>
-  <span class="txt"><span class="only-ar">تحدث معنا</span><span class="only-en">Chat with us</span></span>
+  <span class="txt"><span data-ct="ui.buttons.chatFab"><span class="only-ar">تحدث معنا</span><span class="only-en">Chat with us</span></span></span>
 </a>
 
 <script>
@@ -797,6 +797,190 @@
     },
     showreel: {
       poster:'assets/showreel-poster.jpg', video:'assets/showreel.mp4', autoplay:true
+    },
+    ui: {
+          "buttons": {
+                "skip": {
+                      "ar": "تخطي المقدمة",
+                      "en": "Skip intro"
+                },
+                "talk": {
+                      "ar": "تحدث معنا",
+                      "en": "Talk to us"
+                },
+                "whatsappMenu": {
+                      "ar": "تحدث معنا على واتساب",
+                      "en": "Chat on WhatsApp"
+                },
+                "seeWork": {
+                      "ar": "شوف أعمالنا",
+                      "en": "See our work"
+                },
+                "callChat": {
+                      "ar": "اتصل / تحدث",
+                      "en": "Call / Chat"
+                },
+                "wantWork": {
+                      "ar": "تريد عمل مثل هذا؟ تحدث ويانا",
+                      "en": "Want work like this? Talk to us"
+                },
+                "openMaps": {
+                      "ar": "افتح بالخرائط",
+                      "en": "Open in Maps"
+                },
+                "messageUs": {
+                      "ar": "تواصل ويانا",
+                      "en": "Message us"
+                },
+                "callNow": {
+                      "ar": "اتصل أو تحدث الآن",
+                      "en": "Call or chat now"
+                },
+                "chatFab": {
+                      "ar": "تحدث معنا",
+                      "en": "Chat with us"
+                }
+          },
+          "nav": {
+                "home": {
+                      "ar": "الرئيسية",
+                      "en": "Home"
+                },
+                "services": {
+                      "ar": "خدماتنا",
+                      "en": "Services"
+                },
+                "showreel": {
+                      "ar": "الفيديو",
+                      "en": "Showreel"
+                },
+                "projects": {
+                      "ar": "المشاريع",
+                      "en": "Projects"
+                },
+                "projectsLong": {
+                      "ar": "المشاريع (ريلز · فوتو · TVC)",
+                      "en": "Projects (Reels · Photo · TVC)"
+                },
+                "team": {
+                      "ar": "فريقنا",
+                      "en": "Team"
+                },
+                "results": {
+                      "ar": "النتائج",
+                      "en": "Results"
+                },
+                "clients": {
+                      "ar": "عملاؤنا",
+                      "en": "Clients"
+                },
+                "location": {
+                      "ar": "موقعنا",
+                      "en": "Location"
+                },
+                "contact": {
+                      "ar": "تواصل معنا",
+                      "en": "Contact"
+                }
+          },
+          "services": {
+                "pill": {
+                      "ar": "خدماتنا",
+                      "en": "Our Services"
+                },
+                "title": {
+                      "ar": "خدمات اكشن ايجنسي",
+                      "en": "Action Agency Services"
+                }
+          },
+          "projects": {
+                "pill": {
+                      "ar": "المشاريع",
+                      "en": "Projects"
+                },
+                "tabAll": {
+                      "ar": "الكل",
+                      "en": "All"
+                },
+                "tabReels": {
+                      "ar": "ريلز",
+                      "en": "Reels"
+                },
+                "tabPhoto": {
+                      "ar": "فوتو",
+                      "en": "Photo"
+                },
+                "tabTvc": {
+                      "ar": "TVC",
+                      "en": "TVC"
+                },
+                "title": {
+                      "ar": "أعمالنا: ريلز، فوتو، TVC",
+                      "en": "Our Work: Reels, Photo, TVC"
+                }
+          },
+          "team": {
+                "pill": {
+                      "ar": "فريقنا",
+                      "en": "Our Team"
+                },
+                "desc": {
+                      "ar": "فريق متكامل من المخرجين والمصورين والمصممين، كل واحد مختص بمجاله.",
+                      "en": "A full crew of directors, shooters and designers — each a specialist in their craft."
+                },
+                "title": {
+                      "ar": "الناس اللي تشتغل على مشروعك",
+                      "en": "The people behind your project"
+                }
+          },
+          "results": {
+                "pill": {
+                      "ar": "النتائج",
+                      "en": "Results"
+                },
+                "title": {
+                      "ar": "أرقام تتكلم عن شغلنا",
+                      "en": "Numbers that speak for our work"
+                }
+          },
+          "clients": {
+                "pill": {
+                      "ar": "عملاؤنا",
+                      "en": "Our Clients"
+                }
+          },
+          "location": {
+                "pill": {
+                      "ar": "موقعنا",
+                      "en": "Find us"
+                },
+                "title": {
+                      "ar": "تعال شوفنا بالستوديو",
+                      "en": "Come visit the studio"
+                }
+          },
+          "footer": {
+                "getInTouch": {
+                      "ar": "تواصل معنا",
+                      "en": "Get in touch"
+                },
+                "startProject": {
+                      "ar": "ابدأ مشروعك",
+                      "en": "Start your project"
+                },
+                "rights": {
+                      "ar": "كل الحقوق محفوظة",
+                      "en": "All rights reserved"
+                },
+                "desc": {
+                      "ar": "وكالة إنتاج وإعلان: تصوير، مونتاج، موشن غرافيك، هويات بصرية وإدارة حملات.",
+                      "en": "Production & advertising agency: filming, editing, motion graphics, visual identities and campaign management."
+                },
+                "startDesc": {
+                      "ar": "اضغط الزر وراح تنتقل مباشرة للواتساب ونرد عليك خلال دقائق.",
+                      "en": "Tap the button and you'll go straight to WhatsApp — we reply within minutes."
+                }
+          }
     },
     services: [
       { ar:'الخطة والاستراتيجية التسويقية', en:'Marketing Plan & Strategy' },
