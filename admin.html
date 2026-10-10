@@ -84,6 +84,24 @@
   .warn{ background:rgba(217,154,26,.1); border:1px solid rgba(217,154,26,.4); border-radius:12px; padding:13px; font-size:13.5px; line-height:1.75; }
   .danger-box{ background:rgba(225,35,43,.08); border:1px solid rgba(225,35,43,.35); border-radius:12px; padding:13px; font-size:13.5px; line-height:1.75; }
 
+
+  /* ---------- نافذة تفعيل النشر (تطلع أول مرة بس) ---------- */
+  #keyGate{
+    position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center;
+    background:rgba(10,10,10,.82); backdrop-filter:blur(8px); padding:18px;
+  }
+  #keyGate[hidden]{ display:none; }
+  #keyGate .box{
+    width:min(560px,100%); max-height:92vh; overflow:auto;
+    background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:24px;
+    box-shadow:0 30px 80px rgba(0,0,0,.6);
+  }
+  #keyGate h2{ margin:0 0 6px; font-size:20px; }
+  #keyGate ol{ margin:12px 0; padding-inline-start:20px; line-height:2; font-size:13.5px; color:rgba(244,244,244,.8); }
+  #keyGate li{ margin-bottom:2px; }
+  #keyGate .steps{ background:rgba(217,154,26,.08); border:1px solid rgba(217,154,26,.35); border-radius:12px; padding:12px 14px; }
+  #keyGate .acts{ display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+
   #toast{
     position:fixed; inset-inline-start:50%; transform:translateX(50%) translateY(140%);
     bottom:22px; z-index:100; background:var(--panel2); border:1px solid var(--line);
@@ -523,6 +541,40 @@
       </p>
     </details>
   </section>
+</div>
+
+
+<!-- تطلع أول مرة بس، لين ينحفظ المفتاح -->
+<div id="keyGate" hidden>
+  <div class="box">
+    <h2>تفعيل النشر</h2>
+    <p class="note" style="margin:0">
+      حتى تنشر تعديلاتك على الموقع مباشرة، اللوحة تحتاج مفتاح وصول من GitHub.
+      تسويه مرة وحدة بس وينحفظ بهذا المتصفح.
+    </p>
+
+    <div class="steps" style="margin-top:14px">
+      <b>خطوات إنشاء المفتاح:</b>
+      <ol>
+        <li>افتح <a id="gateLink" href="#" target="_blank" rel="noopener" style="color:var(--hot)">صفحة إنشاء المفتاح</a></li>
+        <li>Token name: اكتب أي اسم، مثلاً <code>action-site</code></li>
+        <li>Repository access ← <b>Only select repositories</b> ← اختر <code id="gateRepo">action-agency-website</code></li>
+        <li>Permissions ← Repository permissions ← <b>Contents</b> ← <b>Read and write</b></li>
+        <li>اضغط <b>Generate token</b> وانسخ المفتاح والصقه تحت</li>
+      </ol>
+    </div>
+
+    <label>الصق المفتاح هنا</label>
+    <input id="gateToken" type="password" dir="ltr" placeholder="github_pat_...">
+
+    <div class="acts">
+      <button class="b hot" id="gateSave">حفظ وتفعيل النشر</button>
+      <button class="b ghost" id="gateSkip">لاحقاً — اشتغل بدون نشر</button>
+    </div>
+    <p class="note" style="margin-top:12px">
+      المفتاح ينحفظ بهذا المتصفح بس، وما ينرفع للموقع ولا يشوفه أحد غيرك.
+    </p>
+  </div>
 </div>
 
 <div id="toast"></div>
@@ -985,8 +1037,7 @@
 
   $('#publishBtn').onclick = function(){
     if (!token()){
-      toast('تحتاج مفتاح — روح لتبويب «الربط والنشر»', 'err');
-      var st = $('.tabs button[data-tab="settings"]'); if (st) st.click();
+      var g = $('#keyGate'); if (g) g.hidden = false;
       return;
     }
     if (!confirm('تريد تنشر التعديلات على الموقع المباشر؟')) return;
@@ -1040,6 +1091,49 @@
     tabs.appendChild(b);
     b.click();
   }
+
+
+  /* ---------- نافذة تفعيل النشر ---------- */
+  (function(){
+    var gate = $('#keyGate');
+    if (!gate) return;
+    var repo0 = repo();
+    $('#gateRepo').textContent = repo0.split('/')[1] || repo0;
+    $('#gateLink').href = 'https://github.com/settings/personal-access-tokens/new';
+
+    function close(){ gate.hidden = true; }
+
+    /* ما نزعجه إلا إذا ما عنده مفتاح وما اختار يتخطى قبل */
+    var skipped = false;
+    try { skipped = localStorage.getItem('aa-gate-skipped') === '1'; } catch(e){}
+    if (!token() && !skipped && location.hash !== '#setup') gate.hidden = false;
+
+    $('#gateSave').onclick = function(){
+      var v = $('#gateToken').value.trim();
+      if (!v) return toast('الصق المفتاح الأول', 'err');
+      try {
+        localStorage.setItem(LS_TOKEN, v);
+        localStorage.setItem(LS_REPO, repo0);
+        localStorage.removeItem('aa-gate-skipped');
+      } catch(e){}
+      var ti = $('#tokenInput'); if (ti) ti.value = v;
+      setDot(true);
+      close();
+      toast('جاري الفحص…');
+      api('/contents/content.json').then(function(r){
+        if (r.ok) toast('تمام ✓ تكدر تنشر هسه', 'ok');
+        else if (r.status === 401) toast('المفتاح غلط أو منتهي', 'err');
+        else if (r.status === 403) toast('المفتاح ما عنده صلاحية Contents: Read and write', 'err');
+        else toast('فشل الفحص (' + r.status + ')', 'err');
+      }).catch(function(){ toast('ما في اتصال', 'err'); });
+    };
+
+    $('#gateSkip').onclick = function(){
+      try { localStorage.setItem('aa-gate-skipped','1'); } catch(e){}
+      close();
+      toast('تكدر تعدّل وتنزّل الملف، بس ما راح تنشر مباشرة');
+    };
+  })();
 
   /* ---------- البداية ---------- */
   loadContent().then(function(){
