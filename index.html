@@ -760,8 +760,13 @@
 
   /* ---------- المقدمة (تشتغل فوراً قبل تحميل المحتوى) ---------- */
   var pre = document.getElementById('preload'), done = false;
+  var introCbs = [];
+  /* ينفّذ الدالة بعد ما تخلص المقدمة، أو فوراً إذا خلصت */
+  function onIntroDone(fn){ if (done) fn(); else introCbs.push(fn); }
   function finishPreload(){
     if (done) return; done = true;
+    introCbs.forEach(function(fn){ try { fn(); } catch(e){} });
+    introCbs.length = 0;
     document.documentElement.classList.remove('preloading');
     if (pre){ pre.classList.add('hide'); setTimeout(function(){ pre.remove(); }, 650); }
   }
@@ -958,7 +963,7 @@
     if (selfHosted && v.autoplay !== false){
       box.innerHTML =
         '<div class="videoWrap playing">' +
-          '<video class="shot" id="showreelVideo" autoplay muted loop playsinline preload="auto"' +
+          '<video class="shot" id="showreelVideo" muted loop playsinline preload="auto"' +
             (poster ? ' poster="' + esc(poster) + '"' : '') +
             ' src="' + esc(vid) + '"></video>' +
           '<button class="soundBtn" id="soundBtn" type="button">' +
@@ -984,7 +989,10 @@
         sync();
       }
 
-      /* ١) نجرب بالصوت فوراً */
+      /* الفيديو ينطر المقدمة تخلص حتى ما تضيع أول ثواني منه،
+         بس يحمّل بالخلفية أثناء المقدمة فيبدي فوراً */
+      function begin(){
+      try { video.currentTime = 0; } catch(e){}
       video.muted = false;
       var first = video.play();
       if (first && first.catch){
@@ -1002,6 +1010,8 @@
         });
       }
       sync();
+      }
+      onIntroDone(begin);
 
       btn.addEventListener('click', function(e){
         e.stopPropagation();
