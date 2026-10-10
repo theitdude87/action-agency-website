@@ -157,25 +157,25 @@
   ],
   "results": [
     {
-      "value": 250,
+      "value": 137,
       "suffix": "+",
       "ar": "مشروع منجز",
       "en": "Projects delivered"
     },
     {
-      "value": 120,
+      "value": 123,
       "suffix": "+",
       "ar": "عميل ووثق بينا",
       "en": "Clients served"
     },
     {
-      "value": 8,
+      "value": 7,
       "suffix": "",
       "ar": "سنوات خبرة",
       "en": "Years of experience"
     },
     {
-      "value": 35,
+      "value": 313,
       "suffix": "+",
       "ar": "حملة إعلانية",
       "en": "Ad campaigns"
@@ -221,6 +221,14 @@
     {
       "name": "Zeno",
       "logo": "assets/clients/zeno.png"
+    },
+    {
+      "name": "مصرف المشرق",
+      "logo": "assets/uploads/file-1791636389660.png"
+    },
+    {
+      "name": "رينو",
+      "logo": "assets/uploads/images-1791636140784.png"
     }
   ],
   "contact": {
@@ -236,7 +244,7 @@
     "mapUrl": "https://maps.app.goo.gl/DJqsz5EZ1Wv4EGWU7"
   },
   "social": {
-    "instagram": "",
+    "instagram": "https://www.instagram.com/action.iq?cplk=MTU2czh3ZXk3cmZsYQ%3D%3D&utm_source=qr",
     "tiktok": "",
     "youtube": ""
   },
@@ -357,8 +365,8 @@
         "en": "TVC"
       },
       "title": {
-        "ar": "أعمالنا: ريلز، فوتو، TVC",
-        "en": "Our Work: Reels, Photo, TVC"
+        "ar": "أعمالنا",
+        "en": "Our Work"
       }
     },
     "team": {
@@ -387,8 +395,8 @@
     },
     "clients": {
       "pill": {
-        "ar": "عملاؤنا",
-        "en": "Our Clients"
+        "ar": "شركاء النجاح ",
+        "en": "Partners in Success"
       }
     },
     "location": {
