@@ -272,13 +272,16 @@
   @keyframes clapKick{ 0%{ transform:none } 25%{ transform:scale(1.025) } 100%{ transform:none } }
   #preload .clapIcon img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
 
-  /* CSS: الموجب مع عقرب الساعة. ٠ = شكل اللوكو، +15 = مطبّق تماماً */
+  /* صورة السلات عدها فراغ فوق حتى تنفتح بدون ما تنقص عند حافة الصورة،
+     فنمدّها فوق الحاوية ونضبط نقطة الدوران على المسمار.
+     CSS: الموجب مع عقرب الساعة. ٠ = شكل اللوكو، +15 = مطبّق تماماً */
   #preload .slat{
-    transform-origin:9.8% 33.1%;
+    top:-46.99%; bottom:auto; height:146.99%;
+    transform-origin:9.84% 54.48%;
     animation:slatClap 1.25s linear forwards .18s;
   }
   @keyframes slatClap{
-    0%  { transform:rotate(-30deg); animation-timing-function:cubic-bezier(.45,0,.9,.5); }  /* يتسارع وهو نازل */
+    0%  { transform:rotate(-24deg); animation-timing-function:cubic-bezier(.45,0,.9,.5); }  /* يتسارع وهو نازل */
     22% { transform:rotate(15deg);  animation-timing-function:cubic-bezier(.2,0,.4,1); }    /* الضربة */
     30% { transform:rotate(5deg);   animation-timing-function:cubic-bezier(.6,0,.9,.6); }   /* ارتداد */
     38% { transform:rotate(15deg);  animation-timing-function:linear; }                     /* يثبت */
