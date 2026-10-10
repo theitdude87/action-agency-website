@@ -69,17 +69,17 @@
   ],
   "projects": [
     {
-      "cat": "reels",
-      "ar": "ريل منتج · مشروب طاقة",
-      "en": "Product Reel · Energy Drink",
-      "meta": "0:18",
-      "media": ""
-    },
-    {
       "cat": "tvc",
       "ar": "إعلان تجاري · بنك",
       "en": "TVC · Banking Brand",
       "meta": "0:45",
+      "media": ""
+    },
+    {
+      "cat": "reels",
+      "ar": "ريل منتج · مشروب طاقة",
+      "en": "Product Reel · Energy Drink",
+      "meta": "0:18",
       "media": ""
     },
     {
@@ -104,7 +104,7 @@
       "media": ""
     },
     {
-      "cat": "tvc",
+      "cat": "reels",
       "ar": "إعلان · شركة اتصالات",
       "en": "TVC · Telecom",
       "meta": "0:60",
@@ -134,10 +134,10 @@
       "icon": "assets/icons/12.jpg"
     },
     {
-      "name": "—",
-      "ar": "مدير تصوير",
-      "en": "Director of Photography",
-      "photo": "",
+      "name": "Fatima Alaa Salman",
+      "ar": "إدارة الحساب",
+      "en": "Account Management",
+      "photo": "assets/uploads/img-8854-1791638798610.png",
       "icon": "assets/icons/02.jpg"
     },
     {
@@ -169,7 +169,7 @@
       "en": "Clients served"
     },
     {
-      "value": 7,
+      "value": 4,
       "suffix": "",
       "ar": "سنوات خبرة",
       "en": "Years of experience"
