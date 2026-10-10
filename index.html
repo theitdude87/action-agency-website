@@ -190,6 +190,10 @@
   /* الفيديو التلقائي يبقى ملوّن مو أبيض وأسود */
   .videoWrap.playing .shot{ filter:none; }
 
+
+  /* أيقونة سوشيال بدون رابط: تظهر بس ما تنضغط */
+  .soc-off{ opacity:.4; pointer-events:none; }
+
   /* ---------- الخريطة ---------- */
   .mapWrap{
     position:relative; width:100%; aspect-ratio:16/9; border-radius:24px; overflow:hidden;
@@ -681,13 +685,13 @@
           <span class="only-en">Production &amp; advertising agency: filming, editing, motion graphics, visual identities and campaign management.</span>
         </p>
         <div class="flex gap-3 pt-1">
-          <a href="#" data-ct-social="instagram" aria-label="Instagram" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
+          <a href="#" data-ct-social="instagram" data-social-always aria-label="Instagram" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
           </a>
-          <a href="#" data-ct-social="tiktok" aria-label="TikTok" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
+          <a href="#" data-ct-social="tiktok" data-social-always aria-label="TikTok" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.4 2.2 1.9 3.8 4 4v3c-1.6 0-3-.5-4.2-1.3v6.6A6.3 6.3 0 1 1 9.5 9v3.2a3.1 3.1 0 1 0 3.2 3.1V3H16z"/></svg>
           </a>
-          <a href="#" data-ct-social="youtube" aria-label="YouTube" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
+          <a href="#" data-ct-social="youtube" data-social-always aria-label="YouTube" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3-.4-4.4a2.7 2.7 0 0 0-1.9-1.9C18.3 5.3 12 5.3 12 5.3s-6.3 0-7.7.4a2.7 2.7 0 0 0-1.9 1.9C2 9 2 12 2 12s0 3 .4 4.4c.2.9.9 1.6 1.9 1.9 1.4.4 7.7.4 7.7.4s6.3 0 7.7-.4a2.7 2.7 0 0 0 1.9-1.9C22 15 22 12 22 12zM10 15V9l5 3-5 3z"/></svg>
           </a>
           <a href="#" data-ct-social="facebook" aria-label="Facebook" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
@@ -1080,8 +1084,21 @@
     document.querySelectorAll('[data-ct-email]').forEach(function(a){ if (em) a.setAttribute('href', 'mailto:' + em); });
     document.querySelectorAll('[data-ct-social]').forEach(function(a){
       var u = get(C, 'social.' + a.getAttribute('data-ct-social'));
-      if (u){ a.setAttribute('href', u); a.setAttribute('target','_blank'); a.setAttribute('rel','noopener'); a.style.display = ''; }
-      else { a.style.display = 'none'; }   /* ما نعرض رابط ميت */
+      var always = a.hasAttribute('data-social-always');
+      if (u){
+        a.setAttribute('href', u);
+        a.setAttribute('target','_blank');
+        a.setAttribute('rel','noopener');
+        a.classList.remove('soc-off');
+        a.style.display = '';
+      } else if (always){
+        /* تظهر دائماً، بس بدون رابط لين ينحط */
+        a.removeAttribute('href');
+        a.classList.add('soc-off');
+        a.style.display = '';
+      } else {
+        a.style.display = 'none';
+      }
     });
   }
 
