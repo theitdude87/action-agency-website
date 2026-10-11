@@ -69,11 +69,11 @@
   ],
   "projects": [
     {
-      "cat": "tvc",
-      "ar": "إعلان تجاري · بنك",
-      "en": "TVC · Banking Brand",
-      "meta": "0:45",
-      "media": ""
+      "cat": "photo",
+      "ar": "",
+      "en": "",
+      "meta": "",
+      "media": "assets/uploads/dsc00004-1791727225439.jpg"
     },
     {
       "cat": "reels",
@@ -148,7 +148,7 @@
       "icon": "assets/icons/04.jpg"
     },
     {
-      "name": "—",
+      "name": "Saddam Barzan Saddam",
       "ar": "مصمم موشن كرافيك",
       "en": "Motion Graphics Designer",
       "photo": "assets/uploads/img-8891-1791726383652.png",
