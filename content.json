@@ -129,7 +129,7 @@
     {
       "name": "karar mutar",
       "ar": "الرئيس التنفيذي",
-      "en": "hief Executive Off",
+      "en": "chief Executive Office",
       "photo": "assets/uploads/img-8835-1791637571136.png",
       "icon": "assets/icons/12.jpg"
     },
@@ -149,9 +149,9 @@
     },
     {
       "name": "—",
-      "ar": "مصور فوتوغرافي",
-      "en": "Photographer",
-      "photo": "",
+      "ar": "مصمم موشن كرافيك",
+      "en": "Motion Graphics Designer",
+      "photo": "assets/uploads/img-8891-1791726383652.png",
       "icon": "assets/icons/03.jpg"
     }
   ],
@@ -250,9 +250,7 @@
   "social": {
     "instagram": "https://www.instagram.com/action.iq?cplk=MTU2czh3ZXk3cmZsYQ%3D%3D&utm_source=qr",
     "tiktok": "",
-    "youtube": "",
-    "facebook": "",
-    "snapchat": ""
+    "youtube": ""
   },
   "ui": {
     "buttons": {
