@@ -439,6 +439,10 @@
         <div><label>تبويب فوتو — انكليزي</label><input dir="ltr" data-bind="ui.projects.tabPhoto.en"></div>
       </div>
       <div class="row">
+        <div><label>تبويب كرافيك ديزاين — عربي</label><input data-bind="ui.projects.tabDesign.ar"></div>
+        <div><label>تبويب كرافيك ديزاين — انكليزي</label><input dir="ltr" data-bind="ui.projects.tabDesign.en"></div>
+      </div>
+      <div class="row">
         <div><label>تبويب TVC — عربي</label><input data-bind="ui.projects.tabTvc.ar"></div>
         <div><label>تبويب TVC — انكليزي</label><input dir="ltr" data-bind="ui.projects.tabTvc.en"></div>
       </div>
@@ -703,8 +707,8 @@
      ويحط مسارها بالحقل تلقائياً — العميل ما يكتب أي رابط.
      ============================================================ */
   var MAXW = 1600;            /* أقصى عرض للصورة بعد التصغير */
-  var WARN_MB = 25;           /* تحذير لو الفيديو كبير */
-  var HARD_MB = 80;           /* فوق هذا GitHub يرفضه */
+  var WARN_MB = 8;            /* فوق هذا يبدي يثقّل الموقع */
+  var HARD_MB = 20;           /* مقاس بالتجربة: ٢٠ ينقبل، ٣٠ يرفضه GitHub */
 
   function slug(name){
     return name.replace(/\.[^.]+$/,'').toLowerCase()
@@ -764,8 +768,9 @@
       var mb = f.size / 1048576;
       if (isVid){
         if (mb > HARD_MB){
-          alert('الفيديو ' + Math.round(mb) + 'MB وهذا أكبر من اللي يتحمله GitHub. '
-              + 'ارفعه على يوتيوب والصق الرابط هنا، أو صغّره قبل الرفع.');
+          alert('حجم الفيديو ' + Math.round(mb) + 'MB — والحد الأقصى للرفع ' + HARD_MB + 'MB. '
+              + 'الحل الأفضل: ارفعه على يوتيوب والصق الرابط بنفس الحقل، '
+              + 'راح يظهر بالموقع عادي وما يثقّله.');
           return;
         }
         if (mb > WARN_MB && !confirm('الفيديو ' + Math.round(mb) + 'MB. راح يثقّل الموقع ويطوّل بالرفع. '
@@ -892,7 +897,7 @@
       var w = document.createElement('div');
       var l = document.createElement('label'); l.textContent = 'القسم';
       var sel = document.createElement('select');
-      [['reels','ريلز'],['photo','فوتو'],['tvc','TVC']].forEach(function(p){
+      [['reels','ريلز'],['photo','فوتو'],['design','كرافيك ديزاين'],['tvc','TVC']].forEach(function(p){
         var op = document.createElement('option'); op.value = p[0]; op.textContent = p[1];
         if (o.cat === p[0]) op.selected = true;
         sel.appendChild(op);

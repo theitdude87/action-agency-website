@@ -571,6 +571,7 @@
       <button class="tab" role="tab" aria-selected="true"  data-filter="all"><span data-ct="ui.projects.tabAll"><span class="only-ar">الكل</span><span class="only-en">All</span></span></button>
       <button class="tab" role="tab" aria-selected="false" data-filter="reels"><span data-ct="ui.projects.tabReels"><span class="only-ar">ريلز</span><span class="only-en">Reels</span></span></button>
       <button class="tab" role="tab" aria-selected="false" data-filter="photo"><span data-ct="ui.projects.tabPhoto"><span class="only-ar">فوتو</span><span class="only-en">Photo</span></span></button>
+      <button class="tab" role="tab" aria-selected="false" data-filter="design"><span data-ct="ui.projects.tabDesign"><span class="only-ar">كرافيك ديزاين</span><span class="only-en">Graphic Design</span></span></button>
       <button class="tab" role="tab" aria-selected="false" data-filter="tvc"><span data-ct="ui.projects.tabTvc"><span class="only-ar">TVC</span><span class="only-en">TVC</span></span></button>
     </div>
 
@@ -929,7 +930,8 @@
                       "ar": "ريلز",
                       "en": "Reels"
                 },
-                "tabPhoto": {
+                "tabDesign": { "ar": "كرافيك ديزاين", "en": "Graphic Design" },
+            "tabPhoto": {
                       "ar": "فوتو",
                       "en": "Photo"
                 },
@@ -1116,12 +1118,16 @@
     }).join('');
   }
 
-  var CAT = { reels:{ en:'Reels' }, photo:{ en:'Photo' }, tvc:{ en:'TVC' } };
+  var CAT = { reels:{ en:'Reels' }, photo:{ en:'Photo' }, design:{ en:'Design' }, tvc:{ en:'TVC' } };
+  /* أقسام الفيديو — هاي بس تاخذ زر التشغيل */
+  var PLAY_CATS = { reels:1, tvc:1 };
 
   function renderProjects(){
     var el = document.getElementById('projectsGrid'); if (!el) return;
     el.innerHTML = (C.projects || []).map(function(p, i){
       var c = CAT[p.cat] || { en: esc(p.cat) };
+      /* الصور ما تاخذ زر تشغيل، إلا إذا الميديا نفسها فيديو */
+      var showPlay = !!PLAY_CATS[p.cat] || isVideo(p.media) || isExternalVideo(p.media);
       return '<article class="proj" data-cat="' + esc(p.cat) + '" data-r="up" data-d="' + (i % 4 * .08).toFixed(2) + 's">' +
                '<div class="card card-hover media-ph aspect-[4/5] overflow-hidden relative group">' +
                  mediaTag(p.media) +
@@ -1130,14 +1136,16 @@
                    '<span class="en-label text-[9px] font-black bg-hot text-white px-3 py-1.5 rounded-full">' + esc(c.en) + '</span>' +
                    '<span class="num text-[15px] text-light bg-black/55 px-2.5 py-1 rounded-full">' + esc(p.meta) + '</span>' +
                  '</div>' +
-                 '<div class="absolute inset-0 flex items-center justify-center z-20">' +
-                   (isExternalVideo(p.media)
-                     ? '<a href="' + esc(p.media) + '" target="_blank" rel="noopener" aria-label="Play"'
-                     : '<span') +
-                   ' class="w-14 h-14 rounded-full border border-light/35 bg-black/35 backdrop-blur flex items-center justify-center text-lg ps-1 ' +
-                          'group-hover:bg-hot group-hover:border-hot group-hover:text-white transition duration-300">▶' +
-                   (isExternalVideo(p.media) ? '</a>' : '</span>') +
-                 '</div>' +
+                 (showPlay
+                   ? '<div class="absolute inset-0 flex items-center justify-center z-20">' +
+                       (isExternalVideo(p.media)
+                         ? '<a href="' + esc(p.media) + '" target="_blank" rel="noopener" aria-label="Play"'
+                         : '<span') +
+                       ' class="w-14 h-14 rounded-full border border-light/35 bg-black/35 backdrop-blur flex items-center justify-center text-lg ps-1 ' +
+                              'group-hover:bg-hot group-hover:border-hot group-hover:text-white transition duration-300">▶' +
+                       (isExternalVideo(p.media) ? '</a>' : '</span>') +
+                     '</div>'
+                   : '') +
                  '<div class="absolute inset-x-0 bottom-0 p-3 sm:p-4 z-20">' +
                    '<h3 class="font-bold text-sm sm:text-base leading-snug only-ar">' + esc(p.ar) + '</h3>' +
                    '<h3 class="font-bold text-sm sm:text-base leading-snug only-en">' + esc(p.en) + '</h3>' +
