@@ -69,18 +69,18 @@
   ],
   "projects": [
     {
-      "cat": "photo",
-      "ar": "",
-      "en": "",
+      "cat": "tvc",
+      "ar": "اعلان شركة هونداي العراق",
+      "en": "Hyundai Iraq Advertisement",
       "meta": "",
-      "media": "assets/uploads/dsc00004-1791727225439.jpg"
+      "media": "https://youtu.be/_sFfg4B_UC8?si=LHCxn8521kbdVpV9"
     },
     {
       "cat": "reels",
-      "ar": "ريل منتج · مشروب طاقة",
-      "en": "Product Reel · Energy Drink",
-      "meta": "0:18",
-      "media": ""
+      "ar": "اعلان شركة ابابيل السعد ",
+      "en": "Ababeel Al-Saad Company Advertisement",
+      "meta": "",
+      "media": "https://youtube.com/shorts/4FXOvjYyd-A?si=yArrxpICNY4pillh"
     },
     {
       "cat": "photo",
