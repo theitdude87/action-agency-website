@@ -104,11 +104,11 @@
       "media": ""
     },
     {
-      "cat": "tvc",
+      "cat": "reels",
       "ar": "إعلان · شركة اتصالات",
       "en": "TVC · Telecom",
-      "meta": "3:32",
-      "media": "https://youtu.be/dQw4w9WgXcQ"
+      "meta": "0:60",
+      "media": ""
     },
     {
       "cat": "reels",
@@ -153,6 +153,20 @@
       "en": "Motion Graphics Designer",
       "photo": "assets/uploads/img-8891-1791726383652.png",
       "icon": "assets/icons/03.jpg"
+    },
+    {
+      "name": "Yaqoob ahmed",
+      "ar": "كاتب محتوى",
+      "en": "Content Writer",
+      "photo": "assets/uploads/img-9473-1792849717205.png",
+      "icon": "assets/icons/09.jpg"
+    },
+    {
+      "name": "AHMED ALRASHEED",
+      "ar": "مصمم جرافيك",
+      "en": "Graphic Designer",
+      "photo": "assets/uploads/img-9467-1792849738635.png",
+      "icon": "assets/icons/09.jpg"
     }
   ],
   "results": [
@@ -250,7 +264,8 @@
   "social": {
     "instagram": "https://www.instagram.com/action.iq?cplk=MTU2czh3ZXk3cmZsYQ%3D%3D&utm_source=qr",
     "tiktok": "",
-    "youtube": ""
+    "youtube": "https://www.youtube.com/@Action.agency.i/shorts",
+    "facebook": "https://web.facebook.com/action.iq0/"
   },
   "ui": {
     "buttons": {
@@ -371,10 +386,6 @@
       "title": {
         "ar": "أعمالنا",
         "en": "Our Work"
-      },
-      "tabDesign": {
-        "ar": "كرافيك ديزاين",
-        "en": "Graphic Design"
       }
     },
     "team": {
