@@ -86,42 +86,42 @@
       "cat": "photo",
       "ar": "جلسة تصوير · مطعم",
       "en": "Photo Shoot · Restaurant",
-      "meta": "24 IMG",
+      "meta": "",
       "media": ""
     },
     {
       "cat": "reels",
       "ar": " مختبر الاحياء الطبي ",
       "en": "Biolab Iraq",
-      "meta": "0:22",
+      "meta": "",
       "media": "https://youtube.com/shorts/Pv_uZLMo97I?si=BvlxxldP30sPzJmJ"
     },
     {
       "cat": "reels",
       "ar": "مصرف المشرق العربي الاسلامي",
       "en": "Al-Mashreq Al-Arabi Islamic Bank",
-      "meta": "16 IMG",
+      "meta": "",
       "media": "https://youtube.com/shorts/Yf2bieKW39I?si=vNMymP0Cg0sOmHU_"
     },
     {
       "cat": "reels",
       "ar": "إعلان معجون أسنان تروث بيست",
       "en": "Truthpaste Toothpaste Advertisement",
-      "meta": "0:60",
+      "meta": "",
       "media": "https://youtube.com/shorts/4Wf2xKKzJsw?si=5kGlczbAPo3-fuaP"
     },
     {
-      "cat": "reels",
-      "ar": "ريل · افتتاح معرض",
-      "en": "Reel · Showroom Opening",
-      "meta": "0:15",
-      "media": ""
+      "cat": "photo",
+      "ar": "جلسة تصوير مطعم مادو",
+      "en": "MADO Restaurant Photoshoot",
+      "meta": "",
+      "media": "assets/uploads/dsc07098-copy-1792855795448.jpg"
     },
     {
       "cat": "photo",
-      "ar": "تصوير جوي · مشروع سكني",
-      "en": "Aerial · Residential Project",
-      "meta": "30 IMG",
+      "ar": "جلسة تصوير مطعم يو اند مي",
+      "en": "You & Me Restaurant Photoshoot",
+      "meta": "",
       "media": ""
     }
   ],
