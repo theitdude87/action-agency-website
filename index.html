@@ -722,6 +722,9 @@
           <a href="#" data-ct-social="youtube" data-social-always aria-label="YouTube" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3-.4-4.4a2.7 2.7 0 0 0-1.9-1.9C18.3 5.3 12 5.3 12 5.3s-6.3 0-7.7.4a2.7 2.7 0 0 0-1.9 1.9C2 9 2 12 2 12s0 3 .4 4.4c.2.9.9 1.6 1.9 1.9 1.4.4 7.7.4 7.7.4s6.3 0 7.7-.4a2.7 2.7 0 0 0 1.9-1.9C22 15 22 12 22 12zM10 15V9l5 3-5 3z"/></svg>
           </a>
+          <a href="#" data-ct-social="linkedin" data-social-always aria-label="LinkedIn" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          </a>
           <a href="#" data-ct-social="facebook" aria-label="Facebook" class="w-11 h-11 rounded-full border border-line flex items-center justify-center hover:border-light hover:text-light transition">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
           </a>
@@ -833,7 +836,9 @@
     /* رابط يوتيوب: نعرض صورته بدل ما نحمّل الفيديو */
     var y = ytId(url);
     if (y){
-      return '<img src="https://img.youtube.com/vi/' + esc(y) + '/hqdefault.jpg" alt="" loading="lazy" ' +
+      /* maxres أوضح بكثير، بس مو كل فيديو عنده — فنرجع لـhqdefault إذا ما وجد */
+      return '<img src="https://img.youtube.com/vi/' + esc(y) + '/maxresdefault.jpg" alt="" loading="lazy" ' +
+             'onerror="this.onerror=null;this.src=&#39;https://img.youtube.com/vi/' + esc(y) + '/hqdefault.jpg&#39;" ' +
              'class="absolute inset-0 w-full h-full object-cover">';
     }
     if (/vimeo\.com/i.test(url)) return '';   /* ما عدنا صورة بدون API، نخلي الخلفية المتدرجة */
@@ -1097,7 +1102,7 @@
       mapQuery:'89F3+8HH الشاهر ستوديو alshaher studio, Rowad St, Baghdad',
       mapUrl:'https://maps.app.goo.gl/DJqsz5EZ1Wv4EGWU7'
     },
-    social: { instagram:'', tiktok:'', youtube:'', facebook:'', snapchat:'' }
+    social: { instagram:'', tiktok:'', youtube:'', linkedin:'', facebook:'', snapchat:'' }
   };
 
   var C = DEFAULTS;
