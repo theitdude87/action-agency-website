@@ -523,85 +523,26 @@
     </div>
   </section>
 
-  <!-- ============ الربط والنشر ============ -->
-  <!-- مخفي عن العميل. يفتح بـ admin.html#setup -->
-  <section id="tab-settings" hidden>
-    <div class="card">
-      <h3>النشر المباشر على الموقع</h3>
-      <p class="note">
-        حتى تنشر تعديلاتك على الموقع مباشرة بدون ما تحتاج أحد، تحتاج مفتاح وصول من GitHub.
-        تسويه مرة وحدة بس.
-      </p>
-
-      <div class="warn" style="margin:12px 0">
-        <b>خطوات إنشاء المفتاح:</b><br>
-        ١. افتح <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" style="color:var(--hot)">هذا الرابط</a><br>
-        ٢. Repository access ← Only select repositories ← اختر <code>action-agency-website</code><br>
-        ٣. Permissions ← Repository permissions ← <b>Contents</b> ← اختر <b>Read and write</b><br>
-        ٤. Generate token، وانسخ المفتاح والصقه تحت
-      </div>
-
-      <label>المستخدم / المستودع</label>
-      <input dir="ltr" id="repoInput" placeholder="theitdude87/action-agency-website">
-
-      <label>مفتاح الوصول (Token)</label>
-      <input dir="ltr" id="tokenInput" type="password" placeholder="github_pat_...">
-
-      <div class="actions" style="margin-top:14px">
-        <button class="b" id="saveTokenBtn">حفظ المفتاح</button>
-        <button class="b ghost" id="testBtn">اختبار الاتصال</button>
-        <button class="b ghost danger" id="clearTokenBtn">مسح المفتاح</button>
-      </div>
-
-      <div class="danger-box" style="margin-top:14px">
-        <b>مهم عن الأمان:</b> المفتاح ينحفظ بمتصفحك أنت بس، ما ينرفع للموقع ولا يشوفه أحد غيرك.
-        بس لا تفتح لوحة التحكم من جهاز مشترك أو عام. إذا شكيت بشي، امسح المفتاح من هنا
-        وألغيه من إعدادات GitHub.
-      </div>
-    </div>
-
-
-    <details>
-      <summary>ما عندي مفتاح — شلون أنشر؟</summary>
-      <p class="note">
-        اضغط «تنزيل الملف» فوق، وراح ينزل ملف اسمه <code>content.json</code>.
-        ارفعه بمستودع GitHub مكان الملف القديم (اسحبه وأفلته بصفحة المستودع)، والموقع
-        يتحدث خلال دقيقة تقريباً.
-      </p>
-    </details>
-  </section>
 </div>
 
 
 <!-- تطلع أول مرة بس، لين ينحفظ المفتاح -->
 <div id="keyGate" hidden>
   <div class="box">
-    <h2>تفعيل النشر</h2>
+    <h2>تسجيل الدخول</h2>
     <p class="note" style="margin:0">
-      حتى تنشر تعديلاتك على الموقع مباشرة، اللوحة تحتاج مفتاح وصول من GitHub.
-      تسويه مرة وحدة بس وينحفظ بهذا المتصفح.
+      اكتب كلمة المرور حتى تكدر تنشر تعديلاتك على الموقع.
     </p>
 
-    <div class="steps" style="margin-top:14px">
-      <b>خطوات إنشاء المفتاح:</b>
-      <ol>
-        <li>افتح <a id="gateLink" href="#" target="_blank" rel="noopener" style="color:var(--hot)">صفحة إنشاء المفتاح</a></li>
-        <li>Token name: اكتب أي اسم، مثلاً <code>action-site</code></li>
-        <li>Repository access ← <b>Only select repositories</b> ← اختر <code id="gateRepo">action-agency-website</code></li>
-        <li>Permissions ← Repository permissions ← <b>Contents</b> ← <b>Read and write</b></li>
-        <li>اضغط <b>Generate token</b> وانسخ المفتاح والصقه تحت</li>
-      </ol>
-    </div>
-
-    <label>الصق المفتاح هنا</label>
-    <input id="gateToken" type="password" dir="ltr" placeholder="github_pat_...">
+    <label style="margin-top:14px">كلمة المرور</label>
+    <input id="gateToken" type="password" dir="ltr" placeholder="••••••••">
 
     <div class="acts">
-      <button class="b hot" id="gateSave">حفظ وتفعيل النشر</button>
+      <button class="b hot" id="gateSave">دخول</button>
       <button class="b ghost" id="gateSkip">لاحقاً — اشتغل بدون نشر</button>
     </div>
     <p class="note" style="margin-top:12px">
-      المفتاح ينحفظ بهذا المتصفح بس، وما ينرفع للموقع ولا يشوفه أحد غيرك.
+      نسيت كلمة المرور؟ موجودة بملف <code>admin-api.php</code> على الاستضافة.
     </p>
   </div>
 </div>
@@ -710,8 +651,8 @@
      ويحط مسارها بالحقل تلقائياً — العميل ما يكتب أي رابط.
      ============================================================ */
   var MAXW = 1600;            /* أقصى عرض للصورة بعد التصغير */
-  var WARN_MB = 8;            /* فوق هذا يبدي يثقّل الموقع */
-  var HARD_MB = 20;           /* مقاس بالتجربة: ٢٠ ينقبل، ٣٠ يرفضه GitHub */
+  var WARN_MB = 12;           /* فوق هذا يبدي يثقّل الموقع */
+  var HARD_MB = 64;           /* حد الاستضافة — لو رفضه الخادم يرجّع رسالة واضحة */
 
   function slug(name){
     return name.replace(/\.[^.]+$/,'').toLowerCase()
@@ -757,8 +698,9 @@
 
   /* يفتح نافذة اختيار ملف، يرفعه، ويرجّع المسار */
   function pickUpload(kind, done){
-    if (!token()){
-      toast('الرفع يحتاج مفتاح — راجع المطوّر', 'err');
+    if (!authed){
+      toast('سجّل الدخول أول حتى ترفع', 'err');
+      var g = $('#keyGate'); if (g) g.hidden = false;
       return;
     }
     var inp = document.createElement('input');
@@ -771,9 +713,8 @@
       var mb = f.size / 1048576;
       if (isVid){
         if (mb > HARD_MB){
-          alert('حجم الفيديو ' + Math.round(mb) + 'MB — والحد الأقصى للرفع ' + HARD_MB + 'MB. '
-              + 'الحل الأفضل: ارفعه على يوتيوب والصق الرابط بنفس الحقل، '
-              + 'راح يظهر بالموقع عادي وما يثقّله.');
+          alert('حجم الفيديو ' + Math.round(mb) + 'MB — والحد الأقصى ' + HARD_MB + 'MB. '
+              + 'الأفضل ترفعه على يوتيوب وتلصق الرابط بنفس الحقل.');
           return;
         }
         if (mb > WARN_MB && !confirm('الفيديو ' + Math.round(mb) + 'MB. راح يثقّل الموقع ويطوّل بالرفع. '
@@ -781,13 +722,12 @@
       }
       toast(isVid ? 'جاري رفع الفيديو… ممكن ياخذ وقت' : 'جاري الرفع…');
       var send = function(blob, ext){
-        blobB64(blob, function(b64){
-          var path = 'assets/uploads/' + slug(f.name) + '-' + Date.now() + '.' + ext;
-          putFile(path, b64, function(err){
-            if (err) return toast('فشل الرفع: ' + err, 'err');
-            toast('انرفع ✓', 'ok');
-            done(path);
-          });
+        /* نعطيه اسم بالامتداد الصح، والخادم يسمّيه اسم آمن */
+        var named = new File([blob], slug(f.name) + '.' + ext, { type: blob.type || f.type });
+        putFile(named, function(err, path){
+          if (err) return toast('فشل الرفع: ' + err, 'err');
+          toast('انرفع ✓', 'ok');
+          done(path);
         });
       };
       if (isVid) send(f, (f.name.split('.').pop() || 'mp4').toLowerCase());
@@ -1022,91 +962,43 @@
 
   $('#previewBtn').onclick = function(){ window.open('index.html', '_blank', 'noopener'); };
 
-  /* ---------- الربط بـ GitHub ---------- */
-  function token(){ try { return localStorage.getItem(LS_TOKEN) || ''; } catch(e){ return ''; } }
-  function repo(){ try { return localStorage.getItem(LS_REPO) || DEFAULT_REPO; } catch(e){ return DEFAULT_REPO; } }
+  /* ---------- الربط بالاستضافة ---------- */
+  /* ============================================================
+     الاتصال بالاستضافة (Namecheap)
+     ============================================================ */
+  var API = 'admin-api.php';
+  var authed = false;
 
-  function setDot(on){ $('#connDot').className = 'dot ' + (on ? 'on' : 'off'); }
+  function setDot(on){ var d = $('#connDot'); if (d) d.className = 'dot ' + (on ? 'on' : 'off'); }
 
-  $('#repoInput').value = repo();
-  $('#tokenInput').value = token();
-  setDot(!!token());
-
-  $('#saveTokenBtn').onclick = function(){
-    try {
-      localStorage.setItem(LS_TOKEN, $('#tokenInput').value.trim());
-      localStorage.setItem(LS_REPO, $('#repoInput').value.trim() || DEFAULT_REPO);
-      setDot(!!token());
-      toast('انحفظ المفتاح', 'ok');
-    } catch(e){ toast('ما كدرت أحفظ', 'err'); }
-  };
-
-  $('#clearTokenBtn').onclick = function(){
-    try { localStorage.removeItem(LS_TOKEN); } catch(e){}
-    $('#tokenInput').value = ''; setDot(false);
-    toast('انمسح المفتاح', 'ok');
-  };
-
-  function api(path, opts){
-    opts = opts || {};
-    opts.headers = Object.assign({
-      'Authorization': 'Bearer ' + token(),
-      'Accept': 'application/vnd.github+json',
-      'X-GitHub-Api-Version': '2022-11-28'
-    }, opts.headers || {});
-    return fetch('https://api.github.com/repos/' + repo() + path, opts);
-  }
-
-  $('#testBtn').onclick = function(){
-    if (!token()) return toast('احفظ المفتاح الأول', 'err');
-    toast('جاري الفحص…');
-    api('/contents/content.json').then(function(r){
-      if (r.ok) return r.json().then(function(j){ fileSha = j.sha; toast('الاتصال تمام ✓', 'ok'); setDot(true); });
-      if (r.status === 404) toast('المستودع موجود بس ما لكيت content.json', 'err');
-      else if (r.status === 401) toast('المفتاح غلط أو منتهي', 'err');
-      else if (r.status === 403) toast('المفتاح ما عنده صلاحية Contents: Read and write', 'err');
-      else toast('فشل الاتصال (' + r.status + ')', 'err');
-      setDot(false);
-    }).catch(function(){ toast('ما في اتصال بالإنترنت', 'err'); setDot(false); });
-  };
-
-  function b64(str){
-    return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str)));
-  }
-
-  $('#publishBtn').onclick = function(){
-    if (!token()){
-      var g = $('#keyGate'); if (g) g.hidden = false;
-      return;
+  function apiPost(fields, isForm){
+    var body;
+    if (isForm) body = fields;
+    else {
+      body = new URLSearchParams();
+      Object.keys(fields).forEach(function(k){ body.append(k, fields[k]); });
     }
-    if (!confirm('تريد تنشر التعديلات على الموقع المباشر؟')) return;
+    return fetch(API, { method:'POST', body: body, credentials:'same-origin' })
+      .then(function(r){ return r.json().catch(function(){ return { error:'bad', message:'رد غير مفهوم من الخادم' }; }); });
+  }
 
-    var btn = this;
-    btn.disabled = true; btn.textContent = 'جاري النشر…';
+  function checkAuth(){
+    return fetch(API + '?action=status', { credentials:'same-origin' })
+      .then(function(r){ return r.json(); })
+      .then(function(j){ authed = !!(j && j.authed); setDot(authed); return authed; })
+      .catch(function(){ authed = false; setDot(false); return false; });
+  }
 
-    api('/contents/content.json')
-      .then(function(r){ return r.ok ? r.json() : null; })
-      .then(function(j){
-        var body = {
-          message: 'تحديث محتوى الموقع من لوحة التحكم',
-          content: b64(JSON.stringify(data, null, 2))
-        };
-        if (j && j.sha) body.sha = j.sha;
-        return api('/contents/content.json', { method:'PUT', body: JSON.stringify(body) });
-      })
-      .then(function(r){
-        if (r.ok){
-          original = clone(data);
-          toast('اننشر ✓ الموقع يتحدث خلال دقيقة', 'ok');
-        } else {
-          return r.json().then(function(e){
-            toast('فشل النشر: ' + (e.message || r.status), 'err');
-          });
-        }
-      })
-      .catch(function(){ toast('فشل النشر — تأكد من الإنترنت', 'err'); })
-      .then(function(){ btn.disabled = false; btn.textContent = 'نشر على الموقع'; });
-  };
+  /* يرفع ملف للاستضافة ويرجّع مساره */
+  function putFile(file, cb){
+    var fd = new FormData();
+    fd.append('action', 'upload');
+    fd.append('file', file, file.name || 'upload');
+    apiPost(fd, true).then(function(j){
+      if (j && j.ok) cb(null, j.path);
+      else cb((j && j.message) || 'فشل الرفع');
+    }).catch(function(){ cb('ما في اتصال بالخادم'); });
+  }
 
   /* ---------- تحذير قبل الخروج ---------- */
   window.addEventListener('beforeunload', function(e){
@@ -1116,62 +1008,60 @@
     }
   });
 
-  /* لوحة المفتاح مخفية عن العميل، تنفتح بـ admin.html#setup */
-  if (location.hash === '#setup'){
-    var tabs = $('.tabs');
-    var b = document.createElement('button');
-    b.setAttribute('role','tab'); b.setAttribute('data-tab','settings');
-    b.setAttribute('aria-selected','false'); b.textContent = 'الربط والنشر';
-    b.addEventListener('click', function(){
-      $$('.tabs button').forEach(function(x){ x.setAttribute('aria-selected', String(x===b)); });
-      $$('.wrap section').forEach(function(x){ x.hidden = true; });
-      $('#tab-settings').hidden = false;
-    });
-    tabs.appendChild(b);
-    b.click();
-  }
 
+  /* ---------- النشر: يحفظ على الاستضافة ---------- */
+  $('#publishBtn').onclick = function(){
+    if (!authed){ var g0 = $('#keyGate'); if (g0) g0.hidden = false; return; }
+    if (!confirm('تريد تنشر التعديلات على الموقع المباشر؟')) return;
 
-  /* ---------- نافذة تفعيل النشر ---------- */
+    var btn = this;
+    btn.disabled = true; btn.textContent = 'جاري النشر…';
+    apiPost({ action:'save', content: JSON.stringify(data) })
+      .then(function(j){
+        if (j && j.ok){
+          original = clone(data);
+          toast('اننشر ✓ الموقع تحدّث', 'ok');
+        } else if (j && j.error === 'auth'){
+          authed = false; setDot(false);
+          var g1 = $('#keyGate'); if (g1) g1.hidden = false;
+          toast('انتهت الجلسة — سجّل دخول مرة ثانية', 'err');
+        } else {
+          toast('فشل النشر: ' + ((j && j.message) || 'خطأ غير معروف'), 'err');
+        }
+      })
+      .catch(function(){ toast('ما في اتصال بالخادم', 'err'); })
+      .then(function(){ btn.disabled = false; btn.textContent = 'نشر على الموقع'; });
+  };
+
+  /* ---------- تسجيل الدخول ---------- */
   (function(){
     var gate = $('#keyGate');
     if (!gate) return;
-    var repo0 = repo();
-    $('#gateRepo').textContent = repo0.split('/')[1] || repo0;
-    $('#gateLink').href = 'https://github.com/settings/personal-access-tokens/new';
-
     function close(){ gate.hidden = true; }
 
-    /* ما نزعجه إلا إذا ما عنده مفتاح وما اختار يتخطى قبل */
-    var skipped = false;
-    try { skipped = localStorage.getItem('aa-gate-skipped') === '1'; } catch(e){}
-    if (!token() && !skipped && location.hash !== '#setup') gate.hidden = false;
+    function submit(){
+      var v = $('#gateToken').value;
+      if (!v) return toast('اكتب كلمة المرور', 'err');
+      apiPost({ action:'login', password: v }).then(function(j){
+        if (j && j.ok){
+          authed = true; setDot(true);
+          $('#gateToken').value = '';
+          close();
+          toast('أهلاً — تكدر تنشر هسه', 'ok');
+        } else {
+          toast((j && j.message) || 'كلمة المرور غلط', 'err');
+        }
+      }).catch(function(){ toast('ما كدرت أوصل للخادم', 'err'); });
+    }
 
-    $('#gateSave').onclick = function(){
-      var v = $('#gateToken').value.trim();
-      if (!v) return toast('الصق المفتاح الأول', 'err');
-      try {
-        localStorage.setItem(LS_TOKEN, v);
-        localStorage.setItem(LS_REPO, repo0);
-        localStorage.removeItem('aa-gate-skipped');
-      } catch(e){}
-      var ti = $('#tokenInput'); if (ti) ti.value = v;
-      setDot(true);
-      close();
-      toast('جاري الفحص…');
-      api('/contents/content.json').then(function(r){
-        if (r.ok) toast('تمام ✓ تكدر تنشر هسه', 'ok');
-        else if (r.status === 401) toast('المفتاح غلط أو منتهي', 'err');
-        else if (r.status === 403) toast('المفتاح ما عنده صلاحية Contents: Read and write', 'err');
-        else toast('فشل الفحص (' + r.status + ')', 'err');
-      }).catch(function(){ toast('ما في اتصال', 'err'); });
-    };
-
+    $('#gateSave').onclick = submit;
+    $('#gateToken').addEventListener('keydown', function(e){ if (e.key === 'Enter') submit(); });
     $('#gateSkip').onclick = function(){
-      try { localStorage.setItem('aa-gate-skipped','1'); } catch(e){}
       close();
       toast('تكدر تعدّل وتنزّل الملف، بس ما راح تنشر مباشرة');
     };
+
+    checkAuth().then(function(ok){ if (!ok) gate.hidden = false; });
   })();
 
   /* ---------- البداية ---------- */
