@@ -14,21 +14,37 @@ const ADMIN_PASSWORD = 'change-me-now';   // ← غيّرها
 
 ---
 
-## ٢. ارفع الملفات
+## ٢. أضف الدومين أول (قبل الرفع)
 
-ارفع محتويات المجلد لـ `public_html` عن طريق **cPanel → File Manager** أو FTP:
+> ⚠️ **لا ترفع شي لـ`public_html`** — هناك ساكن موقع `drahmedmaki.com`.
+> لو رفعت فوقه تخربه. موقع اكشن لازم يكون بمجلد لوحده.
+
+cPanel ← **Domains** ← **Create A New Domain**
+
+- Domain: `action-agency.iq`
+- شيل علامة **Share document root**
+- Document Root: يخليه `/home/USER/action-agency.iq` — خليه مثل ما هو
+
+cPanel راح يسوي المجلد لحاله ويربطه بالدومين.
+
+---
+
+## ٣. ارفع الملفات بمجلد الدومين الجديد
+
+cPanel ← **File Manager** ← ادخل مجلد `action-agency.iq` (مو public_html)
+ارفع `site-upload.zip` ← زر يمين ← **Extract**
 
 ```
-public_html/
+action-agency.iq/
   index.html
   admin.html
   admin-api.php        ← الباك إند
   content.json         ← محتوى الموقع
-  assets/              ← كل الصور واللوكوات والفيديو
-    uploads/           ← مهم: لازم يكون موجود وقابل للكتابة
+  assets/
+    uploads/           ← لازم يكون قابل للكتابة
 ```
 
-**لا ترفع:** `.git` · `README.md` · `DEPLOY-NAMECHEAP.md` · مجلد `x` · `s.backup.html`
+الـZIP جاهز وما بيه ملفات زايدة — ما تحتاج تحذف شي بعد الفك.
 
 ### الصلاحيات (مهم)
 من File Manager، بالزر اليمين → Permissions:
@@ -43,11 +59,12 @@ public_html/
 
 ---
 
-## ٣. الدومين والـ DNS
+## ٤. الدومين والـ DNS
 
 الحكومة تطلب منك **Nameservers**. هاي تجيبها من Namecheap:
 
-1. ادخل حسابك بـNamecheap
+1. الدومين مو مسجّل بـNamecheap (اشتريته من الحكومة)، فما راح يظهر بـDomain List.
+الـnameservers تجيبها من:
 2. **Hosting List** → جنب الباقة اضغط **Manage**
 3. دوّر على **Nameservers** — راح تلكي اثنين بهذا الشكل:
    ```
@@ -64,14 +81,14 @@ public_html/
 
 ---
 
-## ٤. فعّل HTTPS
+## ٥. فعّل HTTPS
 
 من cPanel → **SSL/TLS Status** → اختر الدومين → **Run AutoSSL**.
 يشتغل بعد ما ينتشر الدومين. بدونه المتصفح يقول «غير آمن».
 
 ---
 
-## ٥. جرّب
+## ٦. جرّب
 
 | الرابط | المفروض يصير |
 |---|---|

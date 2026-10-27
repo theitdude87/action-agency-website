@@ -13,3 +13,7 @@ s.backup.html
 # الفيديو الأصلي الضخم - محلي فقط (GitHub يرفض أي ملف فوق 100MB)
 x/
 *.mov
+
+# كلمة مرور اللوحة - محلية فقط، لا ترفعها
+PASSWORD.txt
+site-upload.zip
