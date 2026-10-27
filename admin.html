@@ -170,6 +170,15 @@
     </div>
 
     <div class="card">
+      <h3>كارت الواجهة</h3>
+      <p class="note">
+        الكارت اللي جنب اسم الوكالة بأول الصفحة. إذا تركته فارغ يبقى اللوكو،
+        وإذا حطيت صورة أو فيديو راح يملا الكارت.
+      </p>
+      <div id="heroMediaField"></div>
+    </div>
+
+    <div class="card">
       <h3>فيديو التعريف (الشوريل)</h3>
       <p class="note">اسم الوكالة والشعار يظهرون فوق الفيديو تلقائياً.</p>
       <label>صورة الغلاف</label>
@@ -881,6 +890,14 @@
     }, function(o){ return o.ar; });
   }
 
+  function renderHeroMedia(){
+    var host = $('#heroMediaField'); if (!host) return;
+    host.innerHTML = '';
+    host.appendChild(mediaField('صورة أو فيديو الكارت', (data.hero && data.hero.media) || '',
+      function(v){ if (!data.hero) data.hero = {}; data.hero.media = v; },
+      'media', 'اتركه فارغ حتى يبقى اللوكو'));
+  }
+
   function renderClients(){
     /* ترقية الصيغة القديمة (نصوص) لصيغة الكائنات */
     data.clients = (data.clients || []).map(function(c){
@@ -893,7 +910,7 @@
   }
 
   function renderAll(){
-    renderServices(); renderProjects(); renderTeam(); renderResults(); renderClients();
+    renderHeroMedia(); renderServices(); renderProjects(); renderTeam(); renderResults(); renderClients();
   }
 
   /* ---------- إضافة ---------- */

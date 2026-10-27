@@ -548,8 +548,8 @@
             <span class="bg-hot text-white text-[10px] font-black px-3 py-1.5 rounded-full en-label">Showreel 2026</span>
           </div>
 
-          <!-- اللوكو بالنص -->
-          <div class="relative z-10 my-auto flex items-center justify-center">
+          <!-- اللوكو، أو صورة/فيديو يحطه العميل من اللوحة -->
+          <div class="relative z-10 my-auto flex items-center justify-center" id="heroCardMedia">
             <img class="relative" src="assets/logo-icon.png" alt="" style="width:min(58%,200px);height:auto">
           </div>
 
@@ -854,6 +854,7 @@
   var DEFAULTS = {
     site: { tagline: 'WE BRING HEAT TO BRANDS' },
     hero: {
+      media: '',
       badge: { ar:'وكالة إنتاج وإعلان متكاملة', en:'Full-service production & ad agency' },
       desc:  { ar:'نصنع محتوى بصري يخلي علامتك التجارية تتحچى.', en:'We craft visual content that makes your brand speak.' }
     },
@@ -1210,6 +1211,30 @@
   }
 
 
+  /* كارت الواجهة: لوكو افتراضياً، وإذا حط العميل صورة أو فيديو يملا الكارت */
+  function renderHeroCard(){
+    var box = document.getElementById('heroCardMedia');
+    if (!box) return;
+    var m = get(C, 'hero.media');
+    if (!m) return;                       /* ما حط شي - يبقى اللوكو */
+    var wrap = box.closest('.media-ph') || box.parentElement;
+    box.innerHTML = '';
+    var tag = mediaTag(m);
+    if (!tag) return;
+    var holder = document.createElement('div');
+    holder.className = 'absolute inset-0 z-0';
+    holder.innerHTML = tag + '<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/40"></div>';
+    wrap.insertBefore(holder, wrap.firstChild);
+
+    /* رابط يوتيوب/فيميو يعرض صورة بس — نحط زر تشغيل يفتح الفيديو بالنافذة */
+    if (isExternalVideo(m)){
+      box.innerHTML = '<button type="button" aria-label="تشغيل" ' +
+        'class="w-16 h-16 rounded-full border border-light/35 bg-black/35 backdrop-blur ' +
+        'flex items-center justify-center text-xl ps-1 hover:bg-hot hover:border-hot hover:text-white transition duration-300">▶</button>';
+      box.onclick = function(){ lbOpen(m); };
+    }
+  }
+
   function renderShowreel(){
     var box = document.getElementById('showreelBox'); if (!box) return;
     var v = (C.showreel || {});
@@ -1531,7 +1556,7 @@
   function boot(){
     try {
       applyText();
-      renderServices(); renderShowreel(); renderProjects(); renderMap(); renderTeam(); renderResults(); renderClients();
+      renderServices(); renderHeroCard(); renderShowreel(); renderProjects(); renderMap(); renderTeam(); renderResults(); renderClients();
     } catch(err){
       if (window.console) console.error('خطأ بقراءة المحتوى:', err);
     }
